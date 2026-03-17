@@ -102,6 +102,7 @@
                         <a href="/simulate" class="nav-item px-4 py-2 text-gray-700 font-medium hover:text-primary-600 transition-colors">模拟填报</a>
                         <a href="/school" class="nav-item px-4 py-2 text-gray-700 font-medium hover:text-primary-600 transition-colors">高中分析</a>
                         <a href="/major" class="nav-item px-4 py-2 text-gray-700 font-medium hover:text-primary-600 transition-colors">专业指导</a>
+                        <a href="/news" class="nav-item px-4 py-2 text-gray-700 font-medium hover:text-primary-600 transition-colors">政策资讯</a>
                     </div>
 
                     <!-- 移动端菜单按钮 -->
@@ -122,6 +123,7 @@
                     <a href="/simulate" class="block px-4 py-2 rounded-lg text-gray-700 hover:bg-gray-50">模拟填报</a>
                     <a href="/school" class="block px-4 py-2 rounded-lg text-gray-700 hover:bg-gray-50">高中分析</a>
                     <a href="/major" class="block px-4 py-2 rounded-lg text-gray-700 hover:bg-gray-50">专业指导</a>
+                    <a href="/news" class="block px-4 py-2 rounded-lg text-gray-700 hover:bg-gray-50">政策资讯</a>
                 </div>
             </div>
         </nav>
@@ -167,14 +169,14 @@
 
         <!-- 功能卡片 -->
         <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
                 <!-- 分数查询 -->
                 <a href="/query" class="card-hover bg-white rounded-2xl p-6 shadow-lg border border-gray-100">
                     <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white text-2xl mb-4 shadow-lg">
                         📊
                     </div>
                     <h3 class="text-lg font-bold text-gray-800 mb-2">分数查询</h3>
-                    <p class="text-gray-500 text-sm">输入分数，智能匹配可填报院校，查看录取概率</p>
+                    <p class="text-gray-500 text-sm">输入分数，智能匹配可填报院校</p>
                 </a>
 
                 <!-- 模拟填报 -->
@@ -183,7 +185,7 @@
                         📝
                     </div>
                     <h3 class="text-lg font-bold text-gray-800 mb-2">模拟填报</h3>
-                    <p class="text-gray-500 text-sm">24个平行志愿模拟分析，预测落档风险</p>
+                    <p class="text-gray-500 text-sm">24个平行志愿模拟分析</p>
                 </a>
 
                 <!-- 高中分析 -->
@@ -192,7 +194,7 @@
                         🏫
                     </div>
                     <h3 class="text-lg font-bold text-gray-800 mb-2">高中分析</h3>
-                    <p class="text-gray-500 text-sm">四校四分八校数据分析，了解学校实力</p>
+                    <p class="text-gray-500 text-sm">四校四分八校数据分析</p>
                 </a>
 
                 <!-- 专业指导 -->
@@ -201,7 +203,16 @@
                         📚
                     </div>
                     <h3 class="text-lg font-bold text-gray-800 mb-2">专业指导</h3>
-                    <p class="text-gray-500 text-sm">专业介绍、就业前景、发展方向全解析</p>
+                    <p class="text-gray-500 text-sm">专业介绍、就业前景解析</p>
+                </a>
+
+                <!-- 政策资讯 -->
+                <a href="/news" class="card-hover bg-white rounded-2xl p-6 shadow-lg border border-gray-100">
+                    <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-orange-500 to-red-600 flex items-center justify-center text-white text-2xl mb-4 shadow-lg">
+                        📰
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-800 mb-2">政策资讯</h3>
+                    <p class="text-gray-500 text-sm">高考政策、志愿填报指南</p>
                 </a>
             </div>
         </section>
@@ -211,11 +222,14 @@
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
                 <!-- 分数线表格 -->
                 <div class="lg:col-span-2 bg-white rounded-2xl shadow-lg border border-gray-100 p-6">
-                    <div class="flex items-center mb-6">
-                        <div class="w-10 h-10 rounded-lg gradient-bg flex items-center justify-center text-white mr-3">
-                            📈
+                    <div class="flex items-center justify-between mb-6">
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 rounded-lg gradient-bg flex items-center justify-center text-white mr-3">
+                                📈
+                            </div>
+                            <h2 class="text-xl font-bold text-gray-800">近年分数线一览</h2>
                         </div>
-                        <h2 class="text-xl font-bold text-gray-800">近年分数线一览</h2>
+                        <span class="text-xs text-gray-400">数据来源：上海市教育考试院</span>
                     </div>
                     <div class="overflow-x-auto">
                         <table class="w-full">
@@ -314,11 +328,12 @@
                         </div>
                         <span class="font-semibold text-gray-700">上海高考助手</span>
                     </div>
-                    <p class="text-gray-500 text-sm">
+                    <p class="text-gray-500 text-sm mb-2">
                         本系统仅供参考，志愿填报请以官方信息为准
                     </p>
+                    <a href="/sources" class="text-primary-500 text-sm hover:underline">查看数据来源说明</a>
                     <p class="text-gray-400 text-xs mt-2">
-                        © 2025 上海高考志愿填报辅助系统
+                        © 2026 上海高考志愿填报辅助系统
                     </p>
                 </div>
             </div>
