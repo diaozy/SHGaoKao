@@ -1,0 +1,346 @@
+{
+  "schools": [
+    {
+      "name": "上海中学",
+      "short_name": "上中",
+      "type": "四校",
+      "district": "徐汇区",
+      "founded": 1865,
+      "stats": {
+        "total_students": 380,
+        "qingbei_count": 58,
+        "qingbei_rate": "15.3%",
+        "985_count": 285,
+        "985_rate": "75%",
+        "211_count": 361,
+        "211_rate": "95%",
+        "note": "数据来源：网络公开报道，仅供参考"
+      },
+      "data_source": "网络公开报道/学校官网"
+    },
+    {
+      "name": "华东师范大学第二附属中学",
+      "short_name": "华二",
+      "type": "四校",
+      "district": "浦东新区",
+      "founded": 1958,
+      "stats": {
+        "total_students": 400,
+        "qingbei_count": 48,
+        "qingbei_rate": "12%",
+        "985_count": 280,
+        "985_rate": "70%",
+        "211_count": 372,
+        "211_rate": "93%",
+        "note": "数据来源：网络公开报道，仅供参考"
+      },
+      "data_source": "网络公开报道/学校官网"
+    },
+    {
+      "name": "复旦大学附属中学",
+      "short_name": "复旦附中",
+      "type": "四校",
+      "district": "杨浦区",
+      "founded": 1950,
+      "stats": {
+        "total_students": 360,
+        "qingbei_count": 40,
+        "qingbei_rate": "11.1%",
+        "985_count": 245,
+        "985_rate": "68%",
+        "211_count": 340,
+        "211_rate": "94%",
+        "note": "数据来源：网络公开报道，仅供参考"
+      },
+      "data_source": "网络公开报道/学校官网"
+    },
+    {
+      "name": "上海交通大学附属中学",
+      "short_name": "交大附中",
+      "type": "四校",
+      "district": "杨浦区",
+      "founded": 1954,
+      "stats": {
+        "total_students": 400,
+        "qingbei_count": 40,
+        "qingbei_rate": "10%",
+        "985_count": 260,
+        "985_rate": "65%",
+        "211_count": 360,
+        "211_rate": "90%",
+        "note": "数据来源：网络公开报道，仅供参考"
+      },
+      "data_source": "网络公开报道/学校官网"
+    },
+    {
+      "name": "上海中学东校",
+      "short_name": "上中东校",
+      "type": "四分",
+      "district": "浦东新区",
+      "founded": 2009,
+      "stats": {
+        "total_students": 320,
+        "qingbei_count": 8,
+        "qingbei_rate": "2.5%",
+        "985_count": 128,
+        "985_rate": "40%",
+        "211_count": 224,
+        "211_rate": "70%",
+        "note": "数据来源：网络公开报道，仅供参考"
+      },
+      "data_source": "网络公开报道/学校官网"
+    },
+    {
+      "name": "华东师范大学第二附属中学紫竹校区",
+      "short_name": "华二紫竹",
+      "type": "四分",
+      "district": "闵行区",
+      "founded": 2012,
+      "stats": {
+        "total_students": 280,
+        "qingbei_count": 10,
+        "qingbei_rate": "3.6%",
+        "985_count": 112,
+        "985_rate": "40%",
+        "211_count": 196,
+        "211_rate": "70%",
+        "note": "数据来源：网络公开报道，仅供参考"
+      },
+      "data_source": "网络公开报道/学校官网"
+    },
+    {
+      "name": "华东师范大学第二附属中学浦东校区",
+      "short_name": "华二浦东",
+      "type": "四分",
+      "district": "浦东新区",
+      "founded": 2010,
+      "stats": {
+        "total_students": 300,
+        "qingbei_count": 8,
+        "qingbei_rate": "2.7%",
+        "985_count": 105,
+        "985_rate": "35%",
+        "211_count": 195,
+        "211_rate": "65%",
+        "note": "数据来源：网络公开报道，仅供参考"
+      },
+      "data_source": "网络公开报道/学校官网"
+    },
+    {
+      "name": "复旦大学附属中学青浦分校",
+      "short_name": "复附青浦",
+      "type": "四分",
+      "district": "青浦区",
+      "founded": 2013,
+      "stats": {
+        "total_students": 240,
+        "qingbei_count": 5,
+        "qingbei_rate": "2.1%",
+        "985_count": 84,
+        "985_rate": "35%",
+        "211_count": 156,
+        "211_rate": "65%",
+        "note": "数据来源：网络公开报道，仅供参考"
+      },
+      "data_source": "网络公开报道/学校官网"
+    },
+    {
+      "name": "复旦大学附属中学浦东分校",
+      "short_name": "复附浦东",
+      "type": "四分",
+      "district": "浦东新区",
+      "founded": 2012,
+      "stats": {
+        "total_students": 260,
+        "qingbei_count": 6,
+        "qingbei_rate": "2.3%",
+        "985_count": 91,
+        "985_rate": "35%",
+        "211_count": 169,
+        "211_rate": "65%",
+        "note": "数据来源：网络公开报道，仅供参考"
+      },
+      "data_source": "网络公开报道/学校官网"
+    },
+    {
+      "name": "上海交通大学附属中学嘉定分校",
+      "short_name": "交附嘉定",
+      "type": "四分",
+      "district": "嘉定区",
+      "founded": 2010,
+      "stats": {
+        "total_students": 280,
+        "qingbei_count": 8,
+        "qingbei_rate": "2.9%",
+        "985_count": 98,
+        "985_rate": "35%",
+        "211_count": 182,
+        "211_rate": "65%",
+        "note": "数据来源：网络公开报道，仅供参考"
+      },
+      "data_source": "网络公开报道/学校官网"
+    },
+    {
+      "name": "上海交通大学附属中学闵行分校",
+      "short_name": "交附闵行",
+      "type": "四分",
+      "district": "闵行区",
+      "founded": 2014,
+      "stats": {
+        "total_students": 260,
+        "qingbei_count": 7,
+        "qingbei_rate": "2.7%",
+        "985_count": 91,
+        "985_rate": "35%",
+        "211_count": 169,
+        "211_rate": "65%",
+        "note": "数据来源：网络公开报道，仅供参考"
+      },
+      "data_source": "网络公开报道/学校官网"
+    },
+    {
+      "name": "七宝中学",
+      "short_name": "七宝",
+      "type": "八校",
+      "district": "闵行区",
+      "founded": 1947,
+      "stats": {
+        "total_students": 450,
+        "qingbei_count": 20,
+        "qingbei_rate": "4.4%",
+        "985_count": 180,
+        "985_rate": "40%",
+        "211_count": 315,
+        "211_rate": "70%",
+        "note": "数据来源：网络公开报道，仅供参考"
+      },
+      "data_source": "网络公开报道/学校官网"
+    },
+    {
+      "name": "南洋模范中学",
+      "short_name": "南模",
+      "type": "八校",
+      "district": "徐汇区",
+      "founded": 1901,
+      "stats": {
+        "total_students": 380,
+        "qingbei_count": 12,
+        "qingbei_rate": "3.2%",
+        "985_count": 133,
+        "985_rate": "35%",
+        "211_count": 266,
+        "211_rate": "70%",
+        "note": "数据来源：网络公开报道，仅供参考"
+      },
+      "data_source": "网络公开报道/学校官网"
+    },
+    {
+      "name": "建平中学",
+      "short_name": "建平",
+      "type": "八校",
+      "district": "浦东新区",
+      "founded": 1944,
+      "stats": {
+        "total_students": 400,
+        "qingbei_count": 10,
+        "qingbei_rate": "2.5%",
+        "985_count": 140,
+        "985_rate": "35%",
+        "211_count": 280,
+        "211_rate": "70%",
+        "note": "数据来源：网络公开报道，仅供参考"
+      },
+      "data_source": "网络公开报道/学校官网"
+    },
+    {
+      "name": "控江中学",
+      "short_name": "控江",
+      "type": "八校",
+      "district": "杨浦区",
+      "founded": 1953,
+      "stats": {
+        "total_students": 380,
+        "qingbei_count": 8,
+        "qingbei_rate": "2.1%",
+        "985_count": 114,
+        "985_rate": "30%",
+        "211_count": 266,
+        "211_rate": "70%",
+        "note": "数据来源：网络公开报道，仅供参考"
+      },
+      "data_source": "网络公开报道/学校官网"
+    },
+    {
+      "name": "延安中学",
+      "short_name": "延安",
+      "type": "八校",
+      "district": "长宁区",
+      "founded": 1946,
+      "stats": {
+        "total_students": 360,
+        "qingbei_count": 6,
+        "qingbei_rate": "1.7%",
+        "985_count": 108,
+        "985_rate": "30%",
+        "211_count": 252,
+        "211_rate": "70%",
+        "note": "数据来源：网络公开报道，仅供参考"
+      },
+      "data_source": "网络公开报道/学校官网"
+    },
+    {
+      "name": "大同中学",
+      "short_name": "大同",
+      "type": "八校",
+      "district": "黄浦区",
+      "founded": 1912,
+      "stats": {
+        "total_students": 350,
+        "qingbei_count": 7,
+        "qingbei_rate": "2%",
+        "985_count": 105,
+        "985_rate": "30%",
+        "211_count": 245,
+        "211_rate": "70%",
+        "note": "数据来源：网络公开报道，仅供参考"
+      },
+      "data_source": "网络公开报道/学校官网"
+    },
+    {
+      "name": "格致中学",
+      "short_name": "格致",
+      "type": "八校",
+      "district": "黄浦区",
+      "founded": 1874,
+      "stats": {
+        "total_students": 350,
+        "qingbei_count": 7,
+        "qingbei_rate": "2%",
+        "985_count": 105,
+        "985_rate": "30%",
+        "211_count": 245,
+        "211_rate": "70%",
+        "note": "数据来源：网络公开报道，仅供参考"
+      },
+      "data_source": "网络公开报道/学校官网"
+    },
+    {
+      "name": "复兴高级中学",
+      "short_name": "复兴",
+      "type": "八校",
+      "district": "虹口区",
+      "founded": 1946,
+      "stats": {
+        "total_students": 360,
+        "qingbei_count": 6,
+        "qingbei_rate": "1.7%",
+        "985_count": 108,
+        "985_rate": "30%",
+        "211_count": 252,
+        "211_rate": "70%",
+        "note": "数据来源：网络公开报道，仅供参考"
+      },
+      "data_source": "网络公开报道/学校官网"
+    }
+  ]
+}

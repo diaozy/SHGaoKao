@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>政策资讯 - 上海高考志愿填报辅助系统</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Vue 3 CDN -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#f0f4ff',
+                            100: '#e0e9ff',
+                            200: '#c7d6fe',
+                            300: '#a4b8fc',
+                            400: '#8093f8',
+                            500: '#6366f1',
+                            600: '#4f46e5',
+                            700: '#4338ca',
+                            800: '#3730a3',
+                            900: '#312e81',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        [v-cloak] { display: none; }
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        .nav-item {
+            position: relative;
+        }
+        .nav-item::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+        .nav-item:hover::after, .nav-item.active::after {
+            width: 100%;
+        }
+        .source-badge {
+            font-size: 0.75rem;
+            padding: 2px 8px;
+            border-radius: 9999px;
+        }
+        .source-official {
+            background-color: #dcfce7;
+            color: #166534;
+        }
+        .source-public {
+            background-color: #dbeafe;
+            color: #1e40af;
+        }
+        .source-unverified {
+            background-color: #fef3c7;
+            color: #92400e;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <div id="app" v-cloak>
+        <!-- 导航栏 -->
+        <nav class="bg-white/95 backdrop-blur-md shadow-sm sticky top-0 z-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-center h-16">
+                    <!-- Logo -->
+                    <a href="/" class="flex items-center space-x-3">
+                        <div class="w-10 h-10 rounded-xl gradient-bg flex items-center justify-center text-white font-bold text-lg shadow-lg">
+                            沪
+                        </div>
+                        <div class="hidden sm:block">
+                            <div class="text-lg font-bold text-gray-800">上海高考助手</div>
+                            <div class="text-xs text-gray-500 -mt-1">志愿填报辅助系统</div>
+                        </div>
+                    </a>
+
+                    <!-- 桌面导航 -->
+                    <div class="hidden md:flex items-center space-x-1">
+                        <a href="/" class="nav-item px-4 py-2 text-gray-700 font-medium hover:text-primary-600 transition-colors">首页</a>
+                        <a href="/query" class="nav-item px-4 py-2 text-gray-700 font-medium hover:text-primary-600 transition-colors">分数查询</a>
+                        <a href="/simulate" class="nav-item px-4 py-2 text-gray-700 font-medium hover:text-primary-600 transition-colors">模拟填报</a>
+                        <a href="/school" class="nav-item px-4 py-2 text-gray-700 font-medium hover:text-primary-600 transition-colors">高中分析</a>
+                        <a href="/major" class="nav-item px-4 py-2 text-gray-700 font-medium hover:text-primary-600 transition-colors">专业指导</a>
+                        <a href="/news" class="nav-item active px-4 py-2 text-gray-700 font-medium hover:text-primary-600 transition-colors">政策资讯</a>
+                    </div>
+
+                    <!-- 移动端菜单按钮 -->
+                    <button @click="mobileMenuOpen = !mobileMenuOpen" class="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors">
+                        <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path v-if="!mobileMenuOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                            <path v-else stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- 移动端菜单 -->
+            <div v-show="mobileMenuOpen" class="md:hidden bg-white border-t border-gray-100">
+                <div class="px-4 py-3 space-y-1">
+                    <a href="/" class="block px-4 py-2 rounded-lg text-gray-700 hover:bg-gray-50">首页</a>
+                    <a href="/query" class="block px-4 py-2 rounded-lg text-gray-700 hover:bg-gray-50">分数查询</a>
+                    <a href="/simulate" class="block px-4 py-2 rounded-lg text-gray-700 hover:bg-gray-50">模拟填报</a>
+                    <a href="/school" class="block px-4 py-2 rounded-lg text-gray-700 hover:bg-gray-50">高中分析</a>
+                    <a href="/major" class="block px-4 py-2 rounded-lg text-gray-700 hover:bg-gray-50">专业指导</a>
+                    <a href="/news" class="block px-4 py-2 rounded-lg bg-primary-50 text-primary-600 font-medium">政策资讯</a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- 页面标题 -->
+        <section class="gradient-bg py-12">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center text-white">
+                    <h1 class="text-3xl md:text-4xl font-bold mb-4">政策资讯</h1>
+                    <p class="text-lg opacity-90">高考政策解读、志愿填报指南、招生动态</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 主内容区 -->
+        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+                <!-- 左侧分类 -->
+                <div class="lg:col-span-1">
+                    <div class="bg-white rounded-2xl shadow-lg border border-gray-100 p-4 sticky top-24">
+                        <h3 class="font-bold text-gray-800 mb-4 flex items-center">
+                            <svg class="w-5 h-5 mr-2 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"/>
+                            </svg>
+                            新闻分类
+                        </h3>
+                        <div class="space-y-2">
+                            <button @click="currentCategory = ''"
+                                :class="currentCategory === '' ? 'bg-primary-50 text-primary-600 border-primary-200' : 'text-gray-600 hover:bg-gray-50'"
+                                class="w-full text-left px-4 py-2 rounded-lg border border-transparent transition-colors">
+                                全部资讯
+                                <span class="float-right text-sm text-gray-400">{{ news.length }}</span>
+                            </button>
+                            <button v-for="cat in categories" :key="cat.id"
+                                @click="currentCategory = cat.name"
+                                :class="currentCategory === cat.name ? 'bg-primary-50 text-primary-600 border-primary-200' : 'text-gray-600 hover:bg-gray-50'"
+                                class="w-full text-left px-4 py-2 rounded-lg border border-transparent transition-colors">
+                                {{ cat.name }}
+                                <span class="float-right text-sm text-gray-400">{{ getCategoryCount(cat.name) }}</span>
+                            </button>
+                        </div>
+
+                        <!-- 数据来源说明 -->
+                        <div class="mt-6 pt-6 border-t border-gray-100">
+                            <h4 class="font-semibold text-gray-700 mb-3 text-sm">数据来源说明</h4>
+                            <div class="space-y-2 text-xs">
+                                <div class="flex items-center">
+                                    <span class="source-badge source-official mr-2">官方公布</span>
+                                    <span class="text-gray-500">官方渠道发布</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <span class="source-badge source-public mr-2">网络公开</span>
+                                    <span class="text-gray-500">公开资料整理</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <span class="source-badge source-unverified mr-2">待核实</span>
+                                    <span class="text-gray-500">需进一步确认</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 更新时间 -->
+                        <div class="mt-6 pt-6 border-t border-gray-100 text-center">
+                            <p class="text-xs text-gray-400">数据更新时间</p>
+                            <p class="text-sm text-gray-600 font-medium">{{ updateTime }}</p>
+                            <a href="/sources" class="text-primary-500 text-xs hover:underline mt-2 inline-block">查看数据来源详情</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 右侧新闻列表 -->
+                <div class="lg:col-span-3">
+                    <!-- 置顶新闻 -->
+                    <div v-if="topNews && currentCategory === ''" class="mb-6">
+                        <div class="bg-gradient-to-r from-primary-500 to-purple-600 rounded-2xl p-6 text-white card-hover cursor-pointer" @click="showDetail(topNews)">
+                            <div class="flex items-center mb-3">
+                                <span class="bg-white/20 px-3 py-1 rounded-full text-sm font-medium mr-3">
+                                    置顶
+                                </span>
+                                <span class="source-badge bg-white/20 text-white">{{ topNews.source_type }}</span>
+                            </div>
+                            <h2 class="text-xl font-bold mb-3">{{ topNews.title }}</h2>
+                            <p class="opacity-90 mb-4">{{ topNews.summary }}</p>
+                            <div class="flex items-center justify-between text-sm opacity-80">
+                                <span>{{ topNews.source }} · {{ topNews.publish_date }}</span>
+                                <span>{{ topNews.view_count }} 次浏览</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 新闻列表 -->
+                    <div class="space-y-4">
+                        <div v-for="item in filteredNews" :key="item.id"
+                            class="bg-white rounded-xl shadow border border-gray-100 p-5 card-hover cursor-pointer"
+                            @click="showDetail(item)">
+                            <div class="flex items-start justify-between">
+                                <div class="flex-1">
+                                    <div class="flex items-center mb-2">
+                                        <span class="text-xs px-2 py-1 rounded bg-gray-100 text-gray-600 mr-2">{{ item.category }}</span>
+                                        <span :class="getSourceClass(item.source_type)" class="source-badge">{{ item.source_type }}</span>
+                                    </div>
+                                    <h3 class="font-semibold text-gray-800 mb-2 hover:text-primary-600 transition-colors">
+                                        {{ item.title }}
+                                    </h3>
+                                    <p class="text-gray-500 text-sm mb-3 line-clamp-2">{{ item.summary }}</p>
+                                    <div class="flex items-center text-xs text-gray-400">
+                                        <span class="mr-4">{{ item.source }}</span>
+                                        <span class="mr-4">{{ item.publish_date }}</span>
+                                        <span>{{ item.view_count }} 次浏览</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 空状态 -->
+                    <div v-if="filteredNews.length === 0" class="text-center py-12">
+                        <svg class="w-16 h-16 text-gray-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                        </svg>
+                        <p class="text-gray-400">暂无相关资讯</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 新闻详情弹窗 -->
+        <div v-if="selectedNews" class="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4" @click.self="selectedNews = null">
+            <div class="bg-white rounded-2xl max-w-2xl w-full max-h-[80vh] overflow-hidden shadow-2xl">
+                <div class="p-6 border-b border-gray-100">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center">
+                            <span class="text-xs px-2 py-1 rounded bg-gray-100 text-gray-600 mr-2">{{ selectedNews.category }}</span>
+                            <span :class="getSourceClass(selectedNews.source_type)" class="source-badge">{{ selectedNews.source_type }}</span>
+                        </div>
+                        <button @click="selectedNews = null" class="text-gray-400 hover:text-gray-600">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <h2 class="text-xl font-bold text-gray-800">{{ selectedNews.title }}</h2>
+                </div>
+                <div class="p-6 overflow-y-auto max-h-[50vh]">
+                    <div class="flex items-center text-sm text-gray-500 mb-4">
+                        <span class="mr-4">{{ selectedNews.source }}</span>
+                        <span class="mr-4">{{ selectedNews.publish_date }}</span>
+                    </div>
+                    <div class="prose prose-sm max-w-none text-gray-600 leading-relaxed">
+                        <p v-if="selectedNews.content">{{ selectedNews.content }}</p>
+                        <p v-else>{{ selectedNews.summary }}</p>
+                    </div>
+                    <div class="mt-4 flex flex-wrap gap-2">
+                        <span v-for="tag in selectedNews.tags" :key="tag" class="text-xs px-2 py-1 bg-gray-100 text-gray-500 rounded">
+                            #{{ tag }}
+                        </span>
+                    </div>
+                </div>
+                <div class="p-4 border-t border-gray-100 bg-gray-50 flex justify-between items-center">
+                    <a v-if="selectedNews.source_url" :href="selectedNews.source_url" target="_blank"
+                        class="text-primary-500 hover:text-primary-600 text-sm flex items-center">
+                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                        </svg>
+                        查看原文
+                    </a>
+                    <span v-else class="text-gray-400 text-sm">来源：{{ selectedNews.source }}</span>
+                    <button @click="selectedNews = null" class="px-4 py-2 bg-primary-500 text-white rounded-lg hover:bg-primary-600 transition-colors text-sm">
+                        关闭
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 页脚 -->
+        <footer class="bg-white border-t border-gray-100 mt-12">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                <div class="text-center">
+                    <div class="flex justify-center items-center mb-4">
+                        <div class="w-8 h-8 rounded-lg gradient-bg flex items-center justify-center text-white font-bold text-sm mr-2">
+                            沪
+                        </div>
+                        <span class="font-semibold text-gray-700">上海高考助手</span>
+                    </div>
+                    <p class="text-gray-500 text-sm">
+                        本系统仅供参考，志愿填报请以官方信息为准
+                    </p>
+                    <p class="text-gray-400 text-xs mt-2">
+                        © 2026 上海高考志愿填报辅助系统
+                    </p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        const { createApp, ref, computed, onMounted } = Vue;
+
+        createApp({
+            setup() {
+                const mobileMenuOpen = ref(false);
+                const news = ref([]);
+                const categories = ref([]);
+                const sources = ref([]);
+                const updateTime = ref('');
+                const currentCategory = ref('');
+                const selectedNews = ref(null);
+
+                // 置顶新闻
+                const topNews = computed(() => {
+                    return news.value.find(n => n.is_top);
+                });
+
+                // 过滤后的新闻
+                const filteredNews = computed(() => {
+                    let items = news.value;
+                    if (currentCategory.value) {
+                        items = items.filter(n => n.category === currentCategory.value);
+                    }
+                    // 排除置顶新闻
+                    return items.filter(n => !n.is_top);
+                });
+
+                // 获取分类数量
+                const getCategoryCount = (categoryName) => {
+                    return news.value.filter(n => n.category === categoryName).length;
+                };
+
+                // 获取来源样式
+                const getSourceClass = (sourceType) => {
+                    const classMap = {
+                        '官方公布': 'source-official',
+                        '网络公开': 'source-public',
+                        '待核实': 'source-unverified'
+                    };
+                    return classMap[sourceType] || 'source-public';
+                };
+
+                // 显示详情
+                const showDetail = (item) => {
+                    selectedNews.value = item;
+                    // 增加浏览次数
+                    item.view_count = (item.view_count || 0) + 1;
+                };
+
+                // 获取新闻数据
+                const fetchNews = async () => {
+                    try {
+                        const response = await fetch('/api/news');
+                        const data = await response.json();
+                        if (data.success) {
+                            news.value = data.data.news || [];
+                            categories.value = data.data.categories || [];
+                            sources.value = data.data.sources || [];
+                            updateTime.value = data.data.update_time || '';
+                        }
+                    } catch (error) {
+                        console.error('获取新闻数据失败:', error);
+                    }
+                };
+
+                onMounted(() => {
+                    fetchNews();
+                });
+
+                return {
+                    mobileMenuOpen,
+                    news,
+                    categories,
+                    sources,
+                    updateTime,
+                    currentCategory,
+                    selectedNews,
+                    topNews,
+                    filteredNews,
+                    getCategoryCount,
+                    getSourceClass,
+                    showDetail
+                };
+            }
+        }).mount('#app');
+    </script>
+</body>
+</html>

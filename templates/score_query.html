@@ -1,0 +1,370 @@
+{% extends "base.html" %}
+
+{% block title %}分数查询 - 上海高考志愿填报辅助系统{% endblock %}
+
+{% block extra_css %}
+<style>
+    .page-card {
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 20px;
+        padding: 30px;
+        margin-bottom: 20px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    }
+
+    .page-title {
+        font-size: 28px;
+        font-weight: 700;
+        color: #333;
+        margin-bottom: 10px;
+    }
+
+    .page-desc {
+        color: #666;
+        margin-bottom: 25px;
+    }
+
+    .search-form {
+        display: flex;
+        gap: 15px;
+        margin-bottom: 30px;
+        flex-wrap: wrap;
+    }
+
+    .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .form-label {
+        font-size: 14px;
+        color: #666;
+        font-weight: 500;
+    }
+
+    .score-input {
+        width: 200px;
+        height: 48px;
+        border: 2px solid #e0e0e0;
+        border-radius: 12px;
+        padding: 0 16px;
+        font-size: 18px;
+        font-weight: 600;
+        transition: all 0.3s;
+    }
+
+    .score-input:focus {
+        outline: none;
+        border-color: #667eea;
+        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
+
+    .year-select {
+        width: 150px;
+        height: 48px;
+        border: 2px solid #e0e0e0;
+        border-radius: 12px;
+        padding: 0 16px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+    .search-btn {
+        height: 48px;
+        padding: 0 30px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border: none;
+        border-radius: 12px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+
+    .search-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+    }
+
+    .result-info {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 20px 25px;
+        border-radius: 16px;
+        margin-bottom: 25px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+    .result-stat {
+        text-align: center;
+    }
+
+    .result-stat-value {
+        font-size: 28px;
+        font-weight: 700;
+    }
+
+    .result-stat-label {
+        font-size: 13px;
+        opacity: 0.9;
+    }
+
+    .university-list {
+        display: grid;
+        gap: 15px;
+    }
+
+    .university-card {
+        background: white;
+        border: 1px solid #e8e8e8;
+        border-radius: 16px;
+        padding: 20px;
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        gap: 20px;
+        align-items: center;
+        transition: all 0.3s;
+    }
+
+    .university-card:hover {
+        border-color: #667eea;
+        box-shadow: 0 5px 20px rgba(102, 126, 234, 0.1);
+    }
+
+    .uni-probability {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: 600;
+    }
+
+    .prob-high { background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); }
+    .prob-medium { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
+    .prob-low { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
+
+    .prob-value {
+        font-size: 24px;
+    }
+
+    .prob-label {
+        font-size: 11px;
+        opacity: 0.9;
+    }
+
+    .uni-info h3 {
+        font-size: 18px;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 8px;
+    }
+
+    .uni-tags {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 10px;
+    }
+
+    .uni-tag {
+        padding: 4px 10px;
+        background: #f0f0f0;
+        border-radius: 20px;
+        font-size: 12px;
+        color: #666;
+    }
+
+    .uni-tag.level {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+    }
+
+    .uni-majors {
+        font-size: 13px;
+        color: #999;
+    }
+
+    .uni-scores {
+        text-align: right;
+    }
+
+    .uni-score-item {
+        margin-bottom: 8px;
+    }
+
+    .uni-score-label {
+        font-size: 12px;
+        color: #999;
+    }
+
+    .uni-score-value {
+        font-size: 18px;
+        font-weight: 600;
+        color: #333;
+    }
+
+    .empty-state {
+        text-align: center;
+        padding: 60px 20px;
+        color: #999;
+    }
+
+    .empty-icon {
+        font-size: 60px;
+        margin-bottom: 20px;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div id="query-app">
+    <div class="page-card">
+        <h1 class="page-title">分数查询</h1>
+        <p class="page-desc">输入您的高考分数，系统将为您推荐可填报的院校</p>
+
+        <div class="search-form">
+            <div class="form-group">
+                <label class="form-label">高考分数</label>
+                <input type="number" class="score-input" v-model="score" placeholder="请输入分数" min="0" max="660">
+            </div>
+            <div class="form-group">
+                <label class="form-label">参考年份</label>
+                <select class="year-select" v-model="year">
+                    <option v-for="y in years" :key="y" :value="y">{{ y }}年</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="form-label">&nbsp;</label>
+                <button class="search-btn" @click="handleSearch">查询院校</button>
+            </div>
+        </div>
+    </div>
+
+    <div v-if="loading" class="page-card" style="text-align: center; padding: 60px;">
+        <div style="font-size: 18px; color: #667eea;">正在查询中...</div>
+    </div>
+
+    <template v-if="!loading && result">
+        <div class="result-info">
+            <div class="result-stat">
+                <div class="result-stat-value">{{ result.score }}</div>
+                <div class="result-stat-label">我的分数</div>
+            </div>
+            <div class="result-stat">
+                <div class="result-stat-value">约{{ result.rank }}名</div>
+                <div class="result-stat-label">全市排名</div>
+            </div>
+            <div class="result-stat">
+                <div class="result-stat-value">{{ result.special_line }}</div>
+                <div class="result-stat-label">特控线</div>
+            </div>
+            <div class="result-stat">
+                <div class="result-stat-value">{{ result.undergraduate_line }}</div>
+                <div class="result-stat-label">本科线</div>
+            </div>
+            <div class="result-stat">
+                <div class="result-stat-value">{{ result.universities.length }}</div>
+                <div class="result-stat-label">可填报院校</div>
+            </div>
+        </div>
+
+        <div class="page-card">
+            <h2 style="font-size: 20px; margin-bottom: 20px;">推荐院校列表</h2>
+            <div class="university-list">
+                <div class="university-card" v-for="uni in result.universities" :key="uni.id">
+                    <div class="uni-probability" :class="getProbClass(uni.probability)">
+                        <div class="prob-value">{{ uni.probability }}%</div>
+                        <div class="prob-label">录取概率</div>
+                    </div>
+                    <div class="uni-info">
+                        <h3>{{ uni.name }}</h3>
+                        <div class="uni-tags">
+                            <span class="uni-tag level">{{ uni.level }}</span>
+                            <span class="uni-tag">{{ uni.location }}</span>
+                            <span class="uni-tag">{{ uni.type }}</span>
+                        </div>
+                        <div class="uni-majors">
+                            热门专业：{{ uni.popular_majors.join('、') }}
+                        </div>
+                    </div>
+                    <div class="uni-scores">
+                        <div class="uni-score-item">
+                            <div class="uni-score-label">最低分</div>
+                            <div class="uni-score-value">{{ uni.min_score }}</div>
+                        </div>
+                        <div class="uni-score-item">
+                            <div class="uni-score-label">平均分</div>
+                            <div class="uni-score-value">{{ uni.avg_score }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <div v-if="!loading && !result" class="page-card empty-state">
+        <div class="empty-icon">📊</div>
+        <div style="font-size: 18px; color: #333; margin-bottom: 10px;">请输入分数开始查询</div>
+        <div>系统将根据您的分数，智能推荐可填报的院校</div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    const queryApp = createApp({
+        setup() {
+            const score = ref('');
+            const year = ref(2024);
+            const years = [2025, 2024, 2023, 2022, 2021, 2020];
+            const loading = ref(false);
+            const result = ref(null);
+
+            const getProbClass = (prob) => {
+                if (prob >= 70) return 'prob-high';
+                if (prob >= 40) return 'prob-medium';
+                return 'prob-low';
+            };
+
+            const handleSearch = async () => {
+                const scoreVal = parseInt(score.value);
+                if (!scoreVal || scoreVal < 0 || scoreVal > 660) {
+                    ElementPlus.ElMessage.warning('请输入有效的分数（0-660分）');
+                    return;
+                }
+
+                loading.value = true;
+                try {
+                    const response = await fetch(`/api/query-by-score?score=${scoreVal}&year=${year.value}`);
+                    const data = await response.json();
+                    if (data.success) {
+                        result.value = data.data;
+                    } else {
+                        ElementPlus.ElMessage.error(data.message || '查询失败');
+                    }
+                } catch (error) {
+                    ElementPlus.ElMessage.error('网络错误，请稍后重试');
+                } finally {
+                    loading.value = false;
+                }
+            };
+
+            return {
+                score, year, years, loading, result,
+                getProbClass, handleSearch
+            };
+        }
+    });
+    queryApp.use(ElementPlus);
+    queryApp.mount('#query-app');
+</script>
+{% endblock %}

@@ -1,0 +1,116 @@
+{
+  "score_lines": [
+    {
+      "year": 2024,
+      "total_score": 660,
+      "batches": {
+        "special_type": {
+          "name": "特殊类型招生控制线",
+          "score": 503
+        },
+        "undergraduate": {
+          "name": "本科批",
+          "score": 403
+        },
+        "art_undergraduate": {
+          "name": "艺术类本科文化控制分数线",
+          "score": 302
+        },
+        "sports_undergraduate": {
+          "name": "体育类本科文化控制分数线",
+          "score": 282
+        }
+      }
+    },
+    {
+      "year": 2023,
+      "total_score": 660,
+      "batches": {
+        "special_type": {
+          "name": "特殊类型招生控制线",
+          "score": 504
+        },
+        "undergraduate": {
+          "name": "本科批",
+          "score": 405
+        },
+        "art_undergraduate": {
+          "name": "艺术类本科文化控制分数线",
+          "score": 304
+        },
+        "sports_undergraduate": {
+          "name": "体育类本科文化控制分数线",
+          "score": 284
+        }
+      }
+    },
+    {
+      "year": 2022,
+      "total_score": 660,
+      "batches": {
+        "special_type": {
+          "name": "特殊类型招生控制线",
+          "score": 503
+        },
+        "undergraduate": {
+          "name": "本科批",
+          "score": 400
+        },
+        "art_undergraduate": {
+          "name": "艺术类本科文化控制分数线",
+          "score": 300
+        },
+        "sports_undergraduate": {
+          "name": "体育类本科文化控制分数线",
+          "score": 280
+        }
+      }
+    },
+    {
+      "year": 2021,
+      "total_score": 660,
+      "batches": {
+        "special_type": {
+          "name": "特殊类型招生控制线",
+          "score": 503
+        },
+        "undergraduate": {
+          "name": "本科批",
+          "score": 400
+        },
+        "art_undergraduate": {
+          "name": "艺术类本科文化控制分数线",
+          "score": 300
+        },
+        "sports_undergraduate": {
+          "name": "体育类本科文化控制分数线",
+          "score": 280
+        }
+      }
+    },
+    {
+      "year": 2020,
+      "total_score": 660,
+      "batches": {
+        "special_type": {
+          "name": "特殊类型招生控制线",
+          "score": 502
+        },
+        "undergraduate": {
+          "name": "本科批",
+          "score": 400
+        },
+        "art_undergraduate": {
+          "name": "艺术类本科文化控制分数线",
+          "score": 300
+        },
+        "sports_undergraduate": {
+          "name": "体育类本科文化控制分数线",
+          "score": 280
+        }
+      }
+    }
+  ],
+  "description": "上海高考分数线数据（2020-2024年），总分660分",
+  "update_time": "2026-03-17"
+}

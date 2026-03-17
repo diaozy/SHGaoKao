@@ -1,0 +1,344 @@
+{
+  "universities": [
+    {
+      "id": 1,
+      "name": "清华大学",
+      "code": "10003",
+      "level": "985/211/双一流",
+      "location": "北京",
+      "type": "综合",
+      "popular_majors": ["计算机科学与技术", "电子信息类", "自动化", "建筑学"],
+      "description": "中国顶尖学府，工科实力全国领先",
+      "admission_data": [
+        {"year": 2024, "min_score": 618, "avg_score": 622, "rank": 1},
+        {"year": 2023, "min_score": 617, "avg_score": 620, "rank": 1},
+        {"year": 2022, "min_score": 615, "avg_score": 618, "rank": 1},
+        {"year": 2021, "min_score": 613, "avg_score": 616, "rank": 1},
+        {"year": 2020, "min_score": 610, "avg_score": 614, "rank": 1}
+      ]
+    },
+    {
+      "id": 2,
+      "name": "北京大学",
+      "code": "10001",
+      "level": "985/211/双一流",
+      "location": "北京",
+      "type": "综合",
+      "popular_majors": ["数学类", "物理学类", "中国语言文学", "经济学"],
+      "description": "中国顶尖学府，文理并重，基础学科实力雄厚",
+      "admission_data": [
+        {"year": 2024, "min_score": 616, "avg_score": 619, "rank": 2},
+        {"year": 2023, "min_score": 615, "avg_score": 618, "rank": 2},
+        {"year": 2022, "min_score": 613, "avg_score": 616, "rank": 2},
+        {"year": 2021, "min_score": 611, "avg_score": 614, "rank": 2},
+        {"year": 2020, "min_score": 608, "avg_score": 612, "rank": 2}
+      ]
+    },
+    {
+      "id": 3,
+      "name": "复旦大学",
+      "code": "10246",
+      "level": "985/211/双一流",
+      "location": "上海",
+      "type": "综合",
+      "popular_majors": ["临床医学", "经济学", "新闻传播学", "数学类"],
+      "description": "上海顶尖学府，文理医工综合发展",
+      "admission_data": [
+        {"year": 2024, "min_score": 580, "avg_score": 585, "rank": 3},
+        {"year": 2023, "min_score": 578, "avg_score": 583, "rank": 3},
+        {"year": 2022, "min_score": 575, "avg_score": 580, "rank": 3},
+        {"year": 2021, "min_score": 572, "avg_score": 577, "rank": 3},
+        {"year": 2020, "min_score": 568, "avg_score": 573, "rank": 3}
+      ]
+    },
+    {
+      "id": 4,
+      "name": "上海交通大学",
+      "code": "10248",
+      "level": "985/211/双一流",
+      "location": "上海",
+      "type": "综合",
+      "popular_majors": ["计算机科学与技术", "电子信息类", "机械工程", "临床医学"],
+      "description": "上海顶尖学府，工科和医学见长",
+      "admission_data": [
+        {"year": 2024, "min_score": 580, "avg_score": 585, "rank": 4},
+        {"year": 2023, "min_score": 578, "avg_score": 583, "rank": 4},
+        {"year": 2022, "min_score": 575, "avg_score": 580, "rank": 4},
+        {"year": 2021, "min_score": 572, "avg_score": 577, "rank": 4},
+        {"year": 2020, "min_score": 568, "avg_score": 573, "rank": 4}
+      ]
+    },
+    {
+      "id": 5,
+      "name": "浙江大学",
+      "code": "10335",
+      "level": "985/211/双一流",
+      "location": "浙江",
+      "type": "综合",
+      "popular_majors": ["计算机科学与技术", "软件工程", "人工智能", "光电信息工程"],
+      "description": "顶尖985高校，工科实力强劲",
+      "admission_data": [
+        {"year": 2024, "min_score": 575, "avg_score": 580, "rank": 5},
+        {"year": 2023, "min_score": 573, "avg_score": 578, "rank": 5},
+        {"year": 2022, "min_score": 570, "avg_score": 575, "rank": 5},
+        {"year": 2021, "min_score": 567, "avg_score": 572, "rank": 5},
+        {"year": 2020, "min_score": 563, "avg_score": 568, "rank": 5}
+      ]
+    },
+    {
+      "id": 6,
+      "name": "中国科学技术大学",
+      "code": "10358",
+      "level": "985/211/双一流",
+      "location": "安徽",
+      "type": "理工",
+      "popular_majors": ["物理学类", "数学类", "计算机科学与技术", "电子信息类"],
+      "description": "顶尖985高校，理工科实力超群",
+      "admission_data": [
+        {"year": 2024, "min_score": 570, "avg_score": 575, "rank": 6},
+        {"year": 2023, "min_score": 568, "avg_score": 573, "rank": 6},
+        {"year": 2022, "min_score": 565, "avg_score": 570, "rank": 6},
+        {"year": 2021, "min_score": 562, "avg_score": 567, "rank": 6},
+        {"year": 2020, "min_score": 558, "avg_score": 563, "rank": 6}
+      ]
+    },
+    {
+      "id": 7,
+      "name": "南京大学",
+      "code": "10284",
+      "level": "985/211/双一流",
+      "location": "江苏",
+      "type": "综合",
+      "popular_majors": ["天文学类", "物理学类", "计算机科学与技术", "中国语言文学"],
+      "description": "顶尖985高校，文理见长",
+      "admission_data": [
+        {"year": 2024, "min_score": 568, "avg_score": 573, "rank": 7},
+        {"year": 2023, "min_score": 566, "avg_score": 571, "rank": 7},
+        {"year": 2022, "min_score": 563, "avg_score": 568, "rank": 7},
+        {"year": 2021, "min_score": 560, "avg_score": 565, "rank": 7},
+        {"year": 2020, "min_score": 556, "avg_score": 561, "rank": 7}
+      ]
+    },
+    {
+      "id": 8,
+      "name": "同济大学",
+      "code": "10247",
+      "level": "985/211/双一流",
+      "location": "上海",
+      "type": "理工",
+      "popular_majors": ["建筑学", "土木工程", "城乡规划", "风景园林"],
+      "description": "上海顶尖高校，建筑土木见长",
+      "admission_data": [
+        {"year": 2024, "min_score": 560, "avg_score": 565, "rank": 8},
+        {"year": 2023, "min_score": 558, "avg_score": 563, "rank": 8},
+        {"year": 2022, "min_score": 555, "avg_score": 560, "rank": 8},
+        {"year": 2021, "min_score": 552, "avg_score": 557, "rank": 8},
+        {"year": 2020, "min_score": 548, "avg_score": 553, "rank": 8}
+      ]
+    },
+    {
+      "id": 9,
+      "name": "华东师范大学",
+      "code": "10269",
+      "level": "985/211/双一流",
+      "location": "上海",
+      "type": "师范",
+      "popular_majors": ["教育学", "心理学", "中国语言文学", "数学类"],
+      "description": "上海顶尖师范院校，教育学见长",
+      "admission_data": [
+        {"year": 2024, "min_score": 555, "avg_score": 560, "rank": 10},
+        {"year": 2023, "min_score": 553, "avg_score": 558, "rank": 10},
+        {"year": 2022, "min_score": 550, "avg_score": 555, "rank": 10},
+        {"year": 2021, "min_score": 547, "avg_score": 552, "rank": 10},
+        {"year": 2020, "min_score": 543, "avg_score": 548, "rank": 10}
+      ]
+    },
+    {
+      "id": 10,
+      "name": "上海财经大学",
+      "code": "10272",
+      "level": "211/双一流",
+      "location": "上海",
+      "type": "财经",
+      "popular_majors": ["金融学", "会计学", "经济学", "工商管理"],
+      "description": "上海顶尖财经院校，财经类顶尖",
+      "admission_data": [
+        {"year": 2024, "min_score": 545, "avg_score": 550, "rank": 15},
+        {"year": 2023, "min_score": 543, "avg_score": 548, "rank": 15},
+        {"year": 2022, "min_score": 540, "avg_score": 545, "rank": 15},
+        {"year": 2021, "min_score": 537, "avg_score": 542, "rank": 15},
+        {"year": 2020, "min_score": 533, "avg_score": 538, "rank": 15}
+      ]
+    },
+    {
+      "id": 11,
+      "name": "上海外国语大学",
+      "code": "10271",
+      "level": "211/双一流",
+      "location": "上海",
+      "type": "语言",
+      "popular_majors": ["英语", "翻译", "国际经济与贸易", "新闻学"],
+      "description": "上海顶尖语言院校，外语类顶尖",
+      "admission_data": [
+        {"year": 2024, "min_score": 535, "avg_score": 540, "rank": 25},
+        {"year": 2023, "min_score": 533, "avg_score": 538, "rank": 25},
+        {"year": 2022, "min_score": 530, "avg_score": 535, "rank": 25},
+        {"year": 2021, "min_score": 527, "avg_score": 532, "rank": 25},
+        {"year": 2020, "min_score": 523, "avg_score": 528, "rank": 25}
+      ]
+    },
+    {
+      "id": 12,
+      "name": "华东理工大学",
+      "code": "10251",
+      "level": "211/双一流",
+      "location": "上海",
+      "type": "理工",
+      "popular_majors": ["化学工程与工艺", "材料科学与工程", "生物工程", "机械工程"],
+      "description": "上海重点理工院校，化工见长",
+      "admission_data": [
+        {"year": 2024, "min_score": 530, "avg_score": 535, "rank": 35},
+        {"year": 2023, "min_score": 528, "avg_score": 533, "rank": 35},
+        {"year": 2022, "min_score": 525, "avg_score": 530, "rank": 35},
+        {"year": 2021, "min_score": 522, "avg_score": 527, "rank": 35},
+        {"year": 2020, "min_score": 518, "avg_score": 523, "rank": 35}
+      ]
+    },
+    {
+      "id": 13,
+      "name": "上海大学",
+      "code": "10280",
+      "level": "211/双一流",
+      "location": "上海",
+      "type": "综合",
+      "popular_majors": ["计算机科学与技术", "电子信息工程", "机械工程", "经济学"],
+      "description": "上海市属重点高校，综合实力强",
+      "admission_data": [
+        {"year": 2024, "min_score": 520, "avg_score": 525, "rank": 45},
+        {"year": 2023, "min_score": 518, "avg_score": 523, "rank": 45},
+        {"year": 2022, "min_score": 515, "avg_score": 520, "rank": 45},
+        {"year": 2021, "min_score": 512, "avg_score": 517, "rank": 45},
+        {"year": 2020, "min_score": 508, "avg_score": 513, "rank": 45}
+      ]
+    },
+    {
+      "id": 14,
+      "name": "东华大学",
+      "code": "10255",
+      "level": "211/双一流",
+      "location": "上海",
+      "type": "理工",
+      "popular_majors": ["纺织工程", "服装设计与工程", "材料科学与工程", "机械工程"],
+      "description": "上海重点理工院校，纺织服装见长",
+      "admission_data": [
+        {"year": 2024, "min_score": 515, "avg_score": 520, "rank": 55},
+        {"year": 2023, "min_score": 513, "avg_score": 518, "rank": 55},
+        {"year": 2022, "min_score": 510, "avg_score": 515, "rank": 55},
+        {"year": 2021, "min_score": 507, "avg_score": 512, "rank": 55},
+        {"year": 2020, "min_score": 503, "avg_score": 508, "rank": 55}
+      ]
+    },
+    {
+      "id": 15,
+      "name": "华东政法大学",
+      "code": "10276",
+      "level": "省重点",
+      "location": "上海",
+      "type": "政法",
+      "popular_majors": ["法学", "知识产权", "行政管理", "社会学"],
+      "description": "上海政法类重点院校，法学见长",
+      "admission_data": [
+        {"year": 2024, "min_score": 520, "avg_score": 525, "rank": 50},
+        {"year": 2023, "min_score": 518, "avg_score": 523, "rank": 50},
+        {"year": 2022, "min_score": 515, "avg_score": 520, "rank": 50},
+        {"year": 2021, "min_score": 512, "avg_score": 517, "rank": 50},
+        {"year": 2020, "min_score": 508, "avg_score": 513, "rank": 50}
+      ]
+    },
+    {
+      "id": 16,
+      "name": "上海对外经贸大学",
+      "code": "10273",
+      "level": "省重点",
+      "location": "上海",
+      "type": "财经",
+      "popular_majors": ["国际经济与贸易", "金融学", "会计学", "商务英语"],
+      "description": "上海财经类重点院校，外贸见长",
+      "admission_data": [
+        {"year": 2024, "min_score": 510, "avg_score": 515, "rank": 70},
+        {"year": 2023, "min_score": 508, "avg_score": 513, "rank": 70},
+        {"year": 2022, "min_score": 505, "avg_score": 510, "rank": 70},
+        {"year": 2021, "min_score": 502, "avg_score": 507, "rank": 70},
+        {"year": 2020, "min_score": 498, "avg_score": 503, "rank": 70}
+      ]
+    },
+    {
+      "id": 17,
+      "name": "上海理工大学",
+      "code": "10268",
+      "level": "省重点",
+      "location": "上海",
+      "type": "理工",
+      "popular_majors": ["机械设计制造及其自动化", "光电信息科学与工程", "计算机科学与技术", "生物医学工程"],
+      "description": "上海理工类重点院校，工科实力强",
+      "admission_data": [
+        {"year": 2024, "min_score": 500, "avg_score": 505, "rank": 90},
+        {"year": 2023, "min_score": 498, "avg_score": 503, "rank": 90},
+        {"year": 2022, "min_score": 495, "avg_score": 500, "rank": 90},
+        {"year": 2021, "min_score": 492, "avg_score": 497, "rank": 90},
+        {"year": 2020, "min_score": 488, "avg_score": 493, "rank": 90}
+      ]
+    },
+    {
+      "id": 18,
+      "name": "上海师范大学",
+      "code": "10270",
+      "level": "省重点",
+      "location": "上海",
+      "type": "师范",
+      "popular_majors": ["教育学", "心理学", "汉语言文学", "英语"],
+      "description": "上海师范类重点院校，师范教育见长",
+      "admission_data": [
+        {"year": 2024, "min_score": 495, "avg_score": 500, "rank": 100},
+        {"year": 2023, "min_score": 493, "avg_score": 498, "rank": 100},
+        {"year": 2022, "min_score": 490, "avg_score": 495, "rank": 100},
+        {"year": 2021, "min_score": 487, "avg_score": 492, "rank": 100},
+        {"year": 2020, "min_score": 483, "avg_score": 488, "rank": 100}
+      ]
+    },
+    {
+      "id": 19,
+      "name": "上海海事大学",
+      "code": "10254",
+      "level": "省重点",
+      "location": "上海",
+      "type": "理工",
+      "popular_majors": ["航海技术", "轮机工程", "物流管理", "海洋工程与技术"],
+      "description": "上海特色理工院校，航运物流见长",
+      "admission_data": [
+        {"year": 2024, "min_score": 490, "avg_score": 495, "rank": 120},
+        {"year": 2023, "min_score": 488, "avg_score": 493, "rank": 120},
+        {"year": 2022, "min_score": 485, "avg_score": 490, "rank": 120},
+        {"year": 2021, "min_score": 482, "avg_score": 487, "rank": 120},
+        {"year": 2020, "min_score": 478, "avg_score": 483, "rank": 120}
+      ]
+    },
+    {
+      "id": 20,
+      "name": "上海海洋大学",
+      "code": "10264",
+      "level": "省重点",
+      "location": "上海",
+      "type": "农林",
+      "popular_majors": ["水产养殖学", "海洋渔业科学与技术", "食品科学与工程", "生物技术"],
+      "description": "上海特色院校，水产海洋见长",
+      "admission_data": [
+        {"year": 2024, "min_score": 480, "avg_score": 485, "rank": 150},
+        {"year": 2023, "min_score": 478, "avg_score": 483, "rank": 150},
+        {"year": 2022, "min_score": 475, "avg_score": 480, "rank": 150},
+        {"year": 2021, "min_score": 472, "avg_score": 477, "rank": 150},
+        {"year": 2020, "min_score": 468, "avg_score": 473, "rank": 150}
+      ]
+    }
+  ]
+}

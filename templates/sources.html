@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数据来源说明 - 上海高考志愿填报辅助系统</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Vue 3 CDN -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#f0f4ff',
+                            100: '#e0e9ff',
+                            200: '#c7d6fe',
+                            300: '#a4b8fc',
+                            400: '#8093f8',
+                            500: '#6366f1',
+                            600: '#4f46e5',
+                            700: '#4338ca',
+                            800: '#3730a3',
+                            900: '#312e81',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        [v-cloak] { display: none; }
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .nav-item {
+            position: relative;
+        }
+        .nav-item::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+        .nav-item:hover::after, .nav-item.active::after {
+            width: 100%;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <div id="app" v-cloak>
+        <!-- 导航栏 -->
+        <nav class="bg-white/95 backdrop-blur-md shadow-sm sticky top-0 z-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-center h-16">
+                    <!-- Logo -->
+                    <a href="/" class="flex items-center space-x-3">
+                        <div class="w-10 h-10 rounded-xl gradient-bg flex items-center justify-center text-white font-bold text-lg shadow-lg">
+                            沪
+                        </div>
+                        <div class="hidden sm:block">
+                            <div class="text-lg font-bold text-gray-800">上海高考助手</div>
+                            <div class="text-xs text-gray-500 -mt-1">志愿填报辅助系统</div>
+                        </div>
+                    </a>
+
+                    <!-- 桌面导航 -->
+                    <div class="hidden md:flex items-center space-x-1">
+                        <a href="/" class="nav-item px-4 py-2 text-gray-700 font-medium hover:text-primary-600 transition-colors">首页</a>
+                        <a href="/query" class="nav-item px-4 py-2 text-gray-700 font-medium hover:text-primary-600 transition-colors">分数查询</a>
+                        <a href="/simulate" class="nav-item px-4 py-2 text-gray-700 font-medium hover:text-primary-600 transition-colors">模拟填报</a>
+                        <a href="/school" class="nav-item px-4 py-2 text-gray-700 font-medium hover:text-primary-600 transition-colors">高中分析</a>
+                        <a href="/major" class="nav-item px-4 py-2 text-gray-700 font-medium hover:text-primary-600 transition-colors">专业指导</a>
+                        <a href="/news" class="nav-item px-4 py-2 text-gray-700 font-medium hover:text-primary-600 transition-colors">政策资讯</a>
+                    </div>
+
+                    <!-- 移动端菜单按钮 -->
+                    <button @click="mobileMenuOpen = !mobileMenuOpen" class="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors">
+                        <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path v-if="!mobileMenuOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                            <path v-else stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- 移动端菜单 -->
+            <div v-show="mobileMenuOpen" class="md:hidden bg-white border-t border-gray-100">
+                <div class="px-4 py-3 space-y-1">
+                    <a href="/" class="block px-4 py-2 rounded-lg text-gray-700 hover:bg-gray-50">首页</a>
+                    <a href="/query" class="block px-4 py-2 rounded-lg text-gray-700 hover:bg-gray-50">分数查询</a>
+                    <a href="/simulate" class="block px-4 py-2 rounded-lg text-gray-700 hover:bg-gray-50">模拟填报</a>
+                    <a href="/school" class="block px-4 py-2 rounded-lg text-gray-700 hover:bg-gray-50">高中分析</a>
+                    <a href="/major" class="block px-4 py-2 rounded-lg text-gray-700 hover:bg-gray-50">专业指导</a>
+                    <a href="/news" class="block px-4 py-2 rounded-lg text-gray-700 hover:bg-gray-50">政策资讯</a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- 页面标题 -->
+        <section class="gradient-bg py-12">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center text-white">
+                    <h1 class="text-3xl md:text-4xl font-bold mb-4">数据来源说明</h1>
+                    <p class="text-lg opacity-90">了解本系统数据来源，确保信息可靠性</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 主内容区 -->
+        <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <!-- 数据来源类型说明 -->
+            <div class="bg-white rounded-2xl shadow-lg border border-gray-100 p-6 mb-6">
+                <h2 class="text-xl font-bold text-gray-800 mb-6 flex items-center">
+                    <svg class="w-6 h-6 mr-2 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                    数据来源类型
+                </h2>
+                <div class="space-y-4">
+                    <div class="flex items-start p-4 rounded-xl bg-green-50 border border-green-100">
+                        <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center text-green-600 mr-4 flex-shrink-0">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-green-800 mb-1">官方公布</h3>
+                            <p class="text-green-700 text-sm">数据来源于教育部门、考试院等官方渠道发布的信息，具有最高可信度。包括分数线、招生计划、政策文件等。</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start p-4 rounded-xl bg-blue-50 border border-blue-100">
+                        <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 mr-4 flex-shrink-0">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-blue-800 mb-1">网络公开</h3>
+                            <p class="text-blue-700 text-sm">数据来源于公开渠道、新闻报道、学校官网等，经过整理归纳。建议与官方信息交叉验证。</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start p-4 rounded-xl bg-yellow-50 border border-yellow-100">
+                        <div class="w-10 h-10 rounded-full bg-yellow-100 flex items-center justify-center text-yellow-600 mr-4 flex-shrink-0">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-yellow-800 mb-1">待核实</h3>
+                            <p class="text-yellow-700 text-sm">数据来源不确定或需要进一步核实，仅供参考。正式使用前请务必向官方渠道确认。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 官方数据来源 -->
+            <div class="bg-white rounded-2xl shadow-lg border border-gray-100 p-6 mb-6">
+                <h2 class="text-xl font-bold text-gray-800 mb-6 flex items-center">
+                    <svg class="w-6 h-6 mr-2 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+                    </svg>
+                    官方数据来源
+                </h2>
+                <div class="grid gap-4">
+                    <a href="https://www.shmeea.edu.cn" target="_blank" class="block p-4 rounded-xl border border-gray-200 hover:border-primary-300 hover:bg-primary-50/50 transition-all">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <h3 class="font-semibold text-gray-800">上海招考热线</h3>
+                                <p class="text-sm text-gray-500">上海市教育考试院官方网站</p>
+                            </div>
+                            <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                            </svg>
+                        </div>
+                    </a>
+                    <a href="https://gaokao.chsi.com.cn" target="_blank" class="block p-4 rounded-xl border border-gray-200 hover:border-primary-300 hover:bg-primary-50/50 transition-all">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <h3 class="font-semibold text-gray-800">阳光高考网</h3>
+                                <p class="text-sm text-gray-500">教育部高校招生阳光工程指定平台</p>
+                            </div>
+                            <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                            </svg>
+                        </div>
+                    </a>
+                    <a href="https://www.moe.gov.cn" target="_blank" class="block p-4 rounded-xl border border-gray-200 hover:border-primary-300 hover:bg-primary-50/50 transition-all">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <h3 class="font-semibold text-gray-800">中华人民共和国教育部</h3>
+                                <p class="text-sm text-gray-500">教育部官方网站</p>
+                            </div>
+                            <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                            </svg>
+                        </div>
+                    </a>
+                    <a href="https://edu.sh.gov.cn" target="_blank" class="block p-4 rounded-xl border border-gray-200 hover:border-primary-300 hover:bg-primary-50/50 transition-all">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <h3 class="font-semibold text-gray-800">上海市教育委员会</h3>
+                                <p class="text-sm text-gray-500">上海教委官方网站</p>
+                            </div>
+                            <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                            </svg>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- 数据更新说明 -->
+            <div class="bg-white rounded-2xl shadow-lg border border-gray-100 p-6 mb-6">
+                <h2 class="text-xl font-bold text-gray-800 mb-6 flex items-center">
+                    <svg class="w-6 h-6 mr-2 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+                    </svg>
+                    数据更新说明
+                </h2>
+                <div class="space-y-4 text-gray-600">
+                    <div class="flex items-start">
+                        <span class="w-2 h-2 rounded-full bg-primary-500 mt-2 mr-3 flex-shrink-0"></span>
+                        <p><strong>分数线数据：</strong>每年高考成绩公布后及时更新，历史数据保持稳定。</p>
+                    </div>
+                    <div class="flex items-start">
+                        <span class="w-2 h-2 rounded-full bg-primary-500 mt-2 mr-3 flex-shrink-0"></span>
+                        <p><strong>院校数据：</strong>根据各高校招生简章和录取情况定期更新，每年至少更新一次。</p>
+                    </div>
+                    <div class="flex items-start">
+                        <span class="w-2 h-2 rounded-full bg-primary-500 mt-2 mr-3 flex-shrink-0"></span>
+                        <p><strong>新闻资讯：</strong>每日自动抓取官方渠道最新信息，确保时效性。</p>
+                    </div>
+                    <div class="flex items-start">
+                        <span class="w-2 h-2 rounded-full bg-primary-500 mt-2 mr-3 flex-shrink-0"></span>
+                        <p><strong>专业数据：</strong>根据教育部专业目录和就业市场变化定期更新。</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 免责声明 -->
+            <div class="bg-amber-50 rounded-2xl border border-amber-200 p-6">
+                <h2 class="text-lg font-bold text-amber-800 mb-4 flex items-center">
+                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                    </svg>
+                    免责声明
+                </h2>
+                <div class="text-amber-700 text-sm space-y-2">
+                    <p>1. 本系统所有数据仅供参考，不构成任何形式的录取承诺或保证。</p>
+                    <p>2. 志愿填报决策请以官方发布的信息为准，建议考生和家长多方核实。</p>
+                    <p>3. 本系统不对因使用本系统数据而导致的任何损失承担责任。</p>
+                    <p>4. 如发现数据有误，请及时联系我们进行更正。</p>
+                </div>
+            </div>
+
+            <!-- 返回按钮 -->
+            <div class="text-center mt-8">
+                <a href="/news" class="inline-flex items-center px-6 py-3 rounded-xl gradient-bg text-white font-medium shadow-lg hover:shadow-xl transition-all hover:-translate-y-1">
+                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+                    </svg>
+                    返回政策资讯
+                </a>
+            </div>
+        </section>
+
+        <!-- 页脚 -->
+        <footer class="bg-white border-t border-gray-100 mt-12">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                <div class="text-center">
+                    <div class="flex justify-center items-center mb-4">
+                        <div class="w-8 h-8 rounded-lg gradient-bg flex items-center justify-center text-white font-bold text-sm mr-2">
+                            沪
+                        </div>
+                        <span class="font-semibold text-gray-700">上海高考助手</span>
+                    </div>
+                    <p class="text-gray-500 text-sm">
+                        本系统仅供参考，志愿填报请以官方信息为准
+                    </p>
+                    <p class="text-gray-400 text-xs mt-2">
+                        © 2026 上海高考志愿填报辅助系统
+                    </p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        const { createApp, ref, onMounted } = Vue;
+
+        createApp({
+            setup() {
+                const mobileMenuOpen = ref(false);
+
+                return {
+                    mobileMenuOpen
+                };
+            }
+        }).mount('#app');
+    </script>
+</body>
+</html>

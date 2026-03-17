@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}上海高考志愿填报辅助系统{% endblock %}</title>
+
+    <!-- Vue 3 CDN -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <!-- Element Plus CDN -->
+    <link rel="stylesheet" href="https://unpkg.com/element-plus/dist/index.css">
+    <script src="https://unpkg.com/element-plus"></script>
+    <!-- Element Plus Icons -->
+    <script src="https://unpkg.com/@element-plus/icons-vue"></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        #app {
+            min-height: 100vh;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .logo-text {
+            font-size: 20px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .logo-subtitle {
+            font-size: 12px;
+            color: #999;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 8px;
+        }
+
+        .nav-item {
+            padding: 10px 20px;
+            border-radius: 8px;
+            color: #666;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .nav-item:hover, .nav-item.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .main-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        {% block extra_css %}{% endblock %}
+    </style>
+    {% block head %}{% endblock %}
+</head>
+<body>
+    <div id="app">
+        <header class="header">
+            <div class="header-content">
+                <a href="/" class="logo">
+                    <div class="logo-icon">沪</div>
+                    <div>
+                        <div class="logo-text">上海高考助手</div>
+                        <div class="logo-subtitle">志愿填报辅助系统</div>
+                    </div>
+                </a>
+                <nav class="nav-menu">
+                    <a href="/" class="nav-item {% if request.endpoint == 'index' %}active{% endif %}">首页</a>
+                    <a href="/query" class="nav-item {% if request.endpoint == 'score_query' %}active{% endif %}">分数查询</a>
+                    <a href="/simulate" class="nav-item {% if request.endpoint == 'simulate' %}active{% endif %}">模拟填报</a>
+                    <a href="/school" class="nav-item {% if request.endpoint == 'school' %}active{% endif %}">高中分析</a>
+                    <a href="/major" class="nav-item {% if request.endpoint == 'major' %}active{% endif %}">专业指导</a>
+                </nav>
+            </div>
+        </header>
+
+        <main class="main-content">
+            {% block content %}{% endblock %}
+        </main>
+    </div>
+
+    <script>
+        const { createApp, ref, reactive, computed, onMounted } = Vue;
+        const { ElMessage } = ElementPlus;
+    </script>
+    {% block scripts %}{% endblock %}
+</body>
+</html>

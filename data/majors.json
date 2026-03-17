@@ -1,0 +1,786 @@
+{
+  "categories": [
+    {
+      "name": "工学",
+      "majors": [
+        {
+          "name": "计算机科学与技术",
+          "code": "080901",
+          "subjects": ["物理"],
+          "employment_rate": "95%",
+          "avg_salary": "15-30K",
+          "prospects": "人工智能、大数据、云计算等领域需求旺盛，就业面广，发展空间大",
+          "hot": true
+        },
+        {
+          "name": "软件工程",
+          "code": "080902",
+          "subjects": ["物理"],
+          "employment_rate": "96%",
+          "avg_salary": "15-35K",
+          "prospects": "互联网行业持续发展，软件人才需求稳定，创业机会多",
+          "hot": true
+        },
+        {
+          "name": "人工智能",
+          "code": "080717T",
+          "subjects": ["物理"],
+          "employment_rate": "97%",
+          "avg_salary": "20-50K",
+          "prospects": "国家战略新兴产业，人才缺口大，薪资待遇优厚",
+          "hot": true
+        },
+        {
+          "name": "数据科学与大数据技术",
+          "code": "080910T",
+          "subjects": ["物理"],
+          "employment_rate": "94%",
+          "avg_salary": "18-40K",
+          "prospects": "数据驱动时代，各行业都需要数据分析人才",
+          "hot": true
+        },
+        {
+          "name": "电子信息工程",
+          "code": "080701",
+          "subjects": ["物理"],
+          "employment_rate": "92%",
+          "avg_salary": "12-25K",
+          "prospects": "5G、物联网、芯片行业发展迅速，技术人才紧缺",
+          "hot": true
+        },
+        {
+          "name": "通信工程",
+          "code": "080703",
+          "subjects": ["物理"],
+          "employment_rate": "91%",
+          "avg_salary": "12-28K",
+          "prospects": "5G建设、卫星通信等领域发展前景广阔",
+          "hot": true
+        },
+        {
+          "name": "电气工程及其自动化",
+          "code": "080601",
+          "subjects": ["物理"],
+          "employment_rate": "93%",
+          "avg_salary": "10-22K",
+          "prospects": "国家电网、新能源、智能制造等领域需求稳定",
+          "hot": true
+        },
+        {
+          "name": "机械工程",
+          "code": "080201",
+          "subjects": ["物理"],
+          "employment_rate": "90%",
+          "avg_salary": "8-18K",
+          "prospects": "制造业升级转型，智能制造人才需求增加",
+          "hot": true
+        },
+        {
+          "name": "自动化",
+          "code": "080801",
+          "subjects": ["物理"],
+          "employment_rate": "91%",
+          "avg_salary": "10-20K",
+          "prospects": "工业4.0时代，自动化技术人才需求旺盛",
+          "hot": true
+        },
+        {
+          "name": "土木工程",
+          "code": "081001",
+          "subjects": ["物理"],
+          "employment_rate": "88%",
+          "avg_salary": "8-16K",
+          "prospects": "基建投资持续，城镇化建设需要大量人才",
+          "hot": true
+        },
+        {
+          "name": "建筑学",
+          "code": "082801",
+          "subjects": ["物理", "历史"],
+          "employment_rate": "89%",
+          "avg_salary": "10-25K",
+          "prospects": "城市更新、乡村振兴带来新机遇",
+          "hot": true
+        },
+        {
+          "name": "航空航天工程",
+          "code": "082001",
+          "subjects": ["物理"],
+          "employment_rate": "95%",
+          "avg_salary": "15-30K",
+          "prospects": "航天强国战略，国防科技人才需求稳定",
+          "hot": true
+        },
+        {
+          "name": "生物医学工程",
+          "code": "082601",
+          "subjects": ["物理", "化学", "生物"],
+          "employment_rate": "94%",
+          "avg_salary": "12-28K",
+          "prospects": "医疗器械、精准医疗发展迅速，交叉学科人才稀缺",
+          "hot": true
+        },
+        {
+          "name": "物联网工程",
+          "code": "080905",
+          "subjects": ["物理"],
+          "employment_rate": "90%",
+          "avg_salary": "12-25K",
+          "prospects": "万物互联时代，智能家居、智慧城市建设需求大",
+          "hot": true
+        },
+        {
+          "name": "网络安全",
+          "code": "080911TK",
+          "subjects": ["物理"],
+          "employment_rate": "96%",
+          "avg_salary": "18-40K",
+          "prospects": "网络安全法实施，网络安全人才严重短缺",
+          "hot": true
+        }
+      ]
+    },
+    {
+      "name": "理学",
+      "majors": [
+        {
+          "name": "数学与应用数学",
+          "code": "070101",
+          "subjects": ["物理"],
+          "employment_rate": "88%",
+          "avg_salary": "12-25K",
+          "prospects": "金融、科技、教育领域需求大，考研深造优势明显",
+          "hot": true
+        },
+        {
+          "name": "物理学",
+          "code": "070201",
+          "subjects": ["物理"],
+          "employment_rate": "85%",
+          "avg_salary": "10-22K",
+          "prospects": "科研院所、高新技术企业需要基础研究人才",
+          "hot": false
+        },
+        {
+          "name": "化学",
+          "code": "070301",
+          "subjects": ["物理", "化学"],
+          "employment_rate": "86%",
+          "avg_salary": "8-18K",
+          "prospects": "新材料、新能源、制药行业发展空间大",
+          "hot": false
+        },
+        {
+          "name": "生物科学",
+          "code": "071001",
+          "subjects": ["物理", "化学", "生物"],
+          "employment_rate": "82%",
+          "avg_salary": "8-16K",
+          "prospects": "生物医药、基因工程是未来发展方向",
+          "hot": false
+        },
+        {
+          "name": "统计学",
+          "code": "071201",
+          "subjects": ["物理"],
+          "employment_rate": "90%",
+          "avg_salary": "12-28K",
+          "prospects": "大数据时代，统计分析人才各行业都需要",
+          "hot": true
+        },
+        {
+          "name": "心理学",
+          "code": "071101",
+          "subjects": ["物理", "历史"],
+          "employment_rate": "90%",
+          "avg_salary": "10-25K",
+          "prospects": "心理健康受重视，心理咨询师需求增长",
+          "hot": true
+        },
+        {
+          "name": "应用化学",
+          "code": "070302",
+          "subjects": ["物理", "化学"],
+          "employment_rate": "85%",
+          "avg_salary": "7-15K",
+          "prospects": "化工、材料、制药企业需求稳定",
+          "hot": false
+        }
+      ]
+    },
+    {
+      "name": "医学",
+      "majors": [
+        {
+          "name": "临床医学",
+          "code": "100201K",
+          "subjects": ["物理", "化学", "生物"],
+          "employment_rate": "95%",
+          "avg_salary": "10-30K",
+          "prospects": "人口老龄化，医疗需求持续增长，社会地位高",
+          "hot": true
+        },
+        {
+          "name": "口腔医学",
+          "code": "100301K",
+          "subjects": ["物理", "化学", "生物"],
+          "employment_rate": "96%",
+          "avg_salary": "15-40K",
+          "prospects": "口腔健康意识提升，私立诊所发展空间大",
+          "hot": true
+        },
+        {
+          "name": "麻醉学",
+          "code": "100202TK",
+          "subjects": ["物理", "化学", "生物"],
+          "employment_rate": "94%",
+          "avg_salary": "12-25K",
+          "prospects": "手术量增加，麻醉医师紧缺，就业前景好",
+          "hot": true
+        },
+        {
+          "name": "医学影像学",
+          "code": "100203TK",
+          "subjects": ["物理", "化学", "生物"],
+          "employment_rate": "93%",
+          "avg_salary": "10-22K",
+          "prospects": "影像诊断需求增加，AI辅助诊断是趋势",
+          "hot": true
+        },
+        {
+          "name": "护理学",
+          "code": "101101",
+          "subjects": ["物理", "化学", "生物"],
+          "employment_rate": "97%",
+          "avg_salary": "6-15K",
+          "prospects": "护理人员长期短缺，就业稳定，可出国发展",
+          "hot": true
+        },
+        {
+          "name": "药学",
+          "code": "100701",
+          "subjects": ["物理", "化学", "生物"],
+          "employment_rate": "90%",
+          "avg_salary": "8-20K",
+          "prospects": "创新药物研发、医药产业发展前景好",
+          "hot": true
+        },
+        {
+          "name": "中医学",
+          "code": "100501K",
+          "subjects": ["物理", "化学", "生物"],
+          "employment_rate": "88%",
+          "avg_salary": "8-18K",
+          "prospects": "国家支持中医药发展，养生保健市场扩大",
+          "hot": true
+        },
+        {
+          "name": "预防医学",
+          "code": "100401K",
+          "subjects": ["物理", "化学", "生物"],
+          "employment_rate": "92%",
+          "avg_salary": "8-18K",
+          "prospects": "公共卫生体系建设，疾控人才需求增加",
+          "hot": true
+        }
+      ]
+    },
+    {
+      "name": "经济学",
+      "majors": [
+        {
+          "name": "金融学",
+          "code": "020301K",
+          "subjects": ["物理", "历史"],
+          "employment_rate": "90%",
+          "avg_salary": "12-35K",
+          "prospects": "金融科技发展，投资理财需求增加，高薪行业",
+          "hot": true
+        },
+        {
+          "name": "经济学",
+          "code": "020101",
+          "subjects": ["物理", "历史"],
+          "employment_rate": "85%",
+          "avg_salary": "10-25K",
+          "prospects": "政府机构、金融机构、企业都需要经济分析人才",
+          "hot": true
+        },
+        {
+          "name": "国际经济与贸易",
+          "code": "020401",
+          "subjects": ["物理", "历史"],
+          "employment_rate": "83%",
+          "avg_salary": "8-20K",
+          "prospects": "一带一路带来新机遇，跨境电商发展迅速",
+          "hot": true
+        },
+        {
+          "name": "财政学",
+          "code": "020201K",
+          "subjects": ["物理", "历史"],
+          "employment_rate": "86%",
+          "avg_salary": "10-22K",
+          "prospects": "财税体制改革，公务员、事业单位招录稳定",
+          "hot": false
+        },
+        {
+          "name": "保险学",
+          "code": "020303",
+          "subjects": ["物理", "历史"],
+          "employment_rate": "88%",
+          "avg_salary": "10-25K",
+          "prospects": "保险意识提升，健康险、养老险市场空间大",
+          "hot": false
+        },
+        {
+          "name": "金融工程",
+          "code": "020302",
+          "subjects": ["物理"],
+          "employment_rate": "92%",
+          "avg_salary": "15-40K",
+          "prospects": "量化交易、风险管理，高端金融人才紧缺",
+          "hot": true
+        }
+      ]
+    },
+    {
+      "name": "管理学",
+      "majors": [
+        {
+          "name": "会计学",
+          "code": "120203K",
+          "subjects": ["物理", "历史"],
+          "employment_rate": "92%",
+          "avg_salary": "8-20K",
+          "prospects": "企业刚需岗位，CPA含金量高，职业发展路径清晰",
+          "hot": true
+        },
+        {
+          "name": "工商管理",
+          "code": "120201K",
+          "subjects": ["物理", "历史"],
+          "employment_rate": "85%",
+          "avg_salary": "8-18K",
+          "prospects": "管理岗位需求稳定，MBA深造可提升竞争力",
+          "hot": true
+        },
+        {
+          "name": "财务管理",
+          "code": "120204",
+          "subjects": ["物理", "历史"],
+          "employment_rate": "90%",
+          "avg_salary": "8-18K",
+          "prospects": "企业财务决策重要性提升，就业面广",
+          "hot": true
+        },
+        {
+          "name": "市场营销",
+          "code": "120202",
+          "subjects": ["物理", "历史"],
+          "employment_rate": "86%",
+          "avg_salary": "8-25K",
+          "prospects": "新媒体营销、直播带货等新业态带来机遇",
+          "hot": true
+        },
+        {
+          "name": "人力资源管理",
+          "code": "120206",
+          "subjects": ["物理", "历史"],
+          "employment_rate": "87%",
+          "avg_salary": "8-16K",
+          "prospects": "人才竞争加剧，HR专业人才需求增加",
+          "hot": true
+        },
+        {
+          "name": "信息管理与信息系统",
+          "code": "120102",
+          "subjects": ["物理"],
+          "employment_rate": "89%",
+          "avg_salary": "10-22K",
+          "prospects": "企业数字化转型，信息化管理人才紧缺",
+          "hot": true
+        },
+        {
+          "name": "电子商务",
+          "code": "120801",
+          "subjects": ["物理", "历史"],
+          "employment_rate": "91%",
+          "avg_salary": "8-20K",
+          "prospects": "电商行业持续增长，直播电商、跨境电商火热",
+          "hot": true
+        },
+        {
+          "name": "物流管理",
+          "code": "120601",
+          "subjects": ["物理", "历史"],
+          "employment_rate": "88%",
+          "avg_salary": "7-15K",
+          "prospects": "电商发展带动物流需求，智慧物流是趋势",
+          "hot": true
+        },
+        {
+          "name": "审计学",
+          "code": "120207",
+          "subjects": ["物理", "历史"],
+          "employment_rate": "90%",
+          "avg_salary": "8-18K",
+          "prospects": "企业内控要求提高，审计人才需求稳定",
+          "hot": true
+        }
+      ]
+    },
+    {
+      "name": "文学",
+      "majors": [
+        {
+          "name": "汉语言文学",
+          "code": "050101",
+          "subjects": ["历史"],
+          "employment_rate": "88%",
+          "avg_salary": "6-15K",
+          "prospects": "公务员、教师、媒体编辑等岗位需求稳定",
+          "hot": true
+        },
+        {
+          "name": "英语",
+          "code": "050201",
+          "subjects": ["历史"],
+          "employment_rate": "85%",
+          "avg_salary": "7-18K",
+          "prospects": "外贸、教育、翻译等领域需要英语人才",
+          "hot": true
+        },
+        {
+          "name": "新闻学",
+          "code": "050301",
+          "subjects": ["历史"],
+          "employment_rate": "82%",
+          "avg_salary": "6-15K",
+          "prospects": "新媒体时代，内容创作、运营岗位需求增加",
+          "hot": true
+        },
+        {
+          "name": "广告学",
+          "code": "050303",
+          "subjects": ["历史"],
+          "employment_rate": "84%",
+          "avg_salary": "7-18K",
+          "prospects": "品牌营销需求持续，短视频广告、信息流广告火热",
+          "hot": true
+        },
+        {
+          "name": "网络与新媒体",
+          "code": "050306T",
+          "subjects": ["历史"],
+          "employment_rate": "87%",
+          "avg_salary": "7-16K",
+          "prospects": "短视频、自媒体、直播等新业态人才需求旺盛",
+          "hot": true
+        },
+        {
+          "name": "日语",
+          "code": "050207",
+          "subjects": ["历史"],
+          "employment_rate": "86%",
+          "avg_salary": "8-20K",
+          "prospects": "外贸企业、日企、教育培训机构需求稳定",
+          "hot": false
+        },
+        {
+          "name": "翻译",
+          "code": "050261",
+          "subjects": ["历史"],
+          "employment_rate": "84%",
+          "avg_salary": "8-22K",
+          "prospects": "国际交流频繁，专业翻译人才紧缺",
+          "hot": false
+        }
+      ]
+    },
+    {
+      "name": "法学",
+      "majors": [
+        {
+          "name": "法学",
+          "code": "030101K",
+          "subjects": ["历史"],
+          "employment_rate": "80%",
+          "avg_salary": "8-30K",
+          "prospects": "法律职业资格考试是关键，律师、公务员发展路径清晰",
+          "hot": true
+        },
+        {
+          "name": "知识产权",
+          "code": "030102T",
+          "subjects": ["历史"],
+          "employment_rate": "85%",
+          "avg_salary": "10-25K",
+          "prospects": "知识产权保护意识增强，专利代理、商标代理需求增加",
+          "hot": true
+        },
+        {
+          "name": "社会工作",
+          "code": "030302",
+          "subjects": ["历史"],
+          "employment_rate": "82%",
+          "avg_salary": "5-12K",
+          "prospects": "社区治理、社会组织发展，专业社工需求增加",
+          "hot": false
+        },
+        {
+          "name": "政治学与行政学",
+          "code": "030201",
+          "subjects": ["历史"],
+          "employment_rate": "78%",
+          "avg_salary": "6-15K",
+          "prospects": "公务员、事业单位招录，党政机关人才需求",
+          "hot": false
+        }
+      ]
+    },
+    {
+      "name": "教育学",
+      "majors": [
+        {
+          "name": "教育学",
+          "code": "040101",
+          "subjects": ["历史"],
+          "employment_rate": "88%",
+          "avg_salary": "6-15K",
+          "prospects": "教育行业稳定，教师编制竞争激烈但需求稳定",
+          "hot": true
+        },
+        {
+          "name": "学前教育",
+          "code": "040106",
+          "subjects": ["历史"],
+          "employment_rate": "92%",
+          "avg_salary": "5-12K",
+          "prospects": "三孩政策下，幼教需求增加，就业相对容易",
+          "hot": true
+        },
+        {
+          "name": "小学教育",
+          "code": "040107",
+          "subjects": ["历史"],
+          "employment_rate": "90%",
+          "avg_salary": "6-14K",
+          "prospects": "基础教育投入增加，小学教师需求稳定",
+          "hot": true
+        },
+        {
+          "name": "体育教育",
+          "code": "040201",
+          "subjects": ["物理", "历史"],
+          "employment_rate": "86%",
+          "avg_salary": "6-15K",
+          "prospects": "体育纳入中考，体育培训市场火热",
+          "hot": true
+        },
+        {
+          "name": "教育技术学",
+          "code": "040104",
+          "subjects": ["物理"],
+          "employment_rate": "84%",
+          "avg_salary": "7-16K",
+          "prospects": "在线教育、智慧校园建设需要技术支持",
+          "hot": false
+        },
+        {
+          "name": "特殊教育",
+          "code": "040108",
+          "subjects": ["历史"],
+          "employment_rate": "91%",
+          "avg_salary": "5-12K",
+          "prospects": "特殊教育发展，专业人才紧缺，就业稳定",
+          "hot": true
+        }
+      ]
+    },
+    {
+      "name": "农学",
+      "majors": [
+        {
+          "name": "农学",
+          "code": "090101",
+          "subjects": ["物理", "化学", "生物"],
+          "employment_rate": "85%",
+          "avg_salary": "6-14K",
+          "prospects": "乡村振兴战略，现代农业发展需要专业人才",
+          "hot": false
+        },
+        {
+          "name": "动物医学",
+          "code": "090401",
+          "subjects": ["物理", "化学", "生物"],
+          "employment_rate": "92%",
+          "avg_salary": "8-20K",
+          "prospects": "宠物经济爆发，兽医人才紧缺，可自主创业",
+          "hot": true
+        },
+        {
+          "name": "园林",
+          "code": "090502",
+          "subjects": ["物理", "化学", "生物"],
+          "employment_rate": "86%",
+          "avg_salary": "6-15K",
+          "prospects": "城市绿化、生态建设需要园林设计人才",
+          "hot": true
+        },
+        {
+          "name": "植物保护",
+          "code": "090103",
+          "subjects": ["物理", "化学", "生物"],
+          "employment_rate": "84%",
+          "avg_salary": "6-12K",
+          "prospects": "粮食安全重要，植保技术人才需求稳定",
+          "hot": false
+        },
+        {
+          "name": "动物科学",
+          "code": "090301",
+          "subjects": ["物理", "化学", "生物"],
+          "employment_rate": "86%",
+          "avg_salary": "6-14K",
+          "prospects": "畜牧业现代化，养殖技术人才需求增加",
+          "hot": false
+        }
+      ]
+    },
+    {
+      "name": "艺术学",
+      "majors": [
+        {
+          "name": "视觉传达设计",
+          "code": "130502",
+          "subjects": ["历史"],
+          "employment_rate": "88%",
+          "avg_salary": "7-20K",
+          "prospects": "品牌设计、UI设计、电商设计需求旺盛",
+          "hot": true
+        },
+        {
+          "name": "环境设计",
+          "code": "130503",
+          "subjects": ["历史"],
+          "employment_rate": "85%",
+          "avg_salary": "7-18K",
+          "prospects": "室内设计、景观设计市场稳定",
+          "hot": true
+        },
+        {
+          "name": "产品设计",
+          "code": "130504",
+          "subjects": ["历史"],
+          "employment_rate": "84%",
+          "avg_salary": "8-18K",
+          "prospects": "制造业升级，产品设计师需求增加",
+          "hot": false
+        },
+        {
+          "name": "数字媒体艺术",
+          "code": "130508",
+          "subjects": ["历史"],
+          "employment_rate": "90%",
+          "avg_salary": "8-22K",
+          "prospects": "游戏、动画、影视后期行业快速发展",
+          "hot": true
+        },
+        {
+          "name": "动画",
+          "code": "130310",
+          "subjects": ["历史"],
+          "employment_rate": "86%",
+          "avg_salary": "8-20K",
+          "prospects": "国产动画崛起，游戏动画人才需求大",
+          "hot": true
+        },
+        {
+          "name": "音乐学",
+          "code": "130202",
+          "subjects": ["历史"],
+          "employment_rate": "82%",
+          "avg_salary": "6-18K",
+          "prospects": "音乐教育、演艺、培训行业发展空间大",
+          "hot": false
+        },
+        {
+          "name": "播音与主持艺术",
+          "code": "130309",
+          "subjects": ["历史"],
+          "employment_rate": "80%",
+          "avg_salary": "7-25K",
+          "prospects": "直播带货、短视频创作带来新机遇",
+          "hot": true
+        },
+        {
+          "name": "表演",
+          "code": "130301",
+          "subjects": ["历史"],
+          "employment_rate": "70%",
+          "avg_salary": "8-30K",
+          "prospects": "影视行业发展，但竞争激烈，成名机会少",
+          "hot": false
+        }
+      ]
+    },
+    {
+      "name": "历史学",
+      "majors": [
+        {
+          "name": "历史学",
+          "code": "060101",
+          "subjects": ["历史"],
+          "employment_rate": "78%",
+          "avg_salary": "5-12K",
+          "prospects": "教师、文博、出版等领域，考研深造比例高",
+          "hot": false
+        },
+        {
+          "name": "考古学",
+          "code": "060103",
+          "subjects": ["历史"],
+          "employment_rate": "75%",
+          "avg_salary": "5-12K",
+          "prospects": "文物保护意识增强，考古文博人才需求稳定",
+          "hot": false
+        },
+        {
+          "name": "文物与博物馆学",
+          "code": "060104",
+          "subjects": ["历史"],
+          "employment_rate": "76%",
+          "avg_salary": "5-12K",
+          "prospects": "博物馆事业发展，文博人才需求增加",
+          "hot": false
+        }
+      ]
+    },
+    {
+      "name": "哲学",
+      "majors": [
+        {
+          "name": "哲学",
+          "code": "010101",
+          "subjects": ["历史"],
+          "employment_rate": "72%",
+          "avg_salary": "5-12K",
+          "prospects": "培养思辨能力，适合深造、公务员、教育行业",
+          "hot": false
+        },
+        {
+          "name": "逻辑学",
+          "code": "010102",
+          "subjects": ["历史"],
+          "employment_rate": "74%",
+          "avg_salary": "6-15K",
+          "prospects": "逻辑思维训练，适合从事科研、教育、AI相关工作",
+          "hot": false
+        }
+      ]
+    }
+  ],
+  "description": "中国普通高等学校本科专业信息，包含选科要求、就业前景、薪资水平等",
+  "update_time": "2026-03-17"
+}
