@@ -202,7 +202,8 @@
 {% endblock %}
 
 {% block content %}
-<div id="school-app">{% raw %}
+<div id="school-app">
+    {% raw %}
     <div class="page-card">
         <h1 class="page-title">高中分析</h1>
         <p class="page-desc">上海四校、四校分校、八大金刚及其他重点高中录取数据分析</p>
@@ -264,7 +265,7 @@
                         </div>
                     </div>
 
-                    <div class="score-dist">
+                    <div class="score-dist" v-if="school.stats.score_distribution">
                         <div class="score-dist-title">分数分布</div>
                         <div class="score-bar">
                             <div class="score-bar-label">前10名</div>
@@ -288,6 +289,10 @@
                             <div class="score-bar-value">{{ school.stats.score_distribution.overall_avg }}</div>
                         </div>
                     </div>
+                    <div class="score-dist" v-else>
+                        <div class="score-dist-title">分数分布</div>
+                        <p class="text-gray-500">暂无数据</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -297,6 +302,7 @@
 
 {% block scripts %}
 <script>
+    const { createApp, ref, computed, onMounted } = Vue;
     const schoolApp = createApp({
         setup() {
             const schools = ref([]);
@@ -324,7 +330,6 @@
             return { schools, summary, filter, filteredSchools };
         }
     });
-    schoolApp.use(ElementPlus);
     schoolApp.mount('#school-app');
 </script>
 {% endblock %}
