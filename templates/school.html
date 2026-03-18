@@ -254,6 +254,24 @@
             <div v-if="filteredSchools.length === 0" class="text-center py-12">
                 <div class="text-gray-400 text-lg">暂无数据</div>
             </div>
+
+            <!-- 数据来源说明 -->
+            <div class="mt-8 bg-amber-50 border border-amber-200 rounded-2xl p-6">
+                <div class="flex items-start gap-3">
+                    <svg class="w-6 h-6 text-amber-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                    </svg>
+                    <div>
+                        <h3 class="font-bold text-amber-800 mb-2">数据来源与免责声明</h3>
+                        <ul class="text-sm text-amber-700 space-y-1">
+                            <li>• <strong>数据来源：</strong>高中数据来源于各高中官方发布、上海市教育考试院及公开报道</li>
+                            <li>• <strong>数据性质：</strong>⚠️ 清北录取、985/211比例等数据部分为网络整理，非官方发布</li>
+                            <li>• <strong>统计口径：</strong>不同学校统计口径可能存在差异，数据仅供横向参考</li>
+                            <li>• <strong>免责声明：</strong>本系统仅提供参考信息，不作为择校依据。请以学校官方数据为准</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </section>
 
         <!-- 页脚 -->
