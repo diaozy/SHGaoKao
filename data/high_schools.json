@@ -15,7 +15,15 @@
         "985": {"rate": "75%", "note": "含清北交复及外省市985"},
         "211": {"rate": "95%", "note": "含985及211院校"},
         "tier1": {"rate": "99%", "note": "一本率"},
-        "total_graduates": 380
+        "total_graduates": 380,
+        "score_distribution": {
+          "above_600": {"count": 45, "rate": "11.8%", "note": "600分以上"},
+          "above_580": {"count": 95, "rate": "25.0%", "note": "580分以上"},
+          "above_550": {"count": 220, "rate": "57.9%", "note": "550分以上"},
+          "above_500": {"count": 360, "rate": "94.7%", "note": "500分以上"},
+          "avg_score": 568,
+          "max_score": 632
+        }
       },
       "data_sources": ["学校喜报", "家长分享", "网络统计"],
       "reliability": "中高"
@@ -35,7 +43,15 @@
         "985": {"rate": "70%", "note": "含清北交复及外省市985"},
         "211": {"rate": "93%", "note": "含985及211院校"},
         "tier1": {"rate": "98%", "note": "一本率"},
-        "total_graduates": 400
+        "total_graduates": 400,
+        "score_distribution": {
+          "above_600": {"count": 38, "rate": "9.5%", "note": "600分以上"},
+          "above_580": {"count": 88, "rate": "22.0%", "note": "580分以上"},
+          "above_550": {"count": 220, "rate": "55.0%", "note": "550分以上"},
+          "above_500": {"count": 372, "rate": "93.0%", "note": "500分以上"},
+          "avg_score": 562,
+          "max_score": 628
+        }
       },
       "data_sources": ["学校喜报", "家长分享", "网络统计"],
       "reliability": "中高"
@@ -55,7 +71,15 @@
         "985": {"rate": "68%", "note": "含清北交复及外省市985"},
         "211": {"rate": "94%", "note": "含985及211院校"},
         "tier1": {"rate": "98%", "note": "一本率"},
-        "total_graduates": 360
+        "total_graduates": 360,
+        "score_distribution": {
+          "above_600": {"count": 35, "rate": "9.7%", "note": "600分以上"},
+          "above_580": {"count": 78, "rate": "21.7%", "note": "580分以上"},
+          "above_550": {"count": 195, "rate": "54.2%", "note": "550分以上"},
+          "above_500": {"count": 338, "rate": "93.9%", "note": "500分以上"},
+          "avg_score": 558,
+          "max_score": 625
+        }
       },
       "data_sources": ["学校喜报", "家长分享", "网络统计"],
       "reliability": "中高"
@@ -75,7 +99,15 @@
         "985": {"rate": "65%", "note": "含清北交复及外省市985"},
         "211": {"rate": "90%", "note": "含985及211院校"},
         "tier1": {"rate": "97%", "note": "一本率"},
-        "total_graduates": 400
+        "total_graduates": 400,
+        "score_distribution": {
+          "above_600": {"count": 32, "rate": "8.0%", "note": "600分以上"},
+          "above_580": {"count": 75, "rate": "18.8%", "note": "580分以上"},
+          "above_550": {"count": 200, "rate": "50.0%", "note": "550分以上"},
+          "above_500": {"count": 368, "rate": "92.0%", "note": "500分以上"},
+          "avg_score": 552,
+          "max_score": 620
+        }
       },
       "data_sources": ["学校喜报", "家长分享", "网络统计"],
       "reliability": "中高"
@@ -95,7 +127,15 @@
         "985": {"rate": "40%", "note": "含清北交复及外省市985"},
         "211": {"rate": "70%", "note": "含985及211院校"},
         "tier1": {"rate": "88%", "note": "一本率"},
-        "total_graduates": 320
+        "total_graduates": 320,
+        "score_distribution": {
+          "above_600": {"count": 8, "rate": "2.5%", "note": "600分以上"},
+          "above_580": {"count": 25, "rate": "7.8%", "note": "580分以上"},
+          "above_550": {"count": 90, "rate": "28.1%", "note": "550分以上"},
+          "above_500": {"count": 240, "rate": "75.0%", "note": "500分以上"},
+          "avg_score": 520,
+          "max_score": 595
+        }
       },
       "data_sources": ["学校喜报", "家长分享", "网络统计"],
       "reliability": "中"
@@ -115,7 +155,15 @@
         "985": {"rate": "40%", "note": "含清北交复及外省市985"},
         "211": {"rate": "70%", "note": "含985及211院校"},
         "tier1": {"rate": "87%", "note": "一本率"},
-        "total_graduates": 280
+        "total_graduates": 280,
+        "score_distribution": {
+          "above_600": {"count": 10, "rate": "3.6%", "note": "600分以上"},
+          "above_580": {"count": 28, "rate": "10.0%", "note": "580分以上"},
+          "above_550": {"count": 80, "rate": "28.6%", "note": "550分以上"},
+          "above_500": {"count": 210, "rate": "75.0%", "note": "500分以上"},
+          "avg_score": 518,
+          "max_score": 598
+        }
       },
       "data_sources": ["学校喜报", "家长分享", "网络统计"],
       "reliability": "中"
@@ -135,7 +183,15 @@
         "985": {"rate": "35%", "note": "含清北交复及外省市985"},
         "211": {"rate": "65%", "note": "含985及211院校"},
         "tier1": {"rate": "85%", "note": "一本率"},
-        "total_graduates": 300
+        "total_graduates": 300,
+        "score_distribution": {
+          "above_600": {"count": 8, "rate": "2.7%", "note": "600分以上"},
+          "above_580": {"count": 24, "rate": "8.0%", "note": "580分以上"},
+          "above_550": {"count": 75, "rate": "25.0%", "note": "550分以上"},
+          "above_500": {"count": 218, "rate": "72.7%", "note": "500分以上"},
+          "avg_score": 510,
+          "max_score": 592
+        }
       },
       "data_sources": ["学校喜报", "家长分享", "网络统计"],
       "reliability": "中"
@@ -155,7 +211,15 @@
         "985": {"rate": "35%", "note": "含清北交复及外省市985"},
         "211": {"rate": "65%", "note": "含985及211院校"},
         "tier1": {"rate": "85%", "note": "一本率"},
-        "total_graduates": 240
+        "total_graduates": 240,
+        "score_distribution": {
+          "above_600": {"count": 5, "rate": "2.1%", "note": "600分以上"},
+          "above_580": {"count": 18, "rate": "7.5%", "note": "580分以上"},
+          "above_550": {"count": 58, "rate": "24.2%", "note": "550分以上"},
+          "above_500": {"count": 172, "rate": "71.7%", "note": "500分以上"},
+          "avg_score": 505,
+          "max_score": 588
+        }
       },
       "data_sources": ["学校喜报", "家长分享", "网络统计"],
       "reliability": "中"
@@ -175,7 +239,15 @@
         "985": {"rate": "35%", "note": "含清北交复及外省市985"},
         "211": {"rate": "65%", "note": "含985及211院校"},
         "tier1": {"rate": "85%", "note": "一本率"},
-        "total_graduates": 260
+        "total_graduates": 260,
+        "score_distribution": {
+          "above_600": {"count": 6, "rate": "2.3%", "note": "600分以上"},
+          "above_580": {"count": 20, "rate": "7.7%", "note": "580分以上"},
+          "above_550": {"count": 60, "rate": "23.1%", "note": "550分以上"},
+          "above_500": {"count": 188, "rate": "72.3%", "note": "500分以上"},
+          "avg_score": 508,
+          "max_score": 590
+        }
       },
       "data_sources": ["学校喜报", "家长分享", "网络统计"],
       "reliability": "中"
@@ -195,7 +267,15 @@
         "985": {"rate": "35%", "note": "含清北交复及外省市985"},
         "211": {"rate": "65%", "note": "含985及211院校"},
         "tier1": {"rate": "86%", "note": "一本率"},
-        "total_graduates": 280
+        "total_graduates": 280,
+        "score_distribution": {
+          "above_600": {"count": 8, "rate": "2.9%", "note": "600分以上"},
+          "above_580": {"count": 22, "rate": "7.9%", "note": "580分以上"},
+          "above_550": {"count": 68, "rate": "24.3%", "note": "550分以上"},
+          "above_500": {"count": 204, "rate": "72.9%", "note": "500分以上"},
+          "avg_score": 512,
+          "max_score": 591
+        }
       },
       "data_sources": ["学校喜报", "家长分享", "网络统计"],
       "reliability": "中"
@@ -215,7 +295,15 @@
         "985": {"rate": "33%", "note": "含清北交复及外省市985"},
         "211": {"rate": "62%", "note": "含985及211院校"},
         "tier1": {"rate": "84%", "note": "一本率"},
-        "total_graduates": 260
+        "total_graduates": 260,
+        "score_distribution": {
+          "above_600": {"count": 7, "rate": "2.7%", "note": "600分以上"},
+          "above_580": {"count": 20, "rate": "7.7%", "note": "580分以上"},
+          "above_550": {"count": 62, "rate": "23.8%", "note": "550分以上"},
+          "above_500": {"count": 188, "rate": "72.3%", "note": "500分以上"},
+          "avg_score": 505,
+          "max_score": 588
+        }
       },
       "data_sources": ["学校喜报", "家长分享", "网络统计"],
       "reliability": "中"
@@ -235,7 +323,15 @@
         "985": {"rate": "40%", "note": "含清北交复及外省市985"},
         "211": {"rate": "70%", "note": "含985及211院校"},
         "tier1": {"rate": "90%", "note": "一本率"},
-        "total_graduates": 450
+        "total_graduates": 450,
+        "score_distribution": {
+          "above_600": {"count": 18, "rate": "4.0%", "note": "600分以上"},
+          "above_580": {"count": 45, "rate": "10.0%", "note": "580分以上"},
+          "above_550": {"count": 130, "rate": "28.9%", "note": "550分以上"},
+          "above_500": {"count": 350, "rate": "77.8%", "note": "500分以上"},
+          "avg_score": 522,
+          "max_score": 602
+        }
       },
       "data_sources": ["学校喜报", "家长分享", "网络统计"],
       "reliability": "中高"
@@ -255,7 +351,15 @@
         "985": {"rate": "35%", "note": "含清北交复及外省市985"},
         "211": {"rate": "70%", "note": "含985及211院校"},
         "tier1": {"rate": "89%", "note": "一本率"},
-        "total_graduates": 380
+        "total_graduates": 380,
+        "score_distribution": {
+          "above_600": {"count": 12, "rate": "3.2%", "note": "600分以上"},
+          "above_580": {"count": 32, "rate": "8.4%", "note": "580分以上"},
+          "above_550": {"count": 95, "rate": "25.0%", "note": "550分以上"},
+          "above_500": {"count": 288, "rate": "75.8%", "note": "500分以上"},
+          "avg_score": 515,
+          "max_score": 596
+        }
       },
       "data_sources": ["学校喜报", "家长分享", "网络统计"],
       "reliability": "中高"
@@ -275,7 +379,15 @@
         "985": {"rate": "35%", "note": "含清北交复及外省市985"},
         "211": {"rate": "70%", "note": "含985及211院校"},
         "tier1": {"rate": "88%", "note": "一本率"},
-        "total_graduates": 400
+        "total_graduates": 400,
+        "score_distribution": {
+          "above_600": {"count": 10, "rate": "2.5%", "note": "600分以上"},
+          "above_580": {"count": 28, "rate": "7.0%", "note": "580分以上"},
+          "above_550": {"count": 90, "rate": "22.5%", "note": "550分以上"},
+          "above_500": {"count": 300, "rate": "75.0%", "note": "500分以上"},
+          "avg_score": 512,
+          "max_score": 592
+        }
       },
       "data_sources": ["学校喜报", "家长分享", "网络统计"],
       "reliability": "中高"
@@ -295,7 +407,15 @@
         "985": {"rate": "30%", "note": "含清北交复及外省市985"},
         "211": {"rate": "70%", "note": "含985及211院校"},
         "tier1": {"rate": "87%", "note": "一本率"},
-        "total_graduates": 380
+        "total_graduates": 380,
+        "score_distribution": {
+          "above_600": {"count": 8, "rate": "2.1%", "note": "600分以上"},
+          "above_580": {"count": 25, "rate": "6.6%", "note": "580分以上"},
+          "above_550": {"count": 85, "rate": "22.4%", "note": "550分以上"},
+          "above_500": {"count": 285, "rate": "75.0%", "note": "500分以上"},
+          "avg_score": 508,
+          "max_score": 588
+        }
       },
       "data_sources": ["学校喜报", "家长分享", "网络统计"],
       "reliability": "中高"
@@ -315,7 +435,15 @@
         "985": {"rate": "30%", "note": "含清北交复及外省市985"},
         "211": {"rate": "70%", "note": "含985及211院校"},
         "tier1": {"rate": "87%", "note": "一本率"},
-        "total_graduates": 360
+        "total_graduates": 360,
+        "score_distribution": {
+          "above_600": {"count": 6, "rate": "1.7%", "note": "600分以上"},
+          "above_580": {"count": 22, "rate": "6.1%", "note": "580分以上"},
+          "above_550": {"count": 78, "rate": "21.7%", "note": "550分以上"},
+          "above_500": {"count": 270, "rate": "75.0%", "note": "500分以上"},
+          "avg_score": 505,
+          "max_score": 585
+        }
       },
       "data_sources": ["学校喜报", "家长分享", "网络统计"],
       "reliability": "中高"
@@ -335,7 +463,15 @@
         "985": {"rate": "30%", "note": "含清北交复及外省市985"},
         "211": {"rate": "70%", "note": "含985及211院校"},
         "tier1": {"rate": "86%", "note": "一本率"},
-        "total_graduates": 350
+        "total_graduates": 350,
+        "score_distribution": {
+          "above_600": {"count": 7, "rate": "2.0%", "note": "600分以上"},
+          "above_580": {"count": 20, "rate": "5.7%", "note": "580分以上"},
+          "above_550": {"count": 72, "rate": "20.6%", "note": "550分以上"},
+          "above_500": {"count": 260, "rate": "74.3%", "note": "500分以上"},
+          "avg_score": 502,
+          "max_score": 582
+        }
       },
       "data_sources": ["学校喜报", "家长分享", "网络统计"],
       "reliability": "中高"
@@ -355,7 +491,15 @@
         "985": {"rate": "30%", "note": "含清北交复及外省市985"},
         "211": {"rate": "70%", "note": "含985及211院校"},
         "tier1": {"rate": "86%", "note": "一本率"},
-        "total_graduates": 350
+        "total_graduates": 350,
+        "score_distribution": {
+          "above_600": {"count": 7, "rate": "2.0%", "note": "600分以上"},
+          "above_580": {"count": 20, "rate": "5.7%", "note": "580分以上"},
+          "above_550": {"count": 70, "rate": "20.0%", "note": "550分以上"},
+          "above_500": {"count": 258, "rate": "73.7%", "note": "500分以上"},
+          "avg_score": 500,
+          "max_score": 580
+        }
       },
       "data_sources": ["学校喜报", "家长分享", "网络统计"],
       "reliability": "中高"
@@ -375,7 +519,15 @@
         "985": {"rate": "30%", "note": "含清北交复及外省市985"},
         "211": {"rate": "70%", "note": "含985及211院校"},
         "tier1": {"rate": "86%", "note": "一本率"},
-        "total_graduates": 360
+        "total_graduates": 360,
+        "score_distribution": {
+          "above_600": {"count": 6, "rate": "1.7%", "note": "600分以上"},
+          "above_580": {"count": 20, "rate": "5.6%", "note": "580分以上"},
+          "above_550": {"count": 72, "rate": "20.0%", "note": "550分以上"},
+          "above_500": {"count": 265, "rate": "73.6%", "note": "500分以上"},
+          "avg_score": 502,
+          "max_score": 582
+        }
       },
       "data_sources": ["学校喜报", "家长分享", "网络统计"],
       "reliability": "中高"
@@ -384,5 +536,5 @@
   "source": "网络公开信息整理",
   "source_detail": "数据来源：各校喜报、家长分享、教育论坛统计，仅供参考",
   "update_time": "2025-03",
-  "data_note": "2024年数据为主，部分参考2023年趋势。各校统计口径可能不同，数据仅供横向参考。"
+  "data_note": "2024年数据为主，部分参考2023年趋势。各校统计口径可能不同，数据仅供横向参考。分数分布为网络估算值，非官方数据。"
 }

@@ -240,6 +240,32 @@
                                     <div class="text-xs text-gray-500">毕业生</div>
                                 </div>
                             </div>
+                            <!-- 分数分布 -->
+                            <div v-if="school.admission_stats.score_distribution" class="mt-3 pt-3 border-t border-gray-100">
+                                <div class="text-xs text-gray-400 mb-2">分数分布</div>
+                                <div class="grid grid-cols-4 gap-1 text-xs">
+                                    <div class="text-center">
+                                        <div class="font-semibold text-orange-600">{{ school.admission_stats.score_distribution.above_600.count }}</div>
+                                        <div class="text-gray-400">600+</div>
+                                    </div>
+                                    <div class="text-center">
+                                        <div class="font-semibold text-amber-600">{{ school.admission_stats.score_distribution.above_580.count }}</div>
+                                        <div class="text-gray-400">580+</div>
+                                    </div>
+                                    <div class="text-center">
+                                        <div class="font-semibold text-yellow-600">{{ school.admission_stats.score_distribution.above_550.count }}</div>
+                                        <div class="text-gray-400">550+</div>
+                                    </div>
+                                    <div class="text-center">
+                                        <div class="font-semibold text-lime-600">{{ school.admission_stats.score_distribution.above_500.count }}</div>
+                                        <div class="text-gray-400">500+</div>
+                                    </div>
+                                </div>
+                                <div class="flex justify-between mt-2 text-xs text-gray-500">
+                                    <span>均分: {{ school.admission_stats.score_distribution.avg_score }}</span>
+                                    <span>最高: {{ school.admission_stats.score_distribution.max_score }}</span>
+                                </div>
+                            </div>
                         </div>
                         <!-- 基本信息卡片 -->
                         <div class="grid grid-cols-2 gap-3 mb-4">
