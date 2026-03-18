@@ -142,12 +142,32 @@
                         <label class="block text-sm font-medium text-gray-700 mb-2">选科组合</label>
                         <select v-model="subjects" 
                             class="w-full h-12 px-4 border-2 border-gray-200 rounded-xl focus:border-primary-500 focus:outline-none">
-                            <option value="物化生">物化生</option>
-                            <option value="物化地">物化地</option>
-                            <option value="物生地">物生地</option>
-                            <option value="史政地">史政地</option>
-                            <option value="史政生">史政生</option>
-                            <option value="史地政">史地政</option>
+                            <optgroup label="物理类（含物理）">
+                                <option value="物化生">物理+化学+生物（纯理科）</option>
+                                <option value="物化史">物理+化学+历史</option>
+                                <option value="物化地">物理+化学+地理</option>
+                                <option value="物化政">物理+化学+政治</option>
+                                <option value="物生史">物理+生物+历史</option>
+                                <option value="物生地">物理+生物+地理</option>
+                                <option value="物生政">物理+生物+政治</option>
+                                <option value="物史地">物理+历史+地理</option>
+                                <option value="物史政">物理+历史+政治</option>
+                                <option value="物地政">物理+地理+政治</option>
+                            </optgroup>
+                            <optgroup label="历史类（含历史）">
+                                <option value="史政地">历史+政治+地理（纯文科）</option>
+                                <option value="史政生">历史+政治+生物</option>
+                                <option value="史政化">历史+政治+化学</option>
+                                <option value="史地生">历史+地理+生物</option>
+                                <option value="史地化">历史+地理+化学</option>
+                                <option value="史生化">历史+生物+化学</option>
+                            </optgroup>
+                            <optgroup label="其他组合">
+                                <option value="化生地">化学+生物+地理</option>
+                                <option value="化生政">化学+生物+政治</option>
+                                <option value="化地政">化学+地理+政治</option>
+                                <option value="生地政">生物+地理+政治</option>
+                            </optgroup>
                         </select>
                     </div>
                     <div>
