@@ -157,8 +157,8 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
                     </svg>
                     <div class="text-sm text-blue-700">
-                        <strong>数据说明：</strong>本页面仅展示学校基本信息（区域、建校时间、学校类型等）和中考录取分数线。
-                        <span class="text-blue-600">因清北录取人数、交大复旦录取比例等数据多为网络非官方统计，准确性和口径差异较大，本页面暂不展示此类数据，以避免误导。</span>
+                        <strong>数据说明：</strong>升学数据主要参考2024年各校喜报及网络公开统计。
+                        <span class="text-blue-600">⚠️ 数据非官方发布，各校统计口径可能不同（如是否含自招、综评等），仅供横向参考，请以学校官方发布为准。</span>
                     </div>
                 </div>
             </div>
@@ -211,6 +211,36 @@
                         <div class="mb-4 text-sm text-gray-600">
                             {{ school.description || '上海市重点高中' }}
                         </div>
+                        <!-- 升学数据 -->
+                        <div v-if="school.admission_stats" class="mb-4">
+                            <div class="text-xs text-gray-400 mb-2">{{ school.admission_stats.year }}年升学情况</div>
+                            <div class="grid grid-cols-3 gap-2">
+                                <div class="bg-red-50 rounded-lg p-2 text-center">
+                                    <div class="text-lg font-bold text-red-600">{{ school.admission_stats.qingbei.count }}</div>
+                                    <div class="text-xs text-gray-500">清北</div>
+                                </div>
+                                <div class="bg-blue-50 rounded-lg p-2 text-center">
+                                    <div class="text-lg font-bold text-blue-600">{{ school.admission_stats.jiaofu.count }}</div>
+                                    <div class="text-xs text-gray-500">交复</div>
+                                </div>
+                                <div class="bg-purple-50 rounded-lg p-2 text-center">
+                                    <div class="text-lg font-bold text-purple-600">{{ school.admission_stats['985'].rate }}</div>
+                                    <div class="text-xs text-gray-500">985率</div>
+                                </div>
+                                <div class="bg-indigo-50 rounded-lg p-2 text-center">
+                                    <div class="text-lg font-bold text-indigo-600">{{ school.admission_stats['211'].rate }}</div>
+                                    <div class="text-xs text-gray-500">211率</div>
+                                </div>
+                                <div class="bg-green-50 rounded-lg p-2 text-center">
+                                    <div class="text-lg font-bold text-green-600">{{ school.admission_stats.tier1.rate }}</div>
+                                    <div class="text-xs text-gray-500">一本率</div>
+                                </div>
+                                <div class="bg-gray-50 rounded-lg p-2 text-center">
+                                    <div class="text-lg font-bold text-gray-600">{{ school.admission_stats.total_graduates }}</div>
+                                    <div class="text-xs text-gray-500">毕业生</div>
+                                </div>
+                            </div>
+                        </div>
                         <!-- 基本信息卡片 -->
                         <div class="grid grid-cols-2 gap-3 mb-4">
                             <div class="bg-gray-50 rounded-xl p-3 text-center">
@@ -221,14 +251,6 @@
                                 <div class="text-lg font-bold text-primary-600">{{ school.founded }}年</div>
                                 <div class="text-xs text-gray-500">建校时间</div>
                             </div>
-                            <div class="bg-gray-50 rounded-xl p-3 text-center">
-                                <div class="text-lg font-bold text-primary-600">{{ school.stats.total_students || '—' }}</div>
-                                <div class="text-xs text-gray-500">年级人数</div>
-                            </div>
-                            <div class="bg-gray-50 rounded-xl p-3 text-center">
-                                <div class="text-lg font-bold text-primary-600">{{ school.type }}</div>
-                                <div class="text-xs text-gray-500">学校类型</div>
-                            </div>
                         </div>
                         <!-- 特色标签 -->
                         <div v-if="school.features" class="flex flex-wrap gap-2">
@@ -236,6 +258,10 @@
                                 class="px-3 py-1 bg-primary-50 text-primary-600 rounded-full text-xs">
                                 {{ feature }}
                             </span>
+                        </div>
+                        <!-- 数据可靠性 -->
+                        <div v-if="school.reliability" class="mt-3 text-xs text-gray-400">
+                            数据可信度：{{ school.reliability }}
                         </div>
                     </div>
                 </div>
@@ -256,32 +282,31 @@
                         <h3 class="font-bold text-amber-800 mb-3">数据来源与说明</h3>
                         <div class="text-sm text-amber-700 space-y-3">
                             <div>
-                                <p class="font-medium">✅ 本页面展示的数据（来源可靠）：</p>
+                                <p class="font-medium">📊 数据来源：</p>
                                 <ul class="list-disc list-inside ml-2 mt-1">
-                                    <li>学校名称、简称、类型（四校/四分/八校等）：来源于上海市教委公示</li>
-                                    <li>所在区域、建校时间：来源于学校官网</li>
-                                    <li>学校特色：根据学校办学特点整理</li>
+                                    <li>清北录取：各校高考喜报、家长群统计、教育论坛整理</li>
+                                    <li>交大复旦录取：同上，部分学校含综评录取</li>
+                                    <li>985/211比例：网络公开统计，含外省市院校</li>
+                                    <li>一本率：网络公开数据整理</li>
                                 </ul>
                             </div>
                             <div>
-                                <p class="font-medium">❌ 本页面不展示的数据（原因说明）：</p>
+                                <p class="font-medium">⚠️ 数据局限性：</p>
                                 <ul class="list-disc list-inside ml-2 mt-1">
-                                    <li><strong>清北录取人数</strong>：各校统计口径不一，部分学校未公开，网络数据误差大</li>
-                                    <li><strong>交大复旦录取人数</strong>：同样存在统计口径问题，且多为非官方来源</li>
-                                    <li><strong>985/211录取比例</strong>：不同学校计算方式不同（是否含自主招生、综评等），无可比性</li>
-                                    <li><strong>高考分数分布</strong>：部分学校不公开，网络数据真实性难以验证</li>
+                                    <li>各校统计口径可能不同（是否含自招、综评、强基计划等）</li>
+                                    <li>部分数据为估算值，可能与实际存在偏差</li>
+                                    <li>数据非官方发布，仅供参考</li>
                                 </ul>
                             </div>
                             <div>
-                                <p class="font-medium">💡 选校建议：</p>
+                                <p class="font-medium">💡 使用建议：</p>
                                 <ul class="list-disc list-inside ml-2 mt-1">
-                                    <li>建议参考学校官方发布的年度报告</li>
-                                    <li>关注学校办学特色、师资力量、课程设置等</li>
-                                    <li>实地参观、参加开放日了解学校氛围</li>
-                                    <li>根据孩子实际情况选择适合的学校</li>
+                                    <li>横向对比时可参考，但不宜过度解读具体数值</li>
+                                    <li>建议关注学校办学特色、师资力量等</li>
+                                    <li>历史数据不代表未来趋势</li>
                                 </ul>
                             </div>
-                            <p class="mt-3 text-amber-800 font-medium">❗ 免责声明：本页面仅提供学校基本信息参考，不作为择校依据。请以各学校官方发布的信息为准。</p>
+                            <p class="mt-3 text-amber-800 font-medium">❗ 免责声明：本页面数据为网络公开信息整理，仅供参考，不作为择校依据。请以各学校官方发布的数据为准。</p>
                         </div>
                     </div>
                 </div>
