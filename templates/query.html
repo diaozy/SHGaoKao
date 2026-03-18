@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>分数查询 - 上海高考志愿填报辅助系统</title>
+    <title>历年历年分数查询 - 上海高考志愿填报辅助系统</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Vue 3 -->
@@ -82,13 +82,12 @@
                     </a>
                     <div class="hidden md:flex items-center space-x-1">
                         <a href="/" class="nav-item px-4 py-2 text-gray-700 font-medium hover:text-primary-600 transition-colors">首页</a>
-                        <a href="/query" class="nav-item active px-4 py-2 text-primary-600 font-medium">分数查询</a>
+                        <a href="/query" class="nav-item active px-4 py-2 text-primary-600 font-medium">历年历年分数查询</a>
                         <a href="/simulate" class="nav-item px-4 py-2 text-gray-700 font-medium hover:text-primary-600 transition-colors">模拟填报</a>
                         <a href="/school" class="nav-item px-4 py-2 text-gray-700 font-medium hover:text-primary-600 transition-colors">高中分析</a>
                         <a href="/major" class="nav-item px-4 py-2 text-gray-700 font-medium hover:text-primary-600 transition-colors">专业指导</a>
                         <a href="/news" class="nav-item px-4 py-2 text-gray-700 font-medium hover:text-primary-600 transition-colors">政策资讯</a>
                     </div>
-                </div>
 
                     <!-- 移动端菜单按钮 -->
                     <button @click="mobileMenuOpen = !mobileMenuOpen" class="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors">
@@ -104,7 +103,7 @@
             <div v-show="mobileMenuOpen" class="md:hidden bg-white border-t border-gray-100">
                 <div class="px-4 py-3 space-y-1">
                     <a href="/" class="block px-4 py-2 rounded-lg text-gray-700 hover:bg-gray-50">首页</a>
-                    <a href="/query" class="block px-4 py-2 rounded-lg bg-primary-50 text-primary-600 font-medium">分数查询</a>
+                    <a href="/query" class="block px-4 py-2 rounded-lg bg-primary-50 text-primary-600 font-medium">历年历年分数查询</a>
                     <a href="/simulate" class="block px-4 py-2 rounded-lg text-gray-700 hover:bg-gray-50">模拟填报</a>
                     <a href="/school" class="block px-4 py-2 rounded-lg text-gray-700 hover:bg-gray-50">高中分析</a>
                     <a href="/major" class="block px-4 py-2 rounded-lg text-gray-700 hover:bg-gray-50">专业指导</a>
@@ -117,7 +116,7 @@
         <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             <!-- 查询卡片 -->
             <div class="bg-white rounded-2xl shadow-lg border border-gray-100 p-6 mb-6">
-                <h1 class="text-2xl font-bold text-gray-800 mb-2">分数查询</h1>
+                <h1 class="text-2xl font-bold text-gray-800 mb-2">历年历年分数查询</h1>
                 <p class="text-gray-500 mb-6">输入您的高考分数，系统将为您智能推荐可填报院校</p>
 
                 <div class="flex flex-wrap gap-4 items-end">
