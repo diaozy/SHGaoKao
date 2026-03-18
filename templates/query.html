@@ -8,8 +8,17 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Vue 3 -->
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-    <!-- Chart.js -->
+    <!-- Chart.js - 使用多个备用CDN -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // 检查Chart.js是否加载成功
+        if (typeof Chart === 'undefined') {
+            console.warn('Chart.js加载失败，图表功能将不可用');
+            window.ChartAvailable = false;
+        } else {
+            window.ChartAvailable = true;
+        }
+    </script>
     <script>
         tailwind.config = {
             theme: {
@@ -331,12 +340,24 @@
                     </svg>
                     <div>
                         <h3 class="font-bold text-amber-800 mb-2">数据来源与免责声明</h3>
-                        <ul class="text-sm text-amber-700 space-y-1">
-                            <li>• <strong>数据来源：</strong>本系统分数线数据来源于上海市教育考试院、各高校招生办公开发布的信息</li>
-                            <li>• <strong>数据性质：</strong>⚠️ 部分数据为网络公开资料整理，具体以官方最新公布为准</li>
-                            <li>• <strong>录取概率：</strong>仅供参考，实际录取情况受多种因素影响</li>
-                            <li>• <strong>免责声明：</strong>本系统提供的数据仅供参考和辅助，不作为正式志愿填报依据。请考生和家长以官方渠道发布的信息为准，谨慎决策</li>
-                        </ul>
+                        <div class="text-sm text-amber-700 space-y-2">
+                            <p><strong>📌 官方数据来源：</strong></p>
+                            <ul class="list-disc list-inside ml-2 space-y-1">
+                                <li>上海市教育考试院官网（<a href="https://www.shmeea.edu.cn" target="_blank" class="underline">www.shmeea.edu.cn</a>）发布的各批次分数线</li>
+                                <li>各高校招生官网公布的历年录取分数线数据</li>
+                            </ul>
+                            <p class="mt-2"><strong>📊 算法说明：</strong></p>
+                            <ul class="list-disc list-inside ml-2 space-y-1">
+                                <li>录取概率：根据考生分数与院校历年分数线差距，结合招生计划变化等因素综合估算</li>
+                                <li>排名估算：基于历年分数段位分布数据进行推算</li>
+                            </ul>
+                            <p class="mt-2"><strong>⚠️ 数据性质：</strong></p>
+                            <ul class="list-disc list-inside ml-2 space-y-1">
+                                <li>分数线数据：来源官方，可信度高</li>
+                                <li>录取概率：算法预估，仅供参考，实际录取受当年报考热度、招生计划等因素影响</li>
+                            </ul>
+                            <p class="mt-2 text-amber-800 font-medium">❗ 免责声明：本系统数据仅供参考和辅助决策，不作为正式志愿填报依据。请考生和家长以上海市教育考试院官方发布为准，谨慎决策。</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -439,6 +460,10 @@
 
                 // 渲染图表
                 const renderCharts = () => {
+                    if (!window.ChartAvailable) {
+                        console.warn('Chart.js不可用，跳过图表渲染');
+                        return;
+                    }
                     if (!result.value) return;
 
                     const universities = result.value.universities || [];
