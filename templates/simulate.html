@@ -124,7 +124,7 @@
         <!-- 主内容区 -->
         <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             <!-- 输入表单 -->
-            <div class="bg-white rounded-2xl shadow-lg border border-gray-100 p-6 mb-6">
+            <div class="bg-white rounded-2xl shadow-lg border border-gray-100 p-6 mb-4">
                 <h2 class="text-xl font-bold text-gray-800 mb-6 flex items-center">
                     <svg class="w-6 h-6 mr-2 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
@@ -165,6 +165,20 @@
                         class="px-8 h-12 gradient-bg text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed">
                         {{ loading ? '生成中...' : '生成志愿方案' }}
                     </button>
+                </div>
+            </div>
+
+            <!-- 数据说明 -->
+            <div class="bg-blue-50 border border-blue-200 rounded-xl p-4 mb-6">
+                <div class="flex items-start gap-2">
+                    <svg class="w-5 h-5 text-blue-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                    <div class="text-sm text-blue-700">
+                        <strong>数据说明：</strong>志愿推荐基于历年分数线数据（来源：上海市教育考试院官方发布）和算法预估。
+                        <span class="text-blue-600">⚠️ 录取概率为系统算法计算，受当年招生计划、报考热度等因素影响，不保证与实际录取结果一致。</span>
+                        正式填报请以上海市教育考试院官方系统为准。
+                    </div>
                 </div>
             </div>
 

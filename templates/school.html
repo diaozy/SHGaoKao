@@ -131,7 +131,7 @@
         <!-- 主内容区 -->
         <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             <!-- 汇总统计 -->
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8" v-if="summary">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6" v-if="summary">
                 <div class="bg-white rounded-2xl shadow-lg p-6 text-center">
                     <div class="text-4xl font-bold gradient-text">{{ summary.total }}</div>
                     <div class="text-gray-500 mt-2">收录高中</div>
@@ -147,6 +147,20 @@
                 <div class="bg-white rounded-2xl shadow-lg p-6 text-center">
                     <div class="text-4xl font-bold gradient-text">{{ summary.by_type['八校'] || 0 }}</div>
                     <div class="text-gray-500 mt-2">八校</div>
+                </div>
+            </div>
+
+            <!-- 数据说明 -->
+            <div class="bg-blue-50 border border-blue-200 rounded-xl p-4 mb-6">
+                <div class="flex items-start gap-2">
+                    <svg class="w-5 h-5 text-blue-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                    <div class="text-sm text-blue-700">
+                        <strong>数据说明：</strong>高中录取数据来源于各学校官方发布、上海市教育考试院公示及媒体报道整理。
+                        <span class="text-blue-600">⚠️ 清北录取人数、985/211比例等数据部分来源于网络整理，非官方正式发布，统计口径可能存在差异。</span>
+                        仅供横向参考，请以学校官方数据为准。
+                    </div>
                 </div>
             </div>
 
