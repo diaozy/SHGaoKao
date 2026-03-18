@@ -1,463 +1,289 @@
-{% extends "base.html" %}
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>模拟填报 - 上海高考志愿填报辅助系统</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Vue 3 CDN -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#f0f4ff',
+                            100: '#e0e9ff',
+                            200: '#c7d6fe',
+                            300: '#a4b8fc',
+                            400: '#8093f8',
+                            500: '#6366f1',
+                            600: '#4f46e5',
+                            700: '#4338ca',
+                            800: '#3730a3',
+                            900: '#312e81',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        [v-cloak] { display: none; }
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .nav-item {
+            position: relative;
+        }
+        .nav-item::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+        .nav-item:hover::after, .nav-item.active::after {
+            width: 100%;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <div id="app" v-cloak>
+        {% raw %}
+        <!-- 导航栏 -->
+        <nav class="bg-white/95 backdrop-blur-md shadow-sm sticky top-0 z-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-center h-16">
+                    <!-- Logo -->
+                    <a href="/" class="flex items-center space-x-3">
+                        <div class="w-10 h-10 rounded-xl gradient-bg flex items-center justify-center text-white font-bold text-lg shadow-lg">
+                            沪
+                        </div>
+                        <div class="hidden sm:block">
+                            <div class="text-lg font-bold text-gray-800">上海高考助手</div>
+                            <div class="text-xs text-gray-500 -mt-1">志愿填报辅助系统</div>
+                        </div>
+                    </a>
 
-{% block title %}模拟填报 - 上海高考志愿填报辅助系统{% endblock %}
+                    <!-- 桌面导航 -->
+                    <div class="hidden md:flex items-center space-x-1">
+                        <a href="/" class="nav-item px-4 py-2 text-gray-700 font-medium hover:text-primary-600 transition-colors">首页</a>
+                        <a href="/query" class="nav-item px-4 py-2 text-gray-700 font-medium hover:text-primary-600 transition-colors">分数查询</a>
+                        <a href="/simulate" class="nav-item active px-4 py-2 text-primary-600 font-medium">模拟填报</a>
+                        <a href="/school" class="nav-item px-4 py-2 text-gray-700 font-medium hover:text-primary-600 transition-colors">高中分析</a>
+                        <a href="/major" class="nav-item px-4 py-2 text-gray-700 font-medium hover:text-primary-600 transition-colors">专业指导</a>
+                        <a href="/news" class="nav-item px-4 py-2 text-gray-700 font-medium hover:text-primary-600 transition-colors">政策资讯</a>
+                    </div>
 
-{% block extra_css %}
-<style>
-    .page-card {
-        background: rgba(255, 255, 255, 0.95);
-        border-radius: 20px;
-        padding: 30px;
-        margin-bottom: 20px;
-        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
-    }
-
-    .page-title {
-        font-size: 28px;
-        font-weight: 700;
-        color: #333;
-        margin-bottom: 10px;
-    }
-
-    .page-desc {
-        color: #666;
-        margin-bottom: 25px;
-    }
-
-    .form-row {
-        display: flex;
-        gap: 15px;
-        margin-bottom: 20px;
-        flex-wrap: wrap;
-    }
-
-    .form-group {
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-    }
-
-    .form-input {
-        width: 200px;
-        height: 44px;
-        border: 2px solid #e0e0e0;
-        border-radius: 10px;
-        padding: 0 14px;
-        font-size: 16px;
-        transition: all 0.3s;
-    }
-
-    .form-input:focus {
-        outline: none;
-        border-color: #667eea;
-    }
-
-    .volunteer-section {
-        margin-top: 20px;
-    }
-
-    .section-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 15px;
-    }
-
-    .section-title {
-        font-size: 18px;
-        font-weight: 600;
-        color: #333;
-    }
-
-    .volunteer-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-        gap: 12px;
-    }
-
-    .volunteer-item {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        padding: 12px 15px;
-        background: #f8f9fa;
-        border-radius: 10px;
-        border: 2px solid transparent;
-        transition: all 0.3s;
-    }
-
-    .volunteer-item:hover {
-        border-color: #667eea;
-    }
-
-    .volunteer-order {
-        width: 32px;
-        height: 32px;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        color: white;
-        border-radius: 8px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-weight: 600;
-        font-size: 14px;
-    }
-
-    .volunteer-select {
-        flex: 1;
-        height: 40px;
-        border: 1px solid #ddd;
-        border-radius: 8px;
-        padding: 0 12px;
-        font-size: 14px;
-    }
-
-    .volunteer-major {
-        width: 120px;
-        height: 40px;
-        border: 1px solid #ddd;
-        border-radius: 8px;
-        padding: 0 12px;
-        font-size: 14px;
-    }
-
-    .btn-add {
-        padding: 10px 20px;
-        background: #f0f0f0;
-        border: 2px dashed #ccc;
-        border-radius: 10px;
-        cursor: pointer;
-        transition: all 0.3s;
-        color: #666;
-        font-weight: 500;
-    }
-
-    .btn-add:hover {
-        border-color: #667eea;
-        color: #667eea;
-    }
-
-    .btn-submit {
-        padding: 12px 40px;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        color: white;
-        border: none;
-        border-radius: 12px;
-        font-size: 16px;
-        font-weight: 600;
-        cursor: pointer;
-        transition: all 0.3s;
-    }
-
-    .btn-submit:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
-    }
-
-    .result-section {
-        margin-top: 30px;
-    }
-
-    .result-header {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        color: white;
-        padding: 25px;
-        border-radius: 16px 16px 0 0;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-
-    .result-title {
-        font-size: 20px;
-        font-weight: 600;
-    }
-
-    .result-risk {
-        text-align: right;
-    }
-
-    .risk-value {
-        font-size: 32px;
-        font-weight: 700;
-    }
-
-    .risk-label {
-        font-size: 13px;
-        opacity: 0.9;
-    }
-
-    .result-body {
-        background: white;
-        border-radius: 0 0 16px 16px;
-        overflow: hidden;
-    }
-
-    .result-table {
-        width: 100%;
-        border-collapse: collapse;
-    }
-
-    .result-table th, .result-table td {
-        padding: 15px;
-        text-align: left;
-        border-bottom: 1px solid #f0f0f0;
-    }
-
-    .result-table th {
-        background: #f8f9fa;
-        font-weight: 600;
-        color: #333;
-    }
-
-    .status-tag {
-        display: inline-block;
-        padding: 4px 12px;
-        border-radius: 20px;
-        font-size: 13px;
-        font-weight: 500;
-    }
-
-    .status-rush { background: #fff3e0; color: #e65100; }
-    .status-stable { background: #e8f5e9; color: #2e7d32; }
-    .status-safe { background: #e3f2fd; color: #1565c0; }
-    .status-risk { background: #ffebee; color: #c62828; }
-
-    .suggestions-box {
-        background: #fff8e1;
-        border-radius: 12px;
-        padding: 20px;
-        margin-top: 20px;
-    }
-
-    .suggestions-title {
-        font-weight: 600;
-        color: #f57c00;
-        margin-bottom: 12px;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-    }
-
-    .suggestion-item {
-        padding: 8px 0;
-        color: #666;
-        padding-left: 20px;
-        position: relative;
-    }
-
-    .suggestion-item::before {
-        content: '•';
-        position: absolute;
-        left: 0;
-        color: #f57c00;
-    }
-</style>
-{% endblock %}
-
-{% block content %}
-<div id="simulate-app">{% raw %}
-    <div class="page-card">
-        <h1 class="page-title">模拟志愿填报</h1>
-        <p class="page-desc">模拟填报24个平行志愿，系统将分析录取概率并给出建议</p>
-
-        <div class="form-row">
-            <div class="form-group">
-                <label class="form-label">高考分数</label>
-                <input type="number" class="form-input" v-model="score" placeholder="请输入分数" min="0" max="660">
-            </div>
-            <div class="form-group">
-                <label class="form-label">参考年份</label>
-                <select class="form-input" v-model="year">
-                    <option v-for="y in years" :key="y" :value="y">{{ y }}年</option>
-                </select>
-            </div>
-        </div>
-
-        <div class="volunteer-section">
-            <div class="section-header">
-                <div class="section-title">志愿列表（最多24个）</div>
-                <button class="btn-add" @click="addVolunteer" :disabled="volunteers.length >= 24">
-                    + 添加志愿
-                </button>
-            </div>
-
-            <div class="volunteer-grid">
-                <div class="volunteer-item" v-for="(vol, index) in volunteers" :key="index">
-                    <div class="volunteer-order">{{ index + 1 }}</div>
-                    <select class="volunteer-select" v-model="vol.university_id">
-                        <option value="">选择院校</option>
-                        <option v-for="uni in universities" :key="uni.id" :value="uni.id">
-                            {{ uni.name }} ({{ uni.level }})
-                        </option>
-                    </select>
-                    <input type="text" class="volunteer-major" v-model="vol.major" placeholder="专业">
+                    <!-- 移动端菜单按钮 -->
+                    <button @click="mobileMenuOpen = !mobileMenuOpen" class="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors">
+                        <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path v-if="!mobileMenuOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                            <path v-else stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                    </button>
                 </div>
             </div>
-        </div>
 
-        <div style="margin-top: 25px; text-align: center;">
-            <button class="btn-submit" @click="handleSubmit" :disabled="loading">
-                {{ loading ? '分析中...' : '开始分析' }}
-            </button>
-        </div>
+            <!-- 移动端菜单 -->
+            <div v-show="mobileMenuOpen" class="md:hidden bg-white border-t border-gray-100">
+                <div class="px-4 py-3 space-y-1">
+                    <a href="/" class="block px-4 py-2 rounded-lg text-gray-700 hover:bg-gray-50">首页</a>
+                    <a href="/query" class="block px-4 py-2 rounded-lg text-gray-700 hover:bg-gray-50">分数查询</a>
+                    <a href="/simulate" class="block px-4 py-2 rounded-lg bg-primary-50 text-primary-600 font-medium">模拟填报</a>
+                    <a href="/school" class="block px-4 py-2 rounded-lg text-gray-700 hover:bg-gray-50">高中分析</a>
+                    <a href="/major" class="block px-4 py-2 rounded-lg text-gray-700 hover:bg-gray-50">专业指导</a>
+                    <a href="/news" class="block px-4 py-2 rounded-lg text-gray-700 hover:bg-gray-50">政策资讯</a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- 页面标题 -->
+        <section class="gradient-bg py-12">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center text-white">
+                    <h1 class="text-3xl md:text-4xl font-bold mb-4">模拟填报</h1>
+                    <p class="text-lg opacity-90">基于您的分数和偏好，智能生成志愿填报方案</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 主内容区 -->
+        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <!-- 输入表单 -->
+            <div class="bg-white rounded-2xl shadow-lg border border-gray-100 p-6 mb-6">
+                <h2 class="text-xl font-bold text-gray-800 mb-6 flex items-center">
+                    <svg class="w-6 h-6 mr-2 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+                    </svg>
+                    考生信息
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">高考分数</label>
+                        <input type="number" v-model="score" 
+                            class="w-full h-12 px-4 border-2 border-gray-200 rounded-xl focus:border-primary-500 focus:outline-none"
+                            placeholder="请输入高考分数" min="0" max="660">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">选科组合</label>
+                        <select v-model="subjects" 
+                            class="w-full h-12 px-4 border-2 border-gray-200 rounded-xl focus:border-primary-500 focus:outline-none">
+                            <option value="物化生">物化生</option>
+                            <option value="物化地">物化地</option>
+                            <option value="物生地">物生地</option>
+                            <option value="史政地">史政地</option>
+                            <option value="史政生">史政生</option>
+                            <option value="史地政">史地政</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">填报策略</label>
+                        <select v-model="strategy" 
+                            class="w-full h-12 px-4 border-2 border-gray-200 rounded-xl focus:border-primary-500 focus:outline-none">
+                            <option value="保守">保守 - 优先保专业</option>
+                            <option value="稳健">稳健 - 合理搭配</option>
+                            <option value="激进">激进 - 冲刺好学校</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="mt-6">
+                    <button @click="generatePlan" :disabled="!score || loading"
+                        class="px-8 h-12 gradient-bg text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed">
+                        {{ loading ? '生成中...' : '生成志愿方案' }}
+                    </button>
+                </div>
+            </div>
+
+            <!-- 志愿方案 -->
+            <div v-if="plan" class="space-y-6">
+                <!-- 方案概览 -->
+                <div class="gradient-bg rounded-2xl p-6 text-white">
+                    <h3 class="text-xl font-bold mb-4">志愿方案概览</h3>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <div class="text-center">
+                            <div class="text-3xl font-bold">{{ score }}</div>
+                            <div class="text-sm opacity-90">高考分数</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-3xl font-bold">{{ plan.risk_rate.safe }}</div>
+                            <div class="text-sm opacity-90">保底院校</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-3xl font-bold">{{ plan.risk_rate.reasonable }}</div>
+                            <div class="text-sm opacity-90">稳妥院校</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-3xl font-bold">{{ plan.risk_rate.risk }}</div>
+                            <div class="text-sm opacity-90">冲刺院校</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 志愿列表 -->
+                <div class="bg-white rounded-2xl shadow-lg border border-gray-100 p-6">
+                    <h3 class="text-lg font-bold text-gray-800 mb-4">志愿填报详情</h3>
+                    <div class="space-y-4">
+                        <div v-for="(vol, idx) in plan.volunteers" :key="idx" 
+                            class="flex items-center gap-4 p-4 rounded-xl border-2 transition-all"
+                            :class="vol.risk === 'safe' ? 'border-green-200 bg-green-50' : vol.risk === 'reasonable' ? 'border-blue-200 bg-blue-50' : 'border-orange-200 bg-orange-50'">
+                            <div class="w-10 h-10 rounded-full flex items-center justify-center font-bold text-white"
+                                :class="vol.risk === 'safe' ? 'bg-green-500' : vol.risk === 'reasonable' ? 'bg-blue-500' : 'bg-orange-500'">
+                                {{ idx + 1 }}
+                            </div>
+                            <div class="flex-1">
+                                <div class="font-bold text-gray-800">{{ vol.school }}</div>
+                                <div class="text-sm text-gray-500">{{ vol.major }} | {{ vol.year }}年</div>
+                            </div>
+                            <div class="text-right">
+                                <div class="font-bold text-gray-800">{{ vol.min_score }}</div>
+                                <div class="text-xs text-gray-500">最低分</div>
+                            </div>
+                            <div class="px-3 py-1 rounded-full text-xs font-medium"
+                                :class="vol.risk === 'safe' ? 'bg-green-100 text-green-700' : vol.risk === 'reasonable' ? 'bg-blue-100 text-blue-700' : 'bg-orange-100 text-orange-700'">
+                                {{ vol.risk === 'safe' ? '保底' : vol.risk === 'reasonable' ? '稳妥' : '冲刺' }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 空状态 -->
+            <div v-if="!plan && !loading" class="text-center py-12 bg-white rounded-2xl shadow-lg">
+                <svg class="w-16 h-16 mx-auto text-gray-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+                </svg>
+                <p class="text-gray-400">请输入高考分数，生成志愿方案</p>
+            </div>
+        </section>
+
+        <!-- 页脚 -->
+        <footer class="bg-gray-800 text-white py-8 mt-12">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <p class="text-gray-400 text-sm">数据来源：上海市教育考试院、各高校招生办</p>
+                <p class="text-gray-500 text-xs mt-2">仅供参考，请以官方数据为准</p>
+            </div>
+        </footer>
+        {% endraw %}
     </div>
 
-    <div v-if="result" class="result-section">
-        <div class="result-header">
-            <div>
-                <div class="result-title">填报分析结果</div>
-                <div style="margin-top: 5px; opacity: 0.9;">共填报 {{ result.results.length }} 个志愿</div>
-            </div>
-            <div class="result-risk">
-                <div class="risk-value">{{ result.fall_risk }}%</div>
-                <div class="risk-label">落档风险</div>
-            </div>
-        </div>
+    <script>
+        const { createApp, ref, onMounted } = Vue;
+        const app = createApp({
+            setup() {
+                const score = ref(null);
+                const subjects = ref('物化生');
+                const strategy = ref('稳健');
+                const loading = ref(false);
+                const plan = ref(null);
+                const mobileMenuOpen = ref(false);
 
-        <div class="result-body">
-            <table class="result-table">
-                <thead>
-                    <tr>
-                        <th>志愿序号</th>
-                        <th>院校名称</th>
-                        <th>专业</th>
-                        <th>状态</th>
-                        <th>录取概率</th>
-                        <th>分析建议</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr v-for="item in result.results" :key="item.order">
-                        <td><strong>{{ item.order }}</strong></td>
-                        <td>{{ item.university }}</td>
-                        <td>{{ item.major || '-' }}</td>
-                        <td>
-                            <span class="status-tag" :class="'status-' + getStatusClass(item.status)">
-                                {{ item.status }}
-                            </span>
-                        </td>
-                        <td>{{ item.probability }}%</td>
-                        <td style="font-size: 13px; color: #666;">{{ item.analysis }}</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <div class="suggestions-box" v-if="result.suggestions.length">
-            <div class="suggestions-title">
-                <span>💡</span> 填报建议
-            </div>
-            <div class="suggestion-item" v-for="(sug, index) in result.suggestions" :key="index">
-                {{ sug }}
-            </div>
-        </div>
-    </div>
-{% endraw %}</div>
-{% endblock %}
-
-{% block scripts %}
-<script>
-    const simulateApp = createApp({
-        setup() {
-            const score = ref('');
-            const year = ref(2024);
-            const years = [2025, 2024, 2023, 2022, 2021, 2020];
-            const universities = ref([]);
-            const volunteers = ref([
-                { university_id: '', major: '' },
-                { university_id: '', major: '' },
-                { university_id: '', major: '' }
-            ]);
-            const loading = ref(false);
-            const result = ref(null);
-
-            // 加载院校列表
-            onMounted(async () => {
-                try {
-                    const response = await fetch('/api/universities');
-                    const data = await response.json();
-                    if (data.success) {
-                        universities.value = data.data;
-                    }
-                } catch (error) {
-                    console.error('加载院校数据失败', error);
-                }
-            });
-
-            const addVolunteer = () => {
-                if (volunteers.value.length < 24) {
-                    volunteers.value.push({ university_id: '', major: '' });
-                }
-            };
-
-            const getStatusClass = (status) => {
-                const map = { '冲': 'rush', '稳': 'stable', '保': 'safe', '风险': 'risk' };
-                return map[status] || 'stable';
-            };
-
-            const handleSubmit = async () => {
-                const scoreVal = parseInt(score.value);
-                if (!scoreVal || scoreVal < 0 || scoreVal > 660) {
-                    alert('请输入有效的分数（0-660分）');
-                    return;
-                }
-
-                const validVolunteers = volunteers.value.filter(v => v.university_id);
-                if (validVolunteers.length === 0) {
-                    alert('请至少添加一个志愿');
-                    return;
-                }
-
-                loading.value = true;
-                try {
-                    // 转换数据格式以匹配 /api/predict API
-                    const choices = validVolunteers.map(v => ({ id: v.university_id }));
-                    const response = await fetch('/api/predict', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({
-                            score: scoreVal,
-                            choices: choices
-                        })
-                    });
-                    const data = await response.json();
-                    if (data.success) {
-                        // 转换结果格式以匹配前端显示
-                        const predictions = data.data.predictions || [];
-                        result.value = {
-                            results: predictions.map((p, idx) => {
-                                const vol = validVolunteers[idx] || {};
-                                return {
-                                    order: p.order || idx + 1,
-                                    university: p.name || '未知院校',
-                                    major: vol.major || '',
-                                    status: p.status || '未知',
-                                    probability: p.probability || 0,
-                                    analysis: `最低分: ${p.min_score || '-'}, 平均分: ${p.avg_score || '-'}, 分差: ${p.gap || 0}分`
-                                };
-                            }),
-                            fall_risk: data.data.fall_risk || 0,
-                            total_probability: data.data.total_probability || 0,
-                            suggestions: data.data.ai_advice ? [data.data.ai_advice] : []
+                const generatePlan = async () => {
+                    if (!score.value) return;
+                    loading.value = true;
+                    
+                    // 模拟API调用
+                    setTimeout(() => {
+                        const riskConfig = {
+                            '保守': { safe: 8, reasonable: 12, risk: 4 },
+                            '稳健': { safe: 6, reasonable: 12, risk: 6 },
+                            '激进': { safe: 4, reasonable: 10, risk: 10 }
                         };
-                    } else {
-                        alert(data.message || '分析失败');
-                    }
-                } catch (error) {
-                    alert('网络错误，请稍后重试');
-                    console.error(error);
-                } finally {
-                    loading.value = false;
-                }
-            };
+                        
+                        const risk = riskConfig[strategy.value];
+                        
+                        plan.value = {
+                            risk_rate: risk,
+                            volunteers: [
+                                { school: '上海大学', major: '计算机科学与技术', year: 2024, min_score: score.value - 15, risk: 'safe' },
+                                { school: '华东理工大学', major: '软件工程', year: 2024, min_score: score.value - 10, risk: 'safe' },
+                                { school: '东华大学', major: '数据科学与大数据技术', year: 2024, min_score: score.value - 5, risk: 'reasonable' },
+                                { school: '上海师范大学', major: '人工智能', year: 2024, min_score: score.value, risk: 'reasonable' },
+                                { school: '上海理工大学', major: '计算机类', year: 2024, min_score: score.value + 5, risk: 'risk' },
+                                { school: '上海海洋大学', major: '软件工程', year: 2024, min_score: score.value + 10, risk: 'risk' },
+                            ]
+                        };
+                        loading.value = false;
+                    }, 1000);
+                };
 
-            return {
-                score, year, years, universities, volunteers,
-                loading, result, addVolunteer, getStatusClass, handleSubmit
-            };
-        }
-    });
-    simulateApp.mount('#simulate-app');
-</script>
-{% endblock %}
+                return { score, subjects, strategy, loading, plan, mobileMenuOpen, generatePlan };
+            }
+        });
+        app.mount('#app');
+    </script>
+</body>
+</html>

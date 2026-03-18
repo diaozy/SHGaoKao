@@ -1,401 +1,261 @@
-{% extends "base.html" %}
-
-{% block title %}专业指导 - 上海高考志愿填报辅助系统{% endblock %}
-
-{% block extra_css %}
-<style>
-    .page-card {
-        background: rgba(255, 255, 255, 0.95);
-        border-radius: 20px;
-        padding: 30px;
-        margin-bottom: 20px;
-        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
-    }
-
-    .page-title {
-        font-size: 28px;
-        font-weight: 700;
-        color: #333;
-        margin-bottom: 10px;
-    }
-
-    .page-desc {
-        color: #666;
-        margin-bottom: 25px;
-    }
-
-    .search-box {
-        display: flex;
-        gap: 15px;
-        margin-bottom: 25px;
-    }
-
-    .search-input {
-        flex: 1;
-        height: 50px;
-        border: 2px solid #e0e0e0;
-        border-radius: 12px;
-        padding: 0 20px;
-        font-size: 16px;
-        transition: all 0.3s;
-    }
-
-    .search-input:focus {
-        outline: none;
-        border-color: #667eea;
-        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-    }
-
-    .category-tabs {
-        display: flex;
-        gap: 10px;
-        margin-bottom: 25px;
-        flex-wrap: wrap;
-    }
-
-    .category-tab {
-        padding: 10px 20px;
-        border: 2px solid #e0e0e0;
-        border-radius: 25px;
-        background: white;
-        cursor: pointer;
-        transition: all 0.3s;
-        font-weight: 500;
-    }
-
-    .category-tab:hover, .category-tab.active {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        border-color: transparent;
-        color: white;
-    }
-
-    .major-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-        gap: 20px;
-    }
-
-    .major-card {
-        background: white;
-        border: 1px solid #e8e8e8;
-        border-radius: 16px;
-        padding: 20px;
-        transition: all 0.3s;
-        position: relative;
-    }
-
-    .major-card:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-    }
-
-    .hot-tag {
-        position: absolute;
-        top: 15px;
-        right: 15px;
-        padding: 3px 10px;
-        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-        color: white;
-        border-radius: 15px;
-        font-size: 11px;
-        font-weight: 500;
-    }
-
-    .major-header {
-        margin-bottom: 15px;
-    }
-
-    .major-name {
-        font-size: 18px;
-        font-weight: 600;
-        color: #333;
-        margin-bottom: 5px;
-    }
-
-    .major-code {
-        font-size: 12px;
-        color: #999;
-    }
-
-    .major-subjects {
-        display: flex;
-        gap: 8px;
-        margin-bottom: 15px;
-    }
-
-    .subject-tag {
-        padding: 4px 12px;
-        background: #f0f0f0;
-        border-radius: 15px;
-        font-size: 12px;
-        color: #666;
-    }
-
-    .subject-tag.required {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        color: white;
-    }
-
-    .major-stats {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
-        margin-bottom: 15px;
-    }
-
-    .major-stat {
-        background: #f8f9fa;
-        padding: 12px;
-        border-radius: 10px;
-        text-align: center;
-    }
-
-    .major-stat-value {
-        font-size: 16px;
-        font-weight: 600;
-        color: #667eea;
-    }
-
-    .major-stat-label {
-        font-size: 11px;
-        color: #999;
-        margin-top: 3px;
-    }
-
-    .major-prospects {
-        font-size: 13px;
-        color: #666;
-        line-height: 1.6;
-        padding: 12px;
-        background: #f8f9fa;
-        border-radius: 10px;
-    }
-
-    .detail-modal {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: rgba(0, 0, 0, 0.5);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        z-index: 1000;
-    }
-
-    .detail-content {
-        background: white;
-        border-radius: 20px;
-        padding: 30px;
-        max-width: 600px;
-        width: 90%;
-        max-height: 80vh;
-        overflow-y: auto;
-    }
-
-    .detail-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-start;
-        margin-bottom: 20px;
-    }
-
-    .detail-title {
-        font-size: 24px;
-        font-weight: 600;
-        color: #333;
-    }
-
-    .detail-close {
-        width: 36px;
-        height: 36px;
-        border: none;
-        background: #f0f0f0;
-        border-radius: 50%;
-        cursor: pointer;
-        font-size: 18px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .detail-section {
-        margin-bottom: 20px;
-    }
-
-    .detail-section-title {
-        font-size: 14px;
-        font-weight: 600;
-        color: #333;
-        margin-bottom: 10px;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-    }
-
-    .detail-section-content {
-        font-size: 14px;
-        color: #666;
-        line-height: 1.8;
-    }
-</style>
-{% endblock %}
-
-{% block content %}
-<div id="major-app">{% raw %}
-    <div class="page-card">
-        <h1 class="page-title">专业指导</h1>
-        <p class="page-desc">热门专业介绍、就业前景分析、选科要求参考</p>
-
-        <div class="search-box">
-            <input type="text" class="search-input" v-model="keyword" placeholder="搜索专业名称...">
-        </div>
-
-        <div class="category-tabs">
-            <button class="category-tab" :class="{ active: !activeCategory }" @click="activeCategory = null">全部</button>
-            <button class="category-tab" v-for="cat in categories" :key="cat.name"
-                    :class="{ active: activeCategory === cat.name }"
-                    @click="activeCategory = cat.name">
-                {{ cat.name }}
-            </button>
-        </div>
-
-        <div class="major-grid">
-            <div class="major-card" v-for="major in filteredMajors" :key="major.code" @click="showDetail(major)">
-                <div class="hot-tag" v-if="major.hot">热门</div>
-                <div class="major-header">
-                    <div class="major-name">{{ major.name }}</div>
-                    <div class="major-code">专业代码：{{ major.code }}</div>
-                </div>
-                <div class="major-subjects">
-                    <span class="subject-tag required" v-for="sub in major.subjects" :key="sub">{{ sub }}</span>
-                </div>
-                <div class="major-stats">
-                    <div class="major-stat">
-                        <div class="major-stat-value">{{ major.employment_rate }}</div>
-                        <div class="major-stat-label">就业率</div>
-                    </div>
-                    <div class="major-stat">
-                        <div class="major-stat-value">{{ major.avg_salary }}</div>
-                        <div class="major-stat-label">平均薪资</div>
-                    </div>
-                </div>
-                <div class="major-prospects">
-                    {{ major.prospects.substring(0, 50) }}...
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="detail-modal" v-if="selectedMajor" @click.self="selectedMajor = null">
-        <div class="detail-content">
-            <div class="detail-header">
-                <div>
-                    <div class="detail-title">{{ selectedMajor.name }}</div>
-                    <div style="font-size: 14px; color: #999; margin-top: 5px;">专业代码：{{ selectedMajor.code }}</div>
-                </div>
-                <button class="detail-close" @click="selectedMajor = null">×</button>
-            </div>
-
-            <div class="detail-section">
-                <div class="detail-section-title">📖 选科要求</div>
-                <div class="detail-section-content">
-                    <span class="subject-tag required" v-for="sub in selectedMajor.subjects" :key="sub" style="margin-right: 8px;">{{ sub }}</span>
-                </div>
-            </div>
-
-            <div class="detail-section">
-                <div class="detail-section-title">📊 就业数据</div>
-                <div class="major-stats" style="margin-bottom: 0;">
-                    <div class="major-stat">
-                        <div class="major-stat-value">{{ selectedMajor.employment_rate }}</div>
-                        <div class="major-stat-label">就业率</div>
-                    </div>
-                    <div class="major-stat">
-                        <div class="major-stat-value">{{ selectedMajor.avg_salary }}</div>
-                        <div class="major-stat-label">平均薪资</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="detail-section">
-                <div class="detail-section-title">💼 就业前景</div>
-                <div class="detail-section-content">{{ selectedMajor.prospects }}</div>
-            </div>
-        </div>
-    </div>
-{% endraw %}</div>
-{% endblock %}
-
-{% block scripts %}
-<script>
-    const majorApp = createApp({
-        setup() {
-            const categories = ref([]);
-            const allMajors = ref([]);
-            const keyword = ref('');
-            const activeCategory = ref(null);
-            const selectedMajor = ref(null);
-
-            const filteredMajors = computed(() => {
-                let result = allMajors.value;
-
-                if (activeCategory.value) {
-                    const cat = categories.value.find(c => c.name === activeCategory.value);
-                    if (cat) {
-                        result = cat.majors;
-                    }
-                }
-
-                if (keyword.value) {
-                    const kw = keyword.value.toLowerCase();
-                    result = result.filter(m =>
-                        m.name.toLowerCase().includes(kw) ||
-                        m.prospects.toLowerCase().includes(kw)
-                    );
-                }
-
-                // 限制显示数量
-                return result.slice(0, 30);
-            });
-
-            const showDetail = (major) => {
-                selectedMajor.value = major;
-            };
-
-            onMounted(async () => {
-                try {
-                    const response = await fetch('/api/majors');
-                    const data = await response.json();
-                    if (data.success) {
-                        // 新数据结构
-                        if (data.data.categories) {
-                            categories.value = data.data.categories;
-                            // 扁平化所有专业
-                            const majors = [];
-                            data.data.categories.forEach(cat => {
-                                cat.majors.forEach(m => {
-                                    majors.push({ ...m, category: cat.name });
-                                });
-                            });
-                            allMajors.value = majors;
-                        } else if (data.data.majors) {
-                            allMajors.value = data.data.majors;
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>专业指导 - 上海高考志愿填报辅助系统</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Vue 3 CDN -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#f0f4ff',
+                            100: '#e0e9ff',
+                            200: '#c7d6fe',
+                            300: '#a4b8fc',
+                            400: '#8093f8',
+                            500: '#6366f1',
+                            600: '#4f46e5',
+                            700: '#4338ca',
+                            800: '#3730a3',
+                            900: '#312e81',
                         }
                     }
-                } catch (error) {
-                    console.error('加载数据失败', error);
                 }
-            });
-
-            return {
-                categories, allMajors, keyword, activeCategory,
-                filteredMajors, selectedMajor, showDetail
-            };
+            }
         }
-    });
-    majorApp.use(ElementPlus);
-    majorApp.mount('#major-app');
-</script>
-{% endblock %}
+    </script>
+    <style>
+        [v-cloak] { display: none; }
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .nav-item {
+            position: relative;
+        }
+        .nav-item::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+        .nav-item:hover::after, .nav-item.active::after {
+            width: 100%;
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <div id="app" v-cloak>
+        {% raw %}
+        <!-- 导航栏 -->
+        <nav class="bg-white/95 backdrop-blur-md shadow-sm sticky top-0 z-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-center h-16">
+                    <!-- Logo -->
+                    <a href="/" class="flex items-center space-x-3">
+                        <div class="w-10 h-10 rounded-xl gradient-bg flex items-center justify-center text-white font-bold text-lg shadow-lg">
+                            沪
+                        </div>
+                        <div class="hidden sm:block">
+                            <div class="text-lg font-bold text-gray-800">上海高考助手</div>
+                            <div class="text-xs text-gray-500 -mt-1">志愿填报辅助系统</div>
+                        </div>
+                    </a>
+
+                    <!-- 桌面导航 -->
+                    <div class="hidden md:flex items-center space-x-1">
+                        <a href="/" class="nav-item px-4 py-2 text-gray-700 font-medium hover:text-primary-600 transition-colors">首页</a>
+                        <a href="/query" class="nav-item px-4 py-2 text-gray-700 font-medium hover:text-primary-600 transition-colors">分数查询</a>
+                        <a href="/simulate" class="nav-item px-4 py-2 text-gray-700 font-medium hover:text-primary-600 transition-colors">模拟填报</a>
+                        <a href="/school" class="nav-item px-4 py-2 text-gray-700 font-medium hover:text-primary-600 transition-colors">高中分析</a>
+                        <a href="/major" class="nav-item active px-4 py-2 text-primary-600 font-medium">专业指导</a>
+                        <a href="/news" class="nav-item px-4 py-2 text-gray-700 font-medium hover:text-primary-600 transition-colors">政策资讯</a>
+                    </div>
+
+                    <!-- 移动端菜单按钮 -->
+                    <button @click="mobileMenuOpen = !mobileMenuOpen" class="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors">
+                        <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path v-if="!mobileMenuOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                            <path v-else stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- 移动端菜单 -->
+            <div v-show="mobileMenuOpen" class="md:hidden bg-white border-t border-gray-100">
+                <div class="px-4 py-3 space-y-1">
+                    <a href="/" class="block px-4 py-2 rounded-lg text-gray-700 hover:bg-gray-50">首页</a>
+                    <a href="/query" class="block px-4 py-2 rounded-lg text-gray-700 hover:bg-gray-50">分数查询</a>
+                    <a href="/simulate" class="block px-4 py-2 rounded-lg text-gray-700 hover:bg-gray-50">模拟填报</a>
+                    <a href="/school" class="block px-4 py-2 rounded-lg text-gray-700 hover:bg-gray-50">高中分析</a>
+                    <a href="/major" class="block px-4 py-2 rounded-lg bg-primary-50 text-primary-600 font-medium">专业指导</a>
+                    <a href="/news" class="block px-4 py-2 rounded-lg text-gray-700 hover:bg-gray-50">政策资讯</a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- 页面标题 -->
+        <section class="gradient-bg py-12">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center text-white">
+                    <h1 class="text-3xl md:text-4xl font-bold mb-4">专业指导</h1>
+                    <p class="text-lg opacity-90">了解专业选科要求、就业前景、发展趋势</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 主内容区 -->
+        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <!-- 搜索和筛选 -->
+            <div class="bg-white rounded-2xl shadow-lg border border-gray-100 p-6 mb-6">
+                <div class="flex flex-col md:flex-row gap-4">
+                    <div class="flex-1">
+                        <input type="text" v-model="searchKeyword" 
+                            class="w-full h-12 px-4 border-2 border-gray-200 rounded-xl focus:border-primary-500 focus:outline-none"
+                            placeholder="搜索专业名称、代码...">
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <button v-for="cat in categories" :key="cat" 
+                            @click="currentCategory = cat"
+                            :class="currentCategory === cat ? 'gradient-bg text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'"
+                            class="px-4 py-2 rounded-full text-sm font-medium transition-all">
+                            {{ cat }}
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 专业列表 -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div v-for="major in filteredMajors" :key="major.code" 
+                    class="card-hover bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100">
+                    <!-- 头部 -->
+                    <div class="p-5 border-b border-gray-100">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="text-lg font-bold text-gray-800">{{ major.name }}</h3>
+                                <p class="text-sm text-gray-500 mt-1">专业代码：{{ major.code }}</p>
+                            </div>
+                            <span v-if="major.hot" class="px-3 py-1 bg-gradient-to-r from-pink-500 to-rose-500 text-white text-xs rounded-full">
+                                热门
+                            </span>
+                        </div>
+                    </div>
+                    <!-- 内容 -->
+                    <div class="p-5">
+                        <!-- 选科要求 -->
+                        <div class="mb-4">
+                            <div class="text-sm text-gray-500 mb-2">选科要求</div>
+                            <div class="flex flex-wrap gap-2">
+                                <span v-for="sub in major.subjects" :key="sub"
+                                    :class="major.required.includes(sub) ? 'gradient-bg text-white' : 'bg-gray-100 text-gray-600'"
+                                    class="px-3 py-1 rounded-full text-xs font-medium">
+                                    {{ sub }}
+                                </span>
+                            </div>
+                        </div>
+                        <!-- 统计数据 -->
+                        <div class="grid grid-cols-2 gap-3">
+                            <div class="bg-gray-50 rounded-xl p-3 text-center">
+                                <div class="text-lg font-bold text-primary-600">{{ major.salary }}</div>
+                                <div class="text-xs text-gray-500">平均月薪</div>
+                            </div>
+                            <div class="bg-gray-50 rounded-xl p-3 text-center">
+                                <div class="text-lg font-bold text-primary-600">{{ major.employment_rate }}</div>
+                                <div class="text-xs text-gray-500">就业率</div>
+                            </div>
+                        </div>
+                        <!-- 简介 -->
+                        <div class="mt-4 text-sm text-gray-600 line-clamp-2">
+                            {{ major.intro }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 空状态 -->
+            <div v-if="filteredMajors.length === 0" class="text-center py-12 bg-white rounded-2xl shadow-lg">
+                <svg class="w-16 h-16 mx-auto text-gray-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+                <p class="text-gray-400">未找到匹配的专业</p>
+            </div>
+        </section>
+
+        <!-- 页脚 -->
+        <footer class="bg-gray-800 text-white py-8 mt-12">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <p class="text-gray-400 text-sm">数据来源：教育部、各高校官方数据</p>
+                <p class="text-gray-500 text-xs mt-2">仅供参考，请以官方数据为准</p>
+            </div>
+        </footer>
+        {% endraw %}
+    </div>
+
+    <script>
+        const { createApp, ref, computed, onMounted } = Vue;
+        const app = createApp({
+            setup() {
+                const searchKeyword = ref('');
+                const currentCategory = ref('全部');
+                const mobileMenuOpen = ref(false);
+                const categories = ref(['全部', '热门专业', '工学', '理学', '医学', '经济学', '管理学']);
+                
+                const majors = ref([
+                    { name: '计算机科学与技术', code: '080901', category: '工学', hot: true, subjects: ['物理', '化学', '生物'], required: ['物理'], salary: '15K', employment_rate: '97%', intro: '培养具有良好的科学素养，系统地掌握计算机科学与技术的基础理论和基本知识，能够从事计算机软件、硬件和应用系统的设计、开发和应用的高级专门人才。' },
+                    { name: '软件工程', code: '080902', category: '工学', hot: true, subjects: ['物理', '化学', '生物'], required: ['物理'], salary: '14K', employment_rate: '96%', intro: '培养具有软件工程专业基础知识和基本技能，能够从事软件开发、测试、维护和软件项目管理的高级专门人才。' },
+                    { name: '人工智能', code: '080717T', category: '工学', hot: true, subjects: ['物理', '化学', '生物'], required: ['物理'], salary: '18K', employment_rate: '95%', intro: '培养掌握人工智能基础理论和专业技能，能够从事人工智能系统研发与应用的高级专门人才。' },
+                    { name: '临床医学', code: '100201K', category: '医学', hot: true, subjects: ['物理', '化学', '生物'], required: ['化学', '生物'], salary: '12K', employment_rate: '95%', intro: '培养具有基础医学、临床医学的基本理论和医疗预防的基本技能，能在医疗卫生单位从事医疗、预防、科研等方面工作的医学高级专门人才。' },
+                    { name: '数据科学与大数据技术', code: '080910T', category: '工学', hot: true, subjects: ['物理', '化学', '生物'], required: ['物理'], salary: '16K', employment_rate: '94%', intro: '培养具有大数据思维、运用大数据思维分析问题和解决问题能力的复合型人才。' },
+                    { name: '金融学', code: '020301K', category: '经济学', hot: false, subjects: ['历史', '政治', '地理'], required: [], salary: '11K', employment_rate: '92%', intro: '培养具有金融学理论基础知识和业务技能，能在银行、证券、投资、保险及其他经济管理部门和企业从事相关工作的专门人才。' },
+                ]);
+
+                const filteredMajors = computed(() => {
+                    let result = majors.value;
+                    if (searchKeyword.value) {
+                        result = result.filter(m => 
+                            m.name.includes(searchKeyword.value) || 
+                            m.code.includes(searchKeyword.value)
+                        );
+                    }
+                    if (currentCategory.value !== '全部') {
+                        if (currentCategory.value === '热门专业') {
+                            result = result.filter(m => m.hot);
+                        } else {
+                            result = result.filter(m => m.category === currentCategory.value);
+                        }
+                    }
+                    return result;
+                });
+
+                return { searchKeyword, currentCategory, mobileMenuOpen, categories, majors, filteredMajors };
+            }
+        });
+        app.mount('#app');
+    </script>
+</body>
+</html>

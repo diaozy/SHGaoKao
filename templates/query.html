@@ -47,6 +47,23 @@
         .prob-medium { background: linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%); }
         .prob-low { background: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%); }
         .prob-risk { background: linear-gradient(135deg, #ef4444 0%, #f87171 100%); }
+        .nav-item {
+            position: relative;
+        }
+        .nav-item::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+        .nav-item:hover::after, .nav-item.active::after {
+            width: 100%;
+        }
     </style>
 </head>
 <body class="bg-gray-50 min-h-screen">
@@ -64,12 +81,34 @@
                         </div>
                     </a>
                     <div class="hidden md:flex items-center space-x-1">
-                        <a href="/" class="px-4 py-2 text-gray-700 font-medium hover:text-primary-600 transition-colors">首页</a>
-                        <a href="/query" class="px-4 py-2 text-primary-600 font-medium border-b-2 border-primary-600">分数查询</a>
-                        <a href="/simulate" class="px-4 py-2 text-gray-700 font-medium hover:text-primary-600 transition-colors">模拟填报</a>
-                        <a href="/school" class="px-4 py-2 text-gray-700 font-medium hover:text-primary-600 transition-colors">高中分析</a>
-                        <a href="/major" class="px-4 py-2 text-gray-700 font-medium hover:text-primary-600 transition-colors">专业指导</a>
+                        <a href="/" class="nav-item px-4 py-2 text-gray-700 font-medium hover:text-primary-600 transition-colors">首页</a>
+                        <a href="/query" class="nav-item active px-4 py-2 text-primary-600 font-medium">分数查询</a>
+                        <a href="/simulate" class="nav-item px-4 py-2 text-gray-700 font-medium hover:text-primary-600 transition-colors">模拟填报</a>
+                        <a href="/school" class="nav-item px-4 py-2 text-gray-700 font-medium hover:text-primary-600 transition-colors">高中分析</a>
+                        <a href="/major" class="nav-item px-4 py-2 text-gray-700 font-medium hover:text-primary-600 transition-colors">专业指导</a>
+                        <a href="/news" class="nav-item px-4 py-2 text-gray-700 font-medium hover:text-primary-600 transition-colors">政策资讯</a>
                     </div>
+                </div>
+
+                    <!-- 移动端菜单按钮 -->
+                    <button @click="mobileMenuOpen = !mobileMenuOpen" class="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors">
+                        <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path v-if="!mobileMenuOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                            <path v-else stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- 移动端菜单 -->
+            <div v-show="mobileMenuOpen" class="md:hidden bg-white border-t border-gray-100">
+                <div class="px-4 py-3 space-y-1">
+                    <a href="/" class="block px-4 py-2 rounded-lg text-gray-700 hover:bg-gray-50">首页</a>
+                    <a href="/query" class="block px-4 py-2 rounded-lg bg-primary-50 text-primary-600 font-medium">分数查询</a>
+                    <a href="/simulate" class="block px-4 py-2 rounded-lg text-gray-700 hover:bg-gray-50">模拟填报</a>
+                    <a href="/school" class="block px-4 py-2 rounded-lg text-gray-700 hover:bg-gray-50">高中分析</a>
+                    <a href="/major" class="block px-4 py-2 rounded-lg text-gray-700 hover:bg-gray-50">专业指导</a>
+                    <a href="/news" class="block px-4 py-2 rounded-lg text-gray-700 hover:bg-gray-50">政策资讯</a>
                 </div>
             </div>
         </nav>
@@ -285,6 +324,7 @@
                 const result = ref(null);
                 const showJSON = ref(false);
                 const activeFilter = ref('all');
+                const mobileMenuOpen = ref(false);
 
                 const filters = [
                     { value: 'all', label: '全部' },
@@ -480,7 +520,7 @@
                 };
 
                 return {
-                    score, year, years, loading, result, showJSON, activeFilter,
+                    score, year, years, loading, result, showJSON, activeFilter, mobileMenuOpen,
                     filters, filteredUniversities, getFilterCount, getProbClass,
                     handleSearch, exportJSON
                 };

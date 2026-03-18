@@ -1,335 +1,302 @@
-{% extends "base.html" %}
-
-{% block title %}高中分析 - 上海高考志愿填报辅助系统{% endblock %}
-
-{% block extra_css %}
-<style>
-    .page-card {
-        background: rgba(255, 255, 255, 0.95);
-        border-radius: 20px;
-        padding: 30px;
-        margin-bottom: 20px;
-        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
-    }
-
-    .page-title {
-        font-size: 28px;
-        font-weight: 700;
-        color: #333;
-        margin-bottom: 10px;
-    }
-
-    .page-desc {
-        color: #666;
-        margin-bottom: 25px;
-    }
-
-    .filter-bar {
-        display: flex;
-        gap: 15px;
-        margin-bottom: 25px;
-        flex-wrap: wrap;
-    }
-
-    .filter-btn {
-        padding: 10px 20px;
-        border: 2px solid #e0e0e0;
-        border-radius: 25px;
-        background: white;
-        cursor: pointer;
-        transition: all 0.3s;
-        font-weight: 500;
-    }
-
-    .filter-btn:hover, .filter-btn.active {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        border-color: transparent;
-        color: white;
-    }
-
-    .school-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-        gap: 20px;
-    }
-
-    .school-card {
-        background: white;
-        border: 1px solid #e8e8e8;
-        border-radius: 16px;
-        overflow: hidden;
-        transition: all 0.3s;
-    }
-
-    .school-card:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-    }
-
-    .school-header {
-        padding: 20px;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        color: white;
-    }
-
-    .school-type-tag {
-        display: inline-block;
-        padding: 3px 10px;
-        background: rgba(255, 255, 255, 0.2);
-        border-radius: 15px;
-        font-size: 12px;
-        margin-bottom: 8px;
-    }
-
-    .school-name {
-        font-size: 20px;
-        font-weight: 600;
-        margin-bottom: 5px;
-    }
-
-    .school-info {
-        font-size: 13px;
-        opacity: 0.9;
-    }
-
-    .school-body {
-        padding: 20px;
-    }
-
-    .stats-row {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 15px;
-        margin-bottom: 15px;
-    }
-
-    .stat-item {
-        text-align: center;
-        padding: 12px;
-        background: #f8f9fa;
-        border-radius: 10px;
-    }
-
-    .stat-value {
-        font-size: 20px;
-        font-weight: 700;
-        color: #667eea;
-    }
-
-    .stat-label {
-        font-size: 12px;
-        color: #999;
-        margin-top: 3px;
-    }
-
-    .score-dist {
-        background: #f8f9fa;
-        padding: 15px;
-        border-radius: 10px;
-    }
-
-    .score-dist-title {
-        font-size: 13px;
-        color: #666;
-        margin-bottom: 10px;
-        font-weight: 500;
-    }
-
-    .score-bar {
-        display: flex;
-        align-items: center;
-        margin-bottom: 8px;
-    }
-
-    .score-bar-label {
-        width: 70px;
-        font-size: 12px;
-        color: #999;
-    }
-
-    .score-bar-track {
-        flex: 1;
-        height: 8px;
-        background: #e0e0e0;
-        border-radius: 4px;
-        overflow: hidden;
-    }
-
-    .score-bar-fill {
-        height: 100%;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        border-radius: 4px;
-    }
-
-    .score-bar-value {
-        width: 45px;
-        text-align: right;
-        font-size: 12px;
-        font-weight: 600;
-        color: #333;
-    }
-
-    .summary-section {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 20px;
-        margin-bottom: 30px;
-    }
-
-    .summary-card {
-        background: white;
-        border-radius: 16px;
-        padding: 25px;
-        text-align: center;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-    }
-
-    .summary-value {
-        font-size: 36px;
-        font-weight: 700;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-    }
-
-    .summary-label {
-        font-size: 14px;
-        color: #666;
-        margin-top: 8px;
-    }
-</style>
-{% endblock %}
-
-{% block content %}
-<div id="school-app">
-    {% raw %}
-    <div class="page-card">
-        <h1 class="page-title">高中分析</h1>
-        <p class="page-desc">上海四校、四校分校、八大金刚及其他重点高中录取数据分析</p>
-
-        <div class="summary-section" v-if="summary">
-            <div class="summary-card">
-                <div class="summary-value">{{ summary.total }}</div>
-                <div class="summary-label">收录高中</div>
-            </div>
-            <div class="summary-card">
-                <div class="summary-value">{{ summary.by_type['四校'] || 0 }}</div>
-                <div class="summary-label">四校</div>
-            </div>
-            <div class="summary-card">
-                <div class="summary-value">{{ summary.by_type['四分'] || 0 }}</div>
-                <div class="summary-label">四分</div>
-            </div>
-            <div class="summary-card">
-                <div class="summary-value">{{ summary.by_type['八校'] || 0 }}</div>
-                <div class="summary-label">八校</div>
-            </div>
-        </div>
-
-        <div class="filter-bar">
-            <button class="filter-btn" :class="{ active: !filter }" @click="filter = null">全部</button>
-            <button class="filter-btn" :class="{ active: filter === '四校' }" @click="filter = '四校'">四校</button>
-            <button class="filter-btn" :class="{ active: filter === '四分' }" @click="filter = '四分'">四分</button>
-            <button class="filter-btn" :class="{ active: filter === '八校' }" @click="filter = '八校'">八校</button>
-            <button class="filter-btn" :class="{ active: filter === '其他重点' }" @click="filter = '其他重点'">其他重点</button>
-        </div>
-
-        <div class="school-grid">
-            <div class="school-card" v-for="school in filteredSchools" :key="school.name">
-                <div class="school-header">
-                    <div class="school-type-tag">{{ school.type }}</div>
-                    <div class="school-name">{{ school.name }}</div>
-                    <div class="school-info">
-                        {{ school.district }} | 建校{{ school.founded }}年
-                        <span v-if="school.short_name">| {{ school.short_name }}</span>
-                    </div>
-                </div>
-                <div class="school-body">
-                    <div class="stats-row">
-                        <div class="stat-item">
-                            <div class="stat-value">{{ school.stats.qingbei_count }}</div>
-                            <div class="stat-label">清北录取</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-value">{{ school.stats.qingbei_rate }}</div>
-                            <div class="stat-label">清北比例</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-value">{{ school.stats['985_rate'] }}</div>
-                            <div class="stat-label">985比例</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-value">{{ school.stats['211_rate'] }}</div>
-                            <div class="stat-label">211比例</div>
-                        </div>
-                    </div>
-
-                    <div class="score-dist" v-if="school.stats.score_distribution">
-                        <div class="score-dist-title">分数分布</div>
-                        <div class="score-bar">
-                            <div class="score-bar-label">前10名</div>
-                            <div class="score-bar-track">
-                                <div class="score-bar-fill" :style="{ width: (school.stats.score_distribution.top10_avg / 660 * 100) + '%' }"></div>
-                            </div>
-                            <div class="score-bar-value">{{ school.stats.score_distribution.top10_avg }}</div>
-                        </div>
-                        <div class="score-bar">
-                            <div class="score-bar-label">前50名</div>
-                            <div class="score-bar-track">
-                                <div class="score-bar-fill" :style="{ width: (school.stats.score_distribution.top50_avg / 660 * 100) + '%' }"></div>
-                            </div>
-                            <div class="score-bar-value">{{ school.stats.score_distribution.top50_avg }}</div>
-                        </div>
-                        <div class="score-bar">
-                            <div class="score-bar-label">全体均分</div>
-                            <div class="score-bar-track">
-                                <div class="score-bar-fill" :style="{ width: (school.stats.score_distribution.overall_avg / 660 * 100) + '%' }"></div>
-                            </div>
-                            <div class="score-bar-value">{{ school.stats.score_distribution.overall_avg }}</div>
-                        </div>
-                    </div>
-                    <div class="score-dist" v-else>
-                        <div class="score-dist-title">分数分布</div>
-                        <p class="text-gray-500">暂无数据</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-{% endraw %}</div>
-{% endblock %}
-
-{% block scripts %}
-<script>
-    const { createApp, ref, computed, onMounted } = Vue;
-    const schoolApp = createApp({
-        setup() {
-            const schools = ref([]);
-            const summary = ref(null);
-            const filter = ref(null);
-
-            const filteredSchools = computed(() => {
-                if (!filter.value) return schools.value;
-                return schools.value.filter(s => s.type === filter.value);
-            });
-
-            onMounted(async () => {
-                try {
-                    const response = await fetch('/api/schools');
-                    const data = await response.json();
-                    if (data.success) {
-                        schools.value = data.data.schools;
-                        summary.value = data.data.summary;
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>高中分析 - 上海高考志愿填报辅助系统</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Vue 3 CDN -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#f0f4ff',
+                            100: '#e0e9ff',
+                            200: '#c7d6fe',
+                            300: '#a4b8fc',
+                            400: '#8093f8',
+                            500: '#6366f1',
+                            600: '#4f46e5',
+                            700: '#4338ca',
+                            800: '#3730a3',
+                            900: '#312e81',
+                        }
                     }
-                } catch (error) {
-                    console.error('加载数据失败', error);
                 }
-            });
-
-            return { schools, summary, filter, filteredSchools };
+            }
         }
-    });
-    schoolApp.mount('#school-app');
-</script>
-{% endblock %}
+    </script>
+    <style>
+        [v-cloak] { display: none; }
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .nav-item {
+            position: relative;
+        }
+        .nav-item::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+        .nav-item:hover::after, .nav-item.active::after {
+            width: 100%;
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <div id="app" v-cloak>
+        {% raw %}
+        <!-- 导航栏 -->
+        <nav class="bg-white/95 backdrop-blur-md shadow-sm sticky top-0 z-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-center h-16">
+                    <!-- Logo -->
+                    <a href="/" class="flex items-center space-x-3">
+                        <div class="w-10 h-10 rounded-xl gradient-bg flex items-center justify-center text-white font-bold text-lg shadow-lg">
+                            沪
+                        </div>
+                        <div class="hidden sm:block">
+                            <div class="text-lg font-bold text-gray-800">上海高考助手</div>
+                            <div class="text-xs text-gray-500 -mt-1">志愿填报辅助系统</div>
+                        </div>
+                    </a>
+
+                    <!-- 桌面导航 -->
+                    <div class="hidden md:flex items-center space-x-1">
+                        <a href="/" class="nav-item px-4 py-2 text-gray-700 font-medium hover:text-primary-600 transition-colors">首页</a>
+                        <a href="/query" class="nav-item px-4 py-2 text-gray-700 font-medium hover:text-primary-600 transition-colors">分数查询</a>
+                        <a href="/simulate" class="nav-item px-4 py-2 text-gray-700 font-medium hover:text-primary-600 transition-colors">模拟填报</a>
+                        <a href="/school" class="nav-item active px-4 py-2 text-primary-600 font-medium">高中分析</a>
+                        <a href="/major" class="nav-item px-4 py-2 text-gray-700 font-medium hover:text-primary-600 transition-colors">专业指导</a>
+                        <a href="/news" class="nav-item px-4 py-2 text-gray-700 font-medium hover:text-primary-600 transition-colors">政策资讯</a>
+                    </div>
+
+                    <!-- 移动端菜单按钮 -->
+                    <button @click="mobileMenuOpen = !mobileMenuOpen" class="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors">
+                        <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path v-if="!mobileMenuOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                            <path v-else stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- 移动端菜单 -->
+            <div v-show="mobileMenuOpen" class="md:hidden bg-white border-t border-gray-100">
+                <div class="px-4 py-3 space-y-1">
+                    <a href="/" class="block px-4 py-2 rounded-lg text-gray-700 hover:bg-gray-50">首页</a>
+                    <a href="/query" class="block px-4 py-2 rounded-lg text-gray-700 hover:bg-gray-50">分数查询</a>
+                    <a href="/simulate" class="block px-4 py-2 rounded-lg text-gray-700 hover:bg-gray-50">模拟填报</a>
+                    <a href="/school" class="block px-4 py-2 rounded-lg bg-primary-50 text-primary-600 font-medium">高中分析</a>
+                    <a href="/major" class="block px-4 py-2 rounded-lg text-gray-700 hover:bg-gray-50">专业指导</a>
+                    <a href="/news" class="block px-4 py-2 rounded-lg text-gray-700 hover:bg-gray-50">政策资讯</a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- 页面标题 -->
+        <section class="gradient-bg py-12">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center text-white">
+                    <h1 class="text-3xl md:text-4xl font-bold mb-4">高中分析</h1>
+                    <p class="text-lg opacity-90">上海四校、四校分校、八大金刚及其他重点高中录取数据分析</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 主内容区 -->
+        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <!-- 汇总统计 -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8" v-if="summary">
+                <div class="bg-white rounded-2xl shadow-lg p-6 text-center">
+                    <div class="text-4xl font-bold gradient-text">{{ summary.total }}</div>
+                    <div class="text-gray-500 mt-2">收录高中</div>
+                </div>
+                <div class="bg-white rounded-2xl shadow-lg p-6 text-center">
+                    <div class="text-4xl font-bold gradient-text">{{ summary.by_type['四校'] || 0 }}</div>
+                    <div class="text-gray-500 mt-2">四校</div>
+                </div>
+                <div class="bg-white rounded-2xl shadow-lg p-6 text-center">
+                    <div class="text-4xl font-bold gradient-text">{{ summary.by_type['四分'] || 0 }}</div>
+                    <div class="text-gray-500 mt-2">四分</div>
+                </div>
+                <div class="bg-white rounded-2xl shadow-lg p-6 text-center">
+                    <div class="text-4xl font-bold gradient-text">{{ summary.by_type['八校'] || 0 }}</div>
+                    <div class="text-gray-500 mt-2">八校</div>
+                </div>
+            </div>
+
+            <!-- 筛选按钮 -->
+            <div class="flex flex-wrap gap-3 mb-6">
+                <button @click="filter = null" 
+                    :class="!filter ? 'gradient-bg text-white' : 'bg-white text-gray-700 hover:bg-gray-50'"
+                    class="px-6 py-2 rounded-full font-medium shadow transition-all">
+                    全部
+                </button>
+                <button @click="filter = '四校'" 
+                    :class="filter === '四校' ? 'gradient-bg text-white' : 'bg-white text-gray-700 hover:bg-gray-50'"
+                    class="px-6 py-2 rounded-full font-medium shadow transition-all">
+                    四校
+                </button>
+                <button @click="filter = '四分'" 
+                    :class="filter === '四分' ? 'gradient-bg text-white' : 'bg-white text-gray-700 hover:bg-gray-50'"
+                    class="px-6 py-2 rounded-full font-medium shadow transition-all">
+                    四分
+                </button>
+                <button @click="filter = '八校'" 
+                    :class="filter === '八校' ? 'gradient-bg text-white' : 'bg-white text-gray-700 hover:bg-gray-50'"
+                    class="px-6 py-2 rounded-full font-medium shadow transition-all">
+                    八校
+                </button>
+                <button @click="filter = '其他重点'" 
+                    :class="filter === '其他重点' ? 'gradient-bg text-white' : 'bg-white text-gray-700 hover:bg-gray-50'"
+                    class="px-6 py-2 rounded-full font-medium shadow transition-all">
+                    其他重点
+                </button>
+            </div>
+
+            <!-- 学校卡片 -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div v-for="school in filteredSchools" :key="school.name" 
+                    class="card-hover bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100">
+                    <!-- 头部 -->
+                    <div class="gradient-bg p-5 text-white">
+                        <span class="inline-block px-3 py-1 bg-white/20 rounded-full text-sm mb-2">{{ school.type }}</span>
+                        <h3 class="text-xl font-bold">{{ school.name }}</h3>
+                        <p class="text-sm opacity-90 mt-1">
+                            {{ school.district }} | 建校{{ school.founded }}年
+                            <span v-if="school.short_name">| {{ school.short_name }}</span>
+                        </p>
+                    </div>
+                    <!-- 内容 -->
+                    <div class="p-5">
+                        <!-- 统计数据 -->
+                        <div class="grid grid-cols-2 gap-4 mb-4">
+                            <div class="bg-gray-50 rounded-xl p-3 text-center">
+                                <div class="text-2xl font-bold text-primary-600">{{ school.stats.qingbei_count }}</div>
+                                <div class="text-xs text-gray-500">清北录取</div>
+                            </div>
+                            <div class="bg-gray-50 rounded-xl p-3 text-center">
+                                <div class="text-2xl font-bold text-primary-600">{{ school.stats.qingbei_rate }}</div>
+                                <div class="text-xs text-gray-500">清北比例</div>
+                            </div>
+                            <div class="bg-gray-50 rounded-xl p-3 text-center">
+                                <div class="text-2xl font-bold text-primary-600">{{ school.stats['985_rate'] }}</div>
+                                <div class="text-xs text-gray-500">985比例</div>
+                            </div>
+                            <div class="bg-gray-50 rounded-xl p-3 text-center">
+                                <div class="text-2xl font-bold text-primary-600">{{ school.stats['211_rate'] }}</div>
+                                <div class="text-xs text-gray-500">211比例</div>
+                            </div>
+                        </div>
+                        <!-- 分数分布 -->
+                        <div v-if="school.stats.score_distribution" class="bg-gray-50 rounded-xl p-4">
+                            <div class="text-sm font-medium text-gray-600 mb-3">分数分布</div>
+                            <div class="space-y-2">
+                                <div class="flex items-center">
+                                    <span class="w-16 text-xs text-gray-500">前10名</span>
+                                    <div class="flex-1 h-2 bg-gray-200 rounded-full overflow-hidden">
+                                        <div class="h-full gradient-bg rounded-full" 
+                                            :style="{ width: (school.stats.score_distribution.top10_avg / 660 * 100) + '%' }"></div>
+                                    </div>
+                                    <span class="w-12 text-right text-sm font-medium text-gray-700">{{ school.stats.score_distribution.top10_avg }}</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <span class="w-16 text-xs text-gray-500">前50名</span>
+                                    <div class="flex-1 h-2 bg-gray-200 rounded-full overflow-hidden">
+                                        <div class="h-full gradient-bg rounded-full" 
+                                            :style="{ width: (school.stats.score_distribution.top50_avg / 660 * 100) + '%' }"></div>
+                                    </div>
+                                    <span class="w-12 text-right text-sm font-medium text-gray-700">{{ school.stats.score_distribution.top50_avg }}</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <span class="w-16 text-xs text-gray-500">全体均分</span>
+                                    <div class="flex-1 h-2 bg-gray-200 rounded-full overflow-hidden">
+                                        <div class="h-full gradient-bg rounded-full" 
+                                            :style="{ width: (school.stats.score_distribution.overall_avg / 660 * 100) + '%' }"></div>
+                                    </div>
+                                    <span class="w-12 text-right text-sm font-medium text-gray-700">{{ school.stats.score_distribution.overall_avg }}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div v-else class="bg-gray-50 rounded-xl p-4 text-center text-gray-400 text-sm">
+                            暂无分数分布数据
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 空状态 -->
+            <div v-if="filteredSchools.length === 0" class="text-center py-12">
+                <div class="text-gray-400 text-lg">暂无数据</div>
+            </div>
+        </section>
+
+        <!-- 页脚 -->
+        <footer class="bg-gray-800 text-white py-8 mt-12">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <p class="text-gray-400 text-sm">数据来源：上海市教育考试院、各高中官方发布</p>
+                <p class="text-gray-500 text-xs mt-2">仅供参考，请以官方数据为准</p>
+            </div>
+        </footer>
+        {% endraw %}
+    </div>
+
+    <script>
+        const { createApp, ref, computed, onMounted } = Vue;
+        const app = createApp({
+            setup() {
+                const schools = ref([]);
+                const summary = ref(null);
+                const filter = ref(null);
+                const mobileMenuOpen = ref(false);
+
+                const filteredSchools = computed(() => {
+                    if (!filter.value) return schools.value;
+                    return schools.value.filter(s => s.type === filter.value);
+                });
+
+                onMounted(async () => {
+                    try {
+                        const response = await fetch('/api/schools');
+                        const data = await response.json();
+                        if (data.success) {
+                            schools.value = data.data.schools;
+                            summary.value = data.data.summary;
+                        }
+                    } catch (error) {
+                        console.error('加载数据失败', error);
+                    }
+                });
+
+                return { schools, summary, filter, filteredSchools, mobileMenuOpen };
+            }
+        });
+        app.mount('#app');
+    </script>
+</body>
+</html>
