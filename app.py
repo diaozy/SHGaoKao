@@ -18,6 +18,9 @@ app.config['JSON_AS_ASCII'] = False
 # 数据文件路径
 DATA_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data')
 
+# 访问计数器文件
+COUNTER_FILE = os.path.join(DATA_DIR, 'counter.json')
+
 # 腾讯云 GLM-5 配置
 GLM_API_URL = os.environ.get('GLM_API_URL', 'https://open.bigmodel.cn/api/paas/v4/chat/completions')
 GLM_API_KEY = os.environ.get('GLM_API_KEY', '')
@@ -119,18 +122,52 @@ def call_glm(prompt):
         print(f"GLM API error: {e}")
     return None
 
+# ==================== 访问计数器 ====================
+
+def get_counter():
+    """获取访问计数"""
+    try:
+        with open(COUNTER_FILE, 'r', encoding='utf-8') as f:
+            return json.load(f)
+    except FileNotFoundError:
+        return {'total': 0, 'today': 0, 'date': datetime.now().strftime('%Y-%m-%d')}
+    except Exception:
+        return {'total': 0, 'today': 0, 'date': datetime.now().strftime('%Y-%m-%d')}
+
+def save_counter(data):
+    """保存访问计数"""
+    os.makedirs(DATA_DIR, exist_ok=True)
+    with open(COUNTER_FILE, 'w', encoding='utf-8') as f:
+        json.dump(data, f)
+
+def increment_counter():
+    """增加访问计数"""
+    counter = get_counter()
+    today = datetime.now().strftime('%Y-%m-%d')
+    
+    # 新的一天，重置今日计数
+    if counter.get('date') != today:
+        counter['today'] = 0
+        counter['date'] = today
+    
+    counter['total'] += 1
+    counter['today'] += 1
+    save_counter(counter)
+    return counter
+
 # ==================== 页面路由 ====================
 
 @app.route('/')
 def index():
     """首页"""
+    counter = increment_counter()
     stats = {
         'universities': len(load_json_data('universities.json').get('universities', [])),
         'majors': sum(len(cat.get('majors', [])) for cat in load_json_data('majors.json').get('categories', [])),
         'schools': len(load_json_data('high_schools.json').get('schools', [])),
         'years': 6
     }
-    return render_template('index.html', stats=stats)
+    return render_template('index.html', stats=stats, counter=counter)
 
 @app.route('/query')
 def query():
@@ -163,6 +200,15 @@ def sources():
     return render_template('sources.html')
 
 # ==================== API 路由 ====================
+
+@app.route('/api/counter')
+def api_counter():
+    """获取访问计数"""
+    counter = get_counter()
+    return jsonify({
+        'success': True,
+        'data': counter
+    })
 
 @app.route('/api/score', methods=['GET', 'POST'])
 def api_score():

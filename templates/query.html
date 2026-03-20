@@ -9,7 +9,8 @@
     <!-- Vue 3 - 使用国内CDN -->
     <script src="https://cdn.staticfile.org/vue/3.4.21/vue.global.prod.min.js"></script>
     <!-- Chart.js -->
-    <script src="https://cdn.staticfile.org/chart.js/4.4.1/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3.0.1/dist/chartjs-plugin-annotation.min.js"></script>
     <script>
         tailwind.config = {
             theme: {
@@ -452,12 +453,22 @@
                 // 渲染图表
                 const renderCharts = () => {
                     if (typeof Chart === 'undefined') {
-                        console.warn('Chart.js不可用，跳过图表渲染');
+                        console.warn('Chart.js不可用，尝试重新加载...');
+                        // 尝试再次检查
+                        setTimeout(() => {
+                            if (typeof Chart !== 'undefined') {
+                                renderCharts();
+                            }
+                        }, 1000);
                         return;
                     }
                     if (!result.value) return;
 
                     const universities = result.value.universities || [];
+                    if (universities.length === 0) {
+                        console.warn('没有院校数据');
+                        return;
+                    }
 
                     // 销毁旧图表
                     if (probabilityChart) {
@@ -478,29 +489,48 @@
                             '保底 (70%+)': universities.filter(u => u.probability >= 70).length
                         };
 
-                        probabilityChart = new Chart(probCtx, {
-                            type: 'doughnut',
-                            data: {
-                                labels: Object.keys(ranges),
-                                datasets: [{
-                                    data: Object.values(ranges),
-                                    backgroundColor: [
-                                        'rgba(245, 158, 11, 0.8)',
-                                        'rgba(59, 130, 246, 0.8)',
-                                        'rgba(16, 185, 129, 0.8)'
-                                    ],
-                                    borderWidth: 0
-                                }]
-                            },
-                            options: {
-                                responsive: true,
-                                plugins: {
-                                    legend: {
-                                        position: 'bottom'
+                        // 确保有数据才渲染
+                        const total = Object.values(ranges).reduce((a, b) => a + b, 0);
+                        if (total > 0) {
+                            probabilityChart = new Chart(probCtx.getContext('2d'), {
+                                type: 'doughnut',
+                                data: {
+                                    labels: Object.keys(ranges),
+                                    datasets: [{
+                                        data: Object.values(ranges),
+                                        backgroundColor: [
+                                            'rgba(245, 158, 11, 0.8)',
+                                            'rgba(59, 130, 246, 0.8)',
+                                            'rgba(16, 185, 129, 0.8)'
+                                        ],
+                                        borderWidth: 2,
+                                        borderColor: '#fff'
+                                    }]
+                                },
+                                options: {
+                                    responsive: true,
+                                    maintainAspectRatio: true,
+                                    plugins: {
+                                        legend: {
+                                            position: 'bottom',
+                                            labels: { padding: 20 }
+                                        },
+                                        tooltip: {
+                                            callbacks: {
+                                                label: function(context) {
+                                                    const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                                    const percentage = ((context.raw / total) * 100).toFixed(1);
+                                                    return context.label + ': ' + context.raw + '所 (' + percentage + '%)';
+                                                }
+                                            }
+                                        }
                                     }
                                 }
-                            }
-                        });
+                            });
+                            console.log('概率分布图表渲染完成');
+                        }
+                    } else {
+                        console.warn('找不到 probabilityChart canvas');
                     }
 
                     // 分数线柱状图
@@ -509,47 +539,67 @@
                         const topUnis = universities.slice(0, 10);
                         const myScore = result.value.score;
 
-                        scoreChart = new Chart(scoreCtx, {
-                            type: 'bar',
-                            data: {
-                                labels: topUnis.map(u => u.name.length > 8 ? u.name.slice(0, 8) + '...' : u.name),
-                                datasets: [
-                                    {
-                                        label: '最低分',
-                                        data: topUnis.map(u => u.min_score),
-                                        backgroundColor: 'rgba(102, 126, 234, 0.7)'
-                                    },
-                                    {
-                                        label: '平均分',
-                                        data: topUnis.map(u => u.avg_score),
-                                        backgroundColor: 'rgba(118, 75, 162, 0.7)'
-                                    },
-                                    {
-                                        label: '我的分数',
-                                        data: topUnis.map(() => myScore),
-                                        type: 'line',
-                                        borderColor: 'rgba(239, 68, 68, 1)',
-                                        borderWidth: 2,
-                                        pointRadius: 0,
-                                        borderDash: [5, 5]
-                                    }
-                                ]
-                            },
-                            options: {
-                                responsive: true,
-                                scales: {
-                                    y: {
-                                        beginAtZero: false,
-                                        min: Math.min(myScore, ...topUnis.map(u => u.min_score)) - 20
-                                    }
+                        if (topUnis.length > 0) {
+                            scoreChart = new Chart(scoreCtx.getContext('2d'), {
+                                type: 'bar',
+                                data: {
+                                    labels: topUnis.map(u => u.name.length > 6 ? u.name.slice(0, 6) + '...' : u.name),
+                                    datasets: [
+                                        {
+                                            label: '最低分',
+                                            data: topUnis.map(u => u.min_score),
+                                            backgroundColor: 'rgba(102, 126, 234, 0.7)',
+                                            borderRadius: 4
+                                        },
+                                        {
+                                            label: '平均分',
+                                            data: topUnis.map(u => u.avg_score),
+                                            backgroundColor: 'rgba(118, 75, 162, 0.7)',
+                                            borderRadius: 4
+                                        }
+                                    ]
                                 },
-                                plugins: {
-                                    legend: {
-                                        position: 'bottom'
+                                options: {
+                                    responsive: true,
+                                    maintainAspectRatio: true,
+                                    scales: {
+                                        y: {
+                                            beginAtZero: false,
+                                            min: Math.min(myScore, ...topUnis.map(u => u.min_score)) - 30,
+                                            grid: { color: 'rgba(0,0,0,0.05)' }
+                                        },
+                                        x: {
+                                            grid: { display: false }
+                                        }
+                                    },
+                                    plugins: {
+                                        legend: {
+                                            position: 'bottom'
+                                        },
+                                        annotation: {
+                                            annotations: {
+                                                line1: {
+                                                    type: 'line',
+                                                    yMin: myScore,
+                                                    yMax: myScore,
+                                                    borderColor: 'rgba(239, 68, 68, 1)',
+                                                    borderWidth: 2,
+                                                    borderDash: [5, 5],
+                                                    label: {
+                                                        display: true,
+                                                        content: '我的分数: ' + myScore,
+                                                        position: 'end'
+                                                    }
+                                                }
+                                            }
+                                        }
                                     }
                                 }
-                            }
-                        });
+                            });
+                            console.log('分数线分布图表渲染完成');
+                        }
+                    } else {
+                        console.warn('找不到 scoreChart canvas');
                     }
                 };
 
