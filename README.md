@@ -2,6 +2,8 @@
 
 基于 Flask + Vue3 的上海高考志愿填报辅助系统，提供分数查询、模拟填报、高中分析、专业指导等功能。
 
+**🌐 访问地址**: http://shgk.xihu-nttdata.top
+
 ## 功能特点
 
 - **分数查询**：输入高考分数，智能匹配可填报院校，显示录取概率
@@ -113,6 +115,52 @@ export GLM_API_URL="https://open.bigmodel.cn/api/paas/v4/chat/completions"
 - 本系统仅供参考，志愿填报请以官方信息为准
 - 数据来源于公开信息，可能存在偏差
 - 建议结合多方信息进行综合判断
+
+## 部署说明
+
+### 生产环境部署
+
+```bash
+# 1. 克隆仓库
+git clone https://github.com/diaozy/sh-gaokao-helper.git
+cd sh-gaokao-helper
+
+# 2. 安装依赖
+pip install -r requirements.txt
+
+# 3. 启动服务（端口5001）
+python app.py
+```
+
+### Nginx 配置
+
+```nginx
+server {
+    listen 80;
+    server_name shgk.xihu-nttdata.top;
+
+    location / {
+        proxy_pass http://127.0.0.1:5001;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+    }
+}
+```
+
+## SEO 优化
+
+- ✅ Meta Description & Keywords
+- ✅ Open Graph 标签
+- ✅ Schema.org 结构化数据
+- ✅ 语义化 HTML 结构
+- ✅ 移动端响应式设计
+
+## 更新日志
+
+### v1.0.0 (2026-03-20)
+- ✅ 初始版本发布
+- ✅ 添加 SEO 优化
+- ✅ 部署到 shgk.xihu-nttdata.top
 
 ## 许可证
 
