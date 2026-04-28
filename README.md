@@ -2,7 +2,7 @@
 
 基于 Flask + Vue3 的上海高考志愿填报辅助系统，提供分数查询、模拟填报、高中分析、专业指导等功能。
 
-**🌐 访问地址**: http://shgk.xihu-nttdata.top
+**🌐 访问地址**: https://shgk.flowerclaw.tech
 
 ## 功能特点
 
